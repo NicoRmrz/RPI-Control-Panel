@@ -86,7 +86,6 @@ class GPIO_control(QThread):
 
 
 			if self.setLow == True:
-
 				self.GPIO.output(RlyCtrl1, GPIO.LOW)
 				self.GPIO.output(RlyCtrl2, GPIO.LOW)
 				self.GPIO.output(RlyCtrl3, GPIO.LOW)
@@ -97,61 +96,78 @@ class GPIO_control(QThread):
 				self.GPIO.output(RlyCtrl8, GPIO.LOW)
 				self.GPIO.output(RlyCtrl9, GPIO.LOW)
 				self.GPIO.output(RlyCtrl10, GPIO.LOW)
-
 				self.setLow = False
 				
 			#Push Button 1
 			if (GPIO.input(LSidePB1) or GPIO.input(RSidePB1)):
 				if ((self.run2 and self.run3 and self.run4 and self.run5) != True):
 					self.run1 = True
-								#set relay
+					#set relay
+					self.GPIO.output(RlyCtrl1, GPIO.HIGH)
+					self.GPIO.output(RlyCtrl2, GPIO.HIGH)
 					
 			else:
 				self.run1 = False
-				# turn off		
+				# turn off	
+				self.GPIO.output(RlyCtrl1, GPIO.LOW)
+				self.GPIO.output(RlyCtrl2, GPIO.LOW)	
 			
 			#Push Button 2
 			if (GPIO.input(LSidePB2) or GPIO.input(RSidePB2)):
 				if ((self.run1 and self.run3 and self.run4 and self.run5) != True):
 					self.run2 = True
-								#set relay
-					
+					#set relay
+					self.GPIO.output(RlyCtrl3, GPIO.HIGH)
+					self.GPIO.output(RlyCtrl4, GPIO.HIGH)
+
 			else:
 				self.run2 = False
 				# turn off
+				self.GPIO.output(RlyCtrl3, GPIO.LOW)
+				self.GPIO.output(RlyCtrl4, GPIO.LOW)
 							
 			#Push Button 3
 			if (GPIO.input(LSidePB3) or GPIO.input(RSidePB3)):
 				if ((self.run1 and self.run2 and self.run4 and self.run5) != True):
 					self.run3 = True
-								#set relay
-					
+					#set relay
+					self.GPIO.output(RlyCtrl5, GPIO.HIGH)
+					self.GPIO.output(RlyCtrl6, GPIO.HIGH)
+
 			else:
 				self.run3 = False
 				# turn off	
+				self.GPIO.output(RlyCtrl5, GPIO.LOW)
+				self.GPIO.output(RlyCtrl6, GPIO.LOW)
 
 			#Push Button 4
 			if (GPIO.input(LSidePB4) or GPIO.input(RSidePB4)):
 				if ((self.run1 and self.run2 and self.run3 and self.run5) != True):
 					self.run4 = True
-								#set relay
+					#set relay
+					self.GPIO.output(RlyCtrl7, GPIO.HIGH)
+					self.GPIO.output(RlyCtrl8, GPIO.HIGH)
 					
 			else:
 				self.run4 = False
 				# turn off
+				self.GPIO.output(RlyCtrl7, GPIO.LOW)
+				self.GPIO.output(RlyCtrl8, GPIO.LOW)
 					
 			#Push Button 5
 			if (GPIO.input(LSidePB5) or GPIO.input(RSidePB5)):
 				if ((self.run1 and self.run2 and self.run3 and self.run4) != True):
 					self.run5 = True
-								#set relay
-					
+					#set relay
+					self.GPIO.output(RlyCtrl9, GPIO.HIGH)
+					self.GPIO.output(RlyCtrl10, GPIO.HIGH)
+
 			else:
 				self.run5 = False
 				# turn off
-					
+				self.GPIO.output(RlyCtrl9, GPIO.LOW)
+				self.GPIO.output(RlyCtrl10, GPIO.LOW)					
 
-		
 			
 			if(self.exitProgram == True):
 				self.exitProgram = False

@@ -12,6 +12,7 @@ from PyQt5.QtGui import QPixmap, QIcon
 from threading import Event
 
 from newValue import Controller,  ControlArduino    
+from GPIO_buttonThread import GPIO_control
 
 # Icon Image locations
 Main_path = os.getcwd() + "/"
@@ -45,6 +46,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getArduino.testRS232.connect(self.updateInfoRS232)          
         self.getArduino.start() 
 
+
+        self.GPIOthread = GPIO_control()
+        self.GPIOthread.start()
+
+        self.GPIOthread.setAllLow(True)
 
         # self.accelerometer = Accelometer()
         # self.accelerometer.start() 

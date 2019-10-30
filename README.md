@@ -1,5 +1,5 @@
 # Digital Radiography System
-Raspberry Pi Python application 
+Raspberry Pi Python application for a control panel 
  
  # Control Panel:
 

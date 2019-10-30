@@ -1,13 +1,10 @@
-# RPI_Cam
-Raspberry Pi camera with full tilt-servos
+# Digital Radiography System
+Raspberry Pi Python application 
  
- # Hardware:
-- Raspbery Pi Cam
-- PiCamera Module NOIR v2
-- Adafruit Mini-Pan Tilt Kit
-- Raspberry Pi PWM Servo Hat Development Board
- 
- # Software:
- RPI_Cam git repository. 
- 
- 1. Run RPICam_GUI_Main.py
+ # Control Panel:
+
+ # Set new i2c bus (bus 3) on pi for ADC and accelerometer:
+cd /boot
+sudo nano config.txt
+dtoverlay=i2c-gpio,bus=3,i2c_gpio_delay_us=1,i2c_gpio_sda=4,i2c_gpio_scl=5
+

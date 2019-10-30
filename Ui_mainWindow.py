@@ -7,6 +7,23 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import os
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QStatusBar, QLabel
+from PyQt5.QtCore import Qt
+
+# User made files
+from GUI_Stylesheets import GUI_Stylesheets
+
+GUI_Style = GUI_Stylesheets()
+
+
+
+
+# Icon Image locations
+Main_path = os.getcwd() + "/"
+xray1_Path = Main_path + "/icons/ray.png"
+closex64_Path = Main_path + "/icons/Button-Close-icon x 64.png"
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -17,9 +34,11 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../x-ray.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        MainWindow.setWindowIcon(icon)
+        # icon = QtGui.QIcon()
+        # icon.addPixmap(QtGui.QPixmap(xray1_Path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        # MainWindow.setWindowIcon(icon)
+        MainWindow.setWindowIcon(QIcon(xray1_Path))
+
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -150,6 +169,10 @@ class Ui_MainWindow(object):
         self.lblAnzeige.setAlignment(QtCore.Qt.AlignCenter)
         self.lblAnzeige.setObjectName("lblAnzeige")
         self.gridLayout.addWidget(self.lblAnzeige, 5, 5, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
+
+        self.StatusBar()
+        self.setStatusBar(self.statusBar)
+
         self.MediLogo = QtWidgets.QGraphicsView(self.centralWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -191,7 +214,7 @@ class Ui_MainWindow(object):
         self.btnExit.setAutoFillBackground(False)
         self.btnExit.setStyleSheet("background-color: rgba(255,255,255,0);\n"
 "border-color: rgba(255, 255, 255, 0);\n"
-"background-image: url(Button-Close-icon x 64.png)\n"
+"background-image: url(icons/Button-Close-icon x 64.png)\n"
 "")
         self.btnExit.setText("")
         self.btnExit.setIconSize(QtCore.QSize(200, 200))
@@ -213,7 +236,12 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addLayout(self.gridLayout, 1, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralWidget)
 
+
+
+
+
         self.retranslateUi(MainWindow)
+
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -226,6 +254,38 @@ class Ui_MainWindow(object):
         self.lblAnzeige3.setText(_translate("MainWindow", "1000"))
         self.lblRSinfo.setText(_translate("MainWindow", "Poti on A0"))
         self.lblAnzeige.setText(_translate("MainWindow", "1000"))
+
+    # ------------------------------------------------------------------
+    # ---------------- Create Status Bar Functions ----------------------
+    # ------------------------------------------------------------------
+    def StatusBar(self):
+        self.statusBar = QStatusBar()
+        self.statusBar.setStyleSheet(GUI_Style.statusBarWhite)
+        
+        self.xAxis = QLabel()
+        self.xAxis.setMinimumSize(50, 12)
+        self.xAxis.setStyleSheet(GUI_Style.statusBar_widgets)
+        self.xAxis.setText("x-axis")
+        self.xAxis.setAlignment(Qt.AlignCenter)
+        
+        self.yAxis = QLabel()
+        self.yAxis.setMinimumSize(50, 12)
+        self.yAxis.setStyleSheet(GUI_Style.statusBar_widgets)
+        self.yAxis.setText("y-axis")
+        self.yAxis.setAlignment(Qt.AlignCenter)
+        
+        self.zAxis = QLabel()
+        self.zAxis.setMinimumSize(50, 15)
+        self.zAxis.setStyleSheet(GUI_Style.statusBar_widgets)
+        self.zAxis.setText("z-axis")
+        self.zAxis.setAlignment(Qt.AlignCenter)
+        
+        self.statusBar.addPermanentWidget(self.xAxis, 0)
+        self.statusBar.addPermanentWidget(self.yAxis, 0)
+        self.statusBar.addPermanentWidget(self.zAxis, 0)
+        
+        self.statusBar.showMessage("Initializing... ", 4000)
+
 
 
 if __name__ == "__main__":

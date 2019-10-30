@@ -1,7 +1,7 @@
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtCore import QThread
 import datetime, time
-import serial
+# import serial
 value = 0
 intwert = 0
 
@@ -35,18 +35,19 @@ class ControlArduino(QThread):
         self.altValue = 0
         
     def run(self):
-        try:
-            self.serArduino = serial.Serial('/dev/ttyADM0', 115200, timeout=0)
-            self.noRS232_UNO = 1
-            self.testRS232.emit(1)
+        pass
+        # try:
+        #     self.serArduino = serial.Serial('/dev/ttyADM0', 115200, timeout=0)
+        #     self.noRS232_UNO = 1
+        #     self.testRS232.emit(1)
             
-        except:
-            print("RS232 for Arduino not found")
-            self.noRS232_UNO = 0
-            self.testRS232.emit(0)
+        # except:
+        #     print("RS232 for Arduino not found")
+        #     self.noRS232_UNO = 0
+        #     self.testRS232.emit(0)
             
-        while not self.stopped.wait(0.01):
-            self.ArduinoLoop()
+        # while not self.stopped.wait(0.01):
+        #     self.ArduinoLoop()
     def ArduinoLoop(self):
         global intwert
         global value

@@ -1,17 +1,22 @@
 # -*- coding: utf-8 -*-
 import sys
-
+import os
 from PyQt5.QtCore import pyqtSlot
 from PyQt5.QtWidgets import QMainWindow
 
-from .Ui_mainWindow import Ui_MainWindow
+from Ui_mainWindow import Ui_MainWindow
 
 from PyQt5 import QtWidgets
 
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QIcon
 from threading import Event
 
 from newValue import Controller,  ControlArduino    
+
+# Icon Image locations
+Main_path = os.getcwd() + "/"
+Icon_Path = Main_path + "/icons/logo.png"
+Mediatech_Path = Main_path + "/icons/Medicatech.png"
         
 class MainWindow(QMainWindow, Ui_MainWindow):
     
@@ -22,8 +27,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         scene = QtWidgets.QGraphicsScene()
 
         
-        scene.addPixmap(QPixmap('Medicatech.png'))
-
+        scene.addPixmap(QPixmap(Mediatech_Path))
+        # self.setWindowIcon(QIcon(Mediatech_Path))
         
         self.MediLogo.setScene(scene)
 
@@ -39,6 +44,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getArduino.newValue.connect(self.updatePoti)  
         self.getArduino.testRS232.connect(self.updateInfoRS232)          
         self.getArduino.start() 
+
+
+        # self.accelerometer = Accelometer()
+        # self.accelerometer.start() 
+        # self.accelerometer.upateAxis.connect(self.updateAccelerometer)
+
+
+
         
     @pyqtSlot()
     def on_btnExit_clicked(self):
@@ -64,3 +77,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.lblAnzeige2.setText("Error")
             self.lblAnzeige3.setText("Error")
             self.stop_flag_RS232.set()
+
+    def updateAccelerometer(self, x, y, z):
+        self.xAxis.setText("x: " + str(x))
+        self.yAxis.setText("y: " + str(y))
+        self.zAxis.setText("z: " + str(z))
+

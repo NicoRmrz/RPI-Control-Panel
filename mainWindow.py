@@ -13,6 +13,8 @@ from threading import Event
 
 from newValue import Controller,  ControlArduino    
 from GPIO_buttonThread import GPIO_control
+import RPi.GPIO as GPIO
+
 
 # Icon Image locations
 Main_path = os.getcwd() + "/"
@@ -63,6 +65,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_btnExit_clicked(self):
         self.stop_flag_time.set()
         self.stop_flag_RS232.set()
+        GPIO.cleanup()
         sys.exit(0);
 
     def updateTime(self,  timeInterval):

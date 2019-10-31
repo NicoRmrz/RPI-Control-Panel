@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Control Panel
+Comment=
+Icon=/home/pi/RPI-Control-Panel/icons/logo.png
+Exec=bash /home/pi/RPI-Control-Panel/openApp.sh
+Type=Application
+Encoding=UTF-8
+Terminal=false
+Categories=None

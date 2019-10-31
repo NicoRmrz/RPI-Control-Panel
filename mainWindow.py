@@ -65,7 +65,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_btnExit_clicked(self):
         self.stop_flag_time.set()
         self.stop_flag_RS232.set()
-        self.GPIOthread.exitProgram(True)
+        self.GPIOthread.Set_Exit_Program(True)
         GPIO.cleanup()
         sys.exit(0);
 

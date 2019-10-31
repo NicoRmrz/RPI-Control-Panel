@@ -17,7 +17,7 @@ LSidePB4 = 11
 LSidePB5 = 13
 
 RlyCtrl1 = 16
-RlytCtrl2 = 12
+RlyCtrl2 = 12
 RlyCtrl3 = 7
 RlyCtrl4 = 8
 RlyCtrl5 = 25
@@ -33,34 +33,34 @@ RlyCtrl10 = 14
 class GPIO_control(QThread):
 	doneFlag1 = pyqtSignal(str) 
     
-	def __init__(selfs):
+	def __init__(self):
 		QThread.__init__(self)
 		
 		# GPIO Configuration
-        GPIO.setmode(GPIO.BCM)
+		GPIO.setmode(GPIO.BCM)
 
-        GPIO.setup(RSidePB1,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(RSidePB2,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(RSidePB3,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(RSidePB4,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(RSidePB5,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(RSidePB1,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(RSidePB2,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(RSidePB3,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(RSidePB4,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(RSidePB5,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-        GPIO.setup(LSidePB1,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(LSidePB2,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(LSidePB3,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(LSidePB4,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(LSidePB5,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(LSidePB1,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(LSidePB2,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(LSidePB3,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(LSidePB4,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+		GPIO.setup(LSidePB5,  GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-        GPIO.setup(RlyCtrl1,  GPIO.OUT)
-        GPIO.setup(RlyCtrl2,  GPIO.OUT)
-        GPIO.setup(RlyCtrl3,  GPIO.OUT)
-        GPIO.setup(RlyCtrl4,  GPIO.OUT)
-        GPIO.setup(RlyCtrl5,  GPIO.OUT)
-        GPIO.setup(RlyCtrl6,  GPIO.OUT)
-        GPIO.setup(RlyCtrl7,  GPIO.OUT)
-        GPIO.setup(RlyCtrl8,  GPIO.OUT)
-        GPIO.setup(RlyCtrl9,  GPIO.OUT)
-        GPIO.setup(RlyCtrl10,  GPIO.OUT)
+		GPIO.setup(RlyCtrl1,  GPIO.OUT)
+		GPIO.setup(RlyCtrl2,  GPIO.OUT)
+		GPIO.setup(RlyCtrl3,  GPIO.OUT)
+		GPIO.setup(RlyCtrl4,  GPIO.OUT)
+		GPIO.setup(RlyCtrl5,  GPIO.OUT)
+		GPIO.setup(RlyCtrl6,  GPIO.OUT)
+		GPIO.setup(RlyCtrl7,  GPIO.OUT)
+		GPIO.setup(RlyCtrl8,  GPIO.OUT)
+		GPIO.setup(RlyCtrl9,  GPIO.OUT)
+		GPIO.setup(RlyCtrl10,  GPIO.OUT)
 
 		self.setLow = False
 		self.exitProgram = False
@@ -86,16 +86,16 @@ class GPIO_control(QThread):
 
 
 			if self.setLow == True:
-				self.GPIO.output(RlyCtrl1, GPIO.LOW)
-				self.GPIO.output(RlyCtrl2, GPIO.LOW)
-				self.GPIO.output(RlyCtrl3, GPIO.LOW)
-				self.GPIO.output(RlyCtrl4, GPIO.LOW)
-				self.GPIO.output(RlyCtrl5, GPIO.LOW)
-				self.GPIO.output(RlyCtrl6, GPIO.LOW)
-				self.GPIO.output(RlyCtrl7, GPIO.LOW)
-				self.GPIO.output(RlyCtrl8, GPIO.LOW)
-				self.GPIO.output(RlyCtrl9, GPIO.LOW)
-				self.GPIO.output(RlyCtrl10, GPIO.LOW)
+				GPIO.output(RlyCtrl1, GPIO.LOW)
+				GPIO.output(RlyCtrl2, GPIO.LOW)
+				GPIO.output(RlyCtrl3, GPIO.LOW)
+				GPIO.output(RlyCtrl4, GPIO.LOW)
+				GPIO.output(RlyCtrl5, GPIO.LOW)
+				GPIO.output(RlyCtrl6, GPIO.LOW)
+				GPIO.output(RlyCtrl7, GPIO.LOW)
+				GPIO.output(RlyCtrl8, GPIO.LOW)
+				GPIO.output(RlyCtrl9, GPIO.LOW)
+				GPIO.output(RlyCtrl10, GPIO.LOW)
 				self.setLow = False
 				
 			#Push Button 1
@@ -103,70 +103,70 @@ class GPIO_control(QThread):
 				if ((self.run2 and self.run3 and self.run4 and self.run5) != True):
 					self.run1 = True
 					#set relay
-					self.GPIO.output(RlyCtrl1, GPIO.HIGH)
-					self.GPIO.output(RlyCtrl2, GPIO.HIGH)
+					GPIO.output(RlyCtrl1, GPIO.HIGH)
+					GPIO.output(RlyCtrl2, GPIO.HIGH)
 					
 			else:
 				self.run1 = False
 				# turn off	
-				self.GPIO.output(RlyCtrl1, GPIO.LOW)
-				self.GPIO.output(RlyCtrl2, GPIO.LOW)	
+				GPIO.output(RlyCtrl1, GPIO.LOW)
+				GPIO.output(RlyCtrl2, GPIO.LOW)	
 			
 			#Push Button 2
 			if (GPIO.input(LSidePB2) or GPIO.input(RSidePB2)):
 				if ((self.run1 and self.run3 and self.run4 and self.run5) != True):
 					self.run2 = True
 					#set relay
-					self.GPIO.output(RlyCtrl3, GPIO.HIGH)
-					self.GPIO.output(RlyCtrl4, GPIO.HIGH)
+					GPIO.output(RlyCtrl3, GPIO.HIGH)
+					GPIO.output(RlyCtrl4, GPIO.HIGH)
 
 			else:
 				self.run2 = False
 				# turn off
-				self.GPIO.output(RlyCtrl3, GPIO.LOW)
-				self.GPIO.output(RlyCtrl4, GPIO.LOW)
+				GPIO.output(RlyCtrl3, GPIO.LOW)
+				GPIO.output(RlyCtrl4, GPIO.LOW)
 							
 			#Push Button 3
 			if (GPIO.input(LSidePB3) or GPIO.input(RSidePB3)):
 				if ((self.run1 and self.run2 and self.run4 and self.run5) != True):
 					self.run3 = True
 					#set relay
-					self.GPIO.output(RlyCtrl5, GPIO.HIGH)
-					self.GPIO.output(RlyCtrl6, GPIO.HIGH)
+					GPIO.output(RlyCtrl5, GPIO.HIGH)
+					GPIO.output(RlyCtrl6, GPIO.HIGH)
 
 			else:
 				self.run3 = False
 				# turn off	
-				self.GPIO.output(RlyCtrl5, GPIO.LOW)
-				self.GPIO.output(RlyCtrl6, GPIO.LOW)
+				GPIO.output(RlyCtrl5, GPIO.LOW)
+				GPIO.output(RlyCtrl6, GPIO.LOW)
 
 			#Push Button 4
 			if (GPIO.input(LSidePB4) or GPIO.input(RSidePB4)):
 				if ((self.run1 and self.run2 and self.run3 and self.run5) != True):
 					self.run4 = True
 					#set relay
-					self.GPIO.output(RlyCtrl7, GPIO.HIGH)
-					self.GPIO.output(RlyCtrl8, GPIO.HIGH)
+					GPIO.output(RlyCtrl7, GPIO.HIGH)
+					GPIO.output(RlyCtrl8, GPIO.HIGH)
 					
 			else:
 				self.run4 = False
 				# turn off
-				self.GPIO.output(RlyCtrl7, GPIO.LOW)
-				self.GPIO.output(RlyCtrl8, GPIO.LOW)
+				GPIO.output(RlyCtrl7, GPIO.LOW)
+				GPIO.output(RlyCtrl8, GPIO.LOW)
 					
 			#Push Button 5
 			if (GPIO.input(LSidePB5) or GPIO.input(RSidePB5)):
 				if ((self.run1 and self.run2 and self.run3 and self.run4) != True):
 					self.run5 = True
 					#set relay
-					self.GPIO.output(RlyCtrl9, GPIO.HIGH)
-					self.GPIO.output(RlyCtrl10, GPIO.HIGH)
+					GPIO.output(RlyCtrl9, GPIO.HIGH)
+					GPIO.output(RlyCtrl10, GPIO.HIGH)
 
 			else:
 				self.run5 = False
 				# turn off
-				self.GPIO.output(RlyCtrl9, GPIO.LOW)
-				self.GPIO.output(RlyCtrl10, GPIO.LOW)					
+				GPIO.output(RlyCtrl9, GPIO.LOW)
+				GPIO.output(RlyCtrl10, GPIO.LOW)					
 
 			
 			if(self.exitProgram == True):

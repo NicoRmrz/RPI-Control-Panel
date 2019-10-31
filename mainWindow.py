@@ -31,7 +31,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         
         scene.addPixmap(QPixmap(Mediatech_Path))
-        # self.setWindowIcon(QIcon(Mediatech_Path))
+        self.setWindowIcon(QIcon(Icon_Path))
         
         self.MediLogo.setScene(scene)
 

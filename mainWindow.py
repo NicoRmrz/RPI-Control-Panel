@@ -11,9 +11,11 @@ from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap, QIcon
 from threading import Event
 
+#imports from user made file
 from newValue import Controller,  ControlArduino    
 from GPIO_buttonThread import GPIO_control
 import RPi.GPIO as GPIO
+from LSM9DS1_Thread import AcellerometerThread
 
 
 # Icon Image locations
@@ -54,9 +56,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.GPIOthread.setAllLow(True)
 
-        # self.accelerometer = Accelometer()
-        # self.accelerometer.start() 
-        # self.accelerometer.upateAxis.connect(self.updateAccelerometer)
+        self.accelerometer = AcellerometerThread()
+        self.accelerometer.start() 
+        self.accelerometer.axisSignals.connect(self.updateAccelerometer)
 
 
 

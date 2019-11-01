@@ -91,7 +91,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.stop_flag_RS232.set()
 
     def updateAccelerometer(self, x, y, z):
-        self.xAxis.setText("x: " + str(x))
-        self.yAxis.setText("y: " + str(y))
-        self.zAxis.setText("z: " + str(z))
+        self.xAxis.setText("X: " + str(x))
+        self.yAxis.setText("Y: " + str(y))
+        self.zAxis.setText("Z: " + str(z))
 

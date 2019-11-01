@@ -36,7 +36,7 @@ class GUI_Stylesheets(QObject):
 								"stop:0 rgba(242, 242, 242, 0), "
 								"stop:1 rgba(242,242,242, 0)); "						
 								"font: 20 px; "
-								"font-weight: lighter; "
+								"font-weight: bold; "
 								"color: white; }"			
 							)			
 							

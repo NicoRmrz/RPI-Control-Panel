@@ -70,7 +70,7 @@ class GPIO_control(QThread):
 		self.run3 = False
 		self.run4 = False
 		self.run5 = False
-	
+ 	
     #Sets up the program to exit when the main window is shutting down
 	def Set_Exit_Program(self, exiter):
 		self.exitProgram = exiter
@@ -85,93 +85,71 @@ class GPIO_control(QThread):
 		while (1):
 
 
-			if self.setLow == True:
-				GPIO.output(RlyCtrl1, GPIO.LOW)
-				GPIO.output(RlyCtrl2, GPIO.LOW)
-				GPIO.output(RlyCtrl3, GPIO.LOW)
-				GPIO.output(RlyCtrl4, GPIO.LOW)
-				GPIO.output(RlyCtrl5, GPIO.LOW)
-				GPIO.output(RlyCtrl6, GPIO.LOW)
-				GPIO.output(RlyCtrl7, GPIO.LOW)
-				GPIO.output(RlyCtrl8, GPIO.LOW)
-				GPIO.output(RlyCtrl9, GPIO.LOW)
-				GPIO.output(RlyCtrl10, GPIO.LOW)
-				self.setLow = False
+			GPIO.output(RlyCtrl1, GPIO.HIGH)
+			GPIO.output(RlyCtrl2, GPIO.LOW)
+			GPIO.output(RlyCtrl3, GPIO.LOW)
+			GPIO.output(RlyCtrl4, GPIO.LOW)
+			GPIO.output(RlyCtrl5, GPIO.LOW)
+			GPIO.output(RlyCtrl6, GPIO.LOW)
+			GPIO.output(RlyCtrl7, GPIO.LOW)
+			GPIO.output(RlyCtrl8, GPIO.LOW)
+			GPIO.output(RlyCtrl9, GPIO.LOW)
+			GPIO.output(RlyCtrl10, GPIO.LOW)
+
 				
-			#Push Button 1
-			if (GPIO.input(LSidePB1) or GPIO.input(RSidePB1)):
+			# Mode 1 - Left/Right Push Button 1
+			if (GPIO.input(LSidePB4) or GPIO.input(RSidePB1)):
 				if ((self.run2 and self.run3 and self.run4 and self.run5) != True):
 					self.run1 = True
 					#set relay
-					GPIO.output(RlyCtrl1, GPIO.HIGH)
-					GPIO.output(RlyCtrl2, GPIO.HIGH)
-					
-			else:
-				self.run1 = False
-				# turn off	
-				GPIO.output(RlyCtrl1, GPIO.LOW)
-				GPIO.output(RlyCtrl2, GPIO.LOW)	
+					GPIO.output(RlyCtrl1, GPIO.LOW)
+		
 			
-			#Push Button 2
-			if (GPIO.input(LSidePB2) or GPIO.input(RSidePB2)):
+			# Mode 2 - Left/Right Push Button 2
+			if (GPIO.input(LSidePB3) or GPIO.input(RSidePB2)):
 				if ((self.run1 and self.run3 and self.run4 and self.run5) != True):
 					self.run2 = True
 					#set relay
-					GPIO.output(RlyCtrl3, GPIO.HIGH)
-					GPIO.output(RlyCtrl4, GPIO.HIGH)
+					GPIO.output(RlyCtrl2, GPIO.HIGH)
 
-			else:
-				self.run2 = False
-				# turn off
-				GPIO.output(RlyCtrl3, GPIO.LOW)
-				GPIO.output(RlyCtrl4, GPIO.LOW)
 							
-			#Push Button 3
-			if (GPIO.input(LSidePB3) or GPIO.input(RSidePB3)):
+			# Mode 3 - Left/ Right button 3 and top button
+			if (GPIO.input(LSidePB2) or GPIO.input(RSidePB3) or GPIO.input(RSidePB5)):
 				if ((self.run1 and self.run2 and self.run4 and self.run5) != True):
 					self.run3 = True
 					#set relay
-					GPIO.output(RlyCtrl5, GPIO.HIGH)
-					GPIO.output(RlyCtrl6, GPIO.HIGH)
+					GPIO.output(RlyCtrl3, GPIO.HIGH)
 
 			else:
 				self.run3 = False
-				# turn off	
-				GPIO.output(RlyCtrl5, GPIO.LOW)
-				GPIO.output(RlyCtrl6, GPIO.LOW)
 
-			#Push Button 4
-			if (GPIO.input(LSidePB4) or GPIO.input(RSidePB4)):
-				if ((self.run1 and self.run2 and self.run3 and self.run5) != True):
-					self.run4 = True
-					#set relay
-					GPIO.output(RlyCtrl7, GPIO.HIGH)
-					GPIO.output(RlyCtrl8, GPIO.HIGH)
+
+			# ~ # Mode 4 
+			# ~ if (GPIO.input(LSidePB1) or GPIO.input(RSidePB4)):
+				# ~ if ((self.run1 and self.run2 and self.run3 and self.run5 and self.run6) != True):
+					# ~ self.run4 = True
+					# ~ #set relay
+					# ~ GPIO.output(RlyCtrl6, GPIO.HIGH)
 					
-			else:
-				self.run4 = False
-				# turn off
-				GPIO.output(RlyCtrl7, GPIO.LOW)
-				GPIO.output(RlyCtrl8, GPIO.LOW)
-					
-			#Push Button 5
-			if (GPIO.input(LSidePB5) or GPIO.input(RSidePB5)):
+			# ~ else:
+				# ~ self.run4 = False
+		
+			
+						
+			# Mode 5 - Bottom Push Button - Set All relays
+			if GPIO.input(LSidePB5):
 				if ((self.run1 and self.run2 and self.run3 and self.run4) != True):
 					self.run5 = True
-					#set relay
-					GPIO.output(RlyCtrl9, GPIO.HIGH)
-					GPIO.output(RlyCtrl10, GPIO.HIGH)
-
+					#set all relay
+					GPIO.output(RlyCtrl1, GPIO.LOW)
+					GPIO.output(RlyCtrl2, GPIO.HIGH)
+					GPIO.output(RlyCtrl3, GPIO.HIGH)
 			else:
 				self.run5 = False
-				# turn off
-				GPIO.output(RlyCtrl9, GPIO.LOW)
-				GPIO.output(RlyCtrl10, GPIO.LOW)					
-
-			
+		
 			if(self.exitProgram == True):
 				self.exitProgram = False
 				break
             
-			# time.sleep(0.2)
+			time.sleep(0.2)
 

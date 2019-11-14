@@ -16,6 +16,7 @@ from newValue import Controller,  ControlArduino
 from GPIO_buttonThread import GPIO_control
 import RPi.GPIO as GPIO
 from LSM9DS1_Thread import AcellerometerThread
+from ADS79241_Thread import ADC_thread
 
 
 # Icon Image locations
@@ -56,10 +57,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.GPIOthread.setAllLow(True)
 
-        self.accelerometer = AcellerometerThread()
-        self.accelerometer.start() 
-        self.accelerometer.axisSignals.connect(self.updateAccelerometer)
+        # ~ self.accelerometer = AcellerometerThread()
+        # ~ self.accelerometer.start() 
+        # ~ self.accelerometer.axisSignals.connect(self.updateAccelerometer)
 
+        # ~ self.ADC = ADC_thread()
+        # ~ self.ADC.start() 
 
 
         
@@ -68,6 +71,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.stop_flag_time.set()
         self.stop_flag_RS232.set()
         self.GPIOthread.Set_Exit_Program(True)
+        self.ADC.Set_Exit_Program(True)
         GPIO.cleanup()
         sys.exit(0);
 

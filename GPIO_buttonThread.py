@@ -31,7 +31,7 @@ RlyCtrl10 = 14
 # ----------------------------------- GPIO Control Thread Class ------------------------------------------------
 # --------------------------------------------------------------------------------------------------------------   
 class GPIO_control(QThread):
-	doneFlag1 = pyqtSignal(str) 
+	handleButtonSig = pyqtSignal(str) 
     
 	def __init__(self):
 		QThread.__init__(self)
@@ -64,7 +64,7 @@ class GPIO_control(QThread):
 
 		self.setLow = False
 		self.exitProgram = False
-
+		self.modeSet = "Off"
 		self.run1 = False
 		self.run2 = False
 		self.run3 = False
@@ -74,17 +74,12 @@ class GPIO_control(QThread):
     #Sets up the program to exit when the main window is shutting down
 	def Set_Exit_Program(self, exiter):
 		self.exitProgram = exiter
-		
+
+	def SWpushButton(self, mode):
+		self.modeSet = mode
+
 	#Sets all GPIO pins Low
-	def	setAllLow(self, state):
-		self.setLow = state
-        
-	def run(self):
-		self.setPriority(QThread.HighestPriority)
-
-		while (1):
-
-
+	def	setInitSettings(self):
 			GPIO.output(RlyCtrl1, GPIO.HIGH)
 			GPIO.output(RlyCtrl2, GPIO.LOW)
 			GPIO.output(RlyCtrl3, GPIO.LOW)
@@ -95,41 +90,56 @@ class GPIO_control(QThread):
 			GPIO.output(RlyCtrl8, GPIO.LOW)
 			GPIO.output(RlyCtrl9, GPIO.LOW)
 			GPIO.output(RlyCtrl10, GPIO.LOW)
+			self.handleButtonSig.emit("Off")
 
+
+	def run(self):
+		self.setPriority(QThread.HighestPriority)
+
+		while (1):
+
+			self.setInitSettings()
 				
 			# Mode 1 - Left/Right Push Button 1
-			if (GPIO.input(LSidePB4) or GPIO.input(RSidePB1)):
+			if (GPIO.input(LSidePB4) or GPIO.input(RSidePB1) or self.modeSet == "Mode 1"):
 				if ((self.run2 and self.run3 and self.run4 and self.run5) != True):
 					self.run1 = True
 					#set relay
 					GPIO.output(RlyCtrl1, GPIO.LOW)
+					self.handleButtonSig.emit("Mode 1")
 		
 			
 			# Mode 2 - Left/Right Push Button 2
-			if (GPIO.input(LSidePB3) or GPIO.input(RSidePB2)):
+			if (GPIO.input(LSidePB3) or GPIO.input(RSidePB2) or self.modeSet == "Mode 2"):
 				if ((self.run1 and self.run3 and self.run4 and self.run5) != True):
 					self.run2 = True
 					#set relay
 					GPIO.output(RlyCtrl2, GPIO.HIGH)
+					self.handleButtonSig.emit("Mode 2")
+
 
 							
 			# Mode 3 - Left/ Right button 3 and top button
-			if (GPIO.input(LSidePB2) or GPIO.input(RSidePB3) or GPIO.input(RSidePB5)):
+			if (GPIO.input(LSidePB2) or GPIO.input(RSidePB3) or GPIO.input(RSidePB5)or self.modeSet == "Mode 3"):
 				if ((self.run1 and self.run2 and self.run4 and self.run5) != True):
 					self.run3 = True
 					#set relay
 					GPIO.output(RlyCtrl3, GPIO.HIGH)
+					self.handleButtonSig.emit("Mode 3")
+
 
 			else:
 				self.run3 = False
 
 
 			# ~ # Mode 4 
-			# ~ if (GPIO.input(LSidePB1) or GPIO.input(RSidePB4)):
+			# ~ if (GPIO.input(LSidePB1) or GPIO.input(RSidePB4) or self.modeSet == "Mode 4"):
 				# ~ if ((self.run1 and self.run2 and self.run3 and self.run5 and self.run6) != True):
 					# ~ self.run4 = True
 					# ~ #set relay
 					# ~ GPIO.output(RlyCtrl6, GPIO.HIGH)
+					# self.handleButtonSig.emit("Mode 4")
+
 					
 			# ~ else:
 				# ~ self.run4 = False
@@ -137,13 +147,15 @@ class GPIO_control(QThread):
 			
 						
 			# Mode 5 - Bottom Push Button - Set All relays
-			if GPIO.input(LSidePB5):
+			if (GPIO.input(LSidePB5) or self.modeSet == "Mode 5"):
 				if ((self.run1 and self.run2 and self.run3 and self.run4) != True):
 					self.run5 = True
 					#set all relay
 					GPIO.output(RlyCtrl1, GPIO.LOW)
 					GPIO.output(RlyCtrl2, GPIO.HIGH)
 					GPIO.output(RlyCtrl3, GPIO.HIGH)
+					self.handleButtonSig.emit("Mode 5")
+
 			else:
 				self.run5 = False
 		

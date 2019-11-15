@@ -31,6 +31,8 @@ Up_Idle = Main_path + "/icons/up_grey.png"
 Up_Pressed = Main_path + "/icons/up_grey_pressed.png"
 Rotate_Idle = Main_path + "/icons/rotation.png"
 Rotate_Pressed = Main_path + "/icons/rotation_pressed.png"
+Rotate1_Idle = Main_path + "/icons/rotation1.png"
+Rotate1_Pressed = Main_path + "/icons/rotation1_pressed.png"
 Left_Idle = Main_path + "/icons/left_grey.png"
 Left_Pressed = Main_path + "/icons/left_grey_pressed.png"
 Right_Idle = Main_path + "/icons/right_grey.png"
@@ -500,7 +502,7 @@ class Ui_MainWindow(object):
         self.rightButton1 = QtWidgets.QPushButton()
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton1.setMinimumSize(60,60)
-        self.rightButton1.setIcon(QIcon(Rotate_Idle))
+        self.rightButton1.setIcon(QIcon(Rotate1_Idle))
         self.rightButton1.setIconSize(QtCore.QSize(60, 60))
 
         # Create Graphics view object to rotate widgets

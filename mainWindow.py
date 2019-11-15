@@ -31,6 +31,8 @@ Up_Idle = Main_path + "/icons/up_grey.png"
 Up_Pressed = Main_path + "/icons/up_grey_pressed.png"
 Rotate_Idle = Main_path + "/icons/rotation.png"
 Rotate_Pressed = Main_path + "/icons/rotation_pressed.png"
+Rotate1_Idle = Main_path + "/icons/rotation1.png"
+Rotate1_Pressed = Main_path + "/icons/rotation1_pressed.png"
 Left_Idle = Main_path + "/icons/left_grey.png"
 Left_Pressed = Main_path + "/icons/left_grey_pressed.png"
 Right_Idle = Main_path + "/icons/right_grey.png"
@@ -170,7 +172,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)  
             self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)  
             self.leftButton1.setIcon(QIcon(Rotate_Idle))
-            self.rightButton1.setIcon(QIcon(Rotate_Idle))
+            self.rightButton1.setIcon(QIcon(Rotate_Idle1))
             self.leftButton2.setIcon(QIcon(Left_Idle))
             self.rightButton2.setIcon(QIcon(Right_Idle))
             self.leftButton3.setIcon(QIcon(Up_Idle))
@@ -180,7 +182,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)        
             self.rightButton1.setStyleSheet(GUI_Style.buttonPressed) 
             self.leftButton1.setIcon(QIcon(Rotate_Pressed))
-            self.rightButton1.setIcon(QIcon(Rotate_Pressed))       
+            self.rightButton1.setIcon(QIcon(Rotate1_Pressed))       
         if mode == "Mode 2":
             self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)        
             self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)    
@@ -202,7 +204,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)  
             self.rightButton3.setStyleSheet(GUI_Style.buttonPressed) 
             self.leftButton1.setIcon(QIcon(Rotate_Pressed))
-            self.rightButton1.setIcon(QIcon(Rotate_Pressed)) 
+            self.rightButton1.setIcon(QIcon(Rotate1_Pressed)) 
             self.leftButton2.setIcon(QIcon(Left_Pressed))
             self.rightButton2.setIcon(QIcon(Right_Pressed))
             self.leftButton3.setIcon(QIcon(Up_Pressed))
@@ -212,12 +214,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)        
         self.leftButton1.setIcon(QIcon(Rotate_Pressed))
-        self.rightButton1.setIcon(QIcon(Rotate_Pressed))
+        self.rightButton1.setIcon(QIcon(Rotate1_Pressed))
         # self.GPIOthread.SWpushButton("Mode 1")
 
     def leftButton1_Released(self):
         self.leftButton1.setIcon(QIcon(Rotate_Idle))
-        self.rightButton1.setIcon(QIcon(Rotate_Idle))
+        self.rightButton1.setIcon(QIcon(Rotate1_Idle))
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)        
         # self.GPIOthread.SWpushButton("Off")
@@ -265,14 +267,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton1.setIcon(QIcon(Rotate_Pressed))
-        self.rightButton1.setIcon(QIcon(Rotate_Pressed))
+        self.rightButton1.setIcon(QIcon(Rotate1_Pressed))
         # self.GPIOthread.SWpushButton("Mode 1")
 
     def rightButton1_Released(self):
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton1.setIcon(QIcon(Rotate_Idle))
-        self.rightButton1.setIcon(QIcon(Rotate_Idle))
+        self.rightButton1.setIcon(QIcon(Rotate1_Idle))
         # self.GPIOthread.SWpushButton("Off")
 
     def rightButton2_Clicked(self):

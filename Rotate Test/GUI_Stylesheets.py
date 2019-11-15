@@ -12,6 +12,23 @@ class GUI_Stylesheets(QObject):
 
 
 		self.mainWidget = ("background-color: rgb(119, 136, 153);")	
+
+		self.timer = ("font: 14pt \"Arial\";\n"
+						"color: rgb(255, 255, 255);\n"
+						"background-color: rgba(255, 255, 255, 0);")
+
+
+		self.logo = ("background-color: rgba(255, 255, 255, 0);\n"
+						"selection-color: rgba(255, 255, 255, 0);\n"
+						"color: rgba(255, 255, 255, 0);\n"
+						"alternate-background-color: rgba(255, 255, 255, 0);\n"
+						"gridline-color: rgba(255, 255, 255, 0);\n"
+						"border-color: rgba(255, 255, 255, 0);")
+
+		self.exitBtn = ("background-color: rgba(255,255,255,0);\n"
+							"border-color: rgba(255, 255, 255, 0);\n"
+							# "background-image: url(icons/Button-Close-icon x 64.png)\n"
+							"")
 		
 		self.statusBarWhite = ("QStatusBar { background: rgb(58, 213, 255); "
 										"color:white;} "
@@ -43,4 +60,15 @@ class GUI_Stylesheets(QObject):
 								"color: white; }"			
 							)			
 							
-		
+		self.SID = ("color: rgb(255, 255, 255);\n"
+						"background-color: rgba(255, 255, 255, 0);\n"
+						"font: 24pt \"Arial\";")
+
+		self.SID_Data = ("font: 36pt \"Arial\";\n"
+						"color: rgb(255, 255, 255);\n"
+						"background-color: rgba(255, 255, 255, 0); border: none;")
+
+		self.groupBox = ("font: bold 11px Verdana; "
+	                    "color: white; "
+	                    "background-color: rgba(18,151,147,0);"
+	                    )

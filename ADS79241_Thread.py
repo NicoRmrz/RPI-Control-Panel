@@ -22,7 +22,7 @@ MANUAL_SCAN = 0xC8
 # ----------------------------------- ADS79241 ADC Thread Class ------------------------------------------------
 # --------------------------------------------------------------------------------------------------------------   
 class ADC_thread(QThread):
-	doneFlag = pyqtSignal(str) 
+	ADC_meas = pyqtSignal(int, int, int) 
     
 	def __init__(self):
 		QThread.__init__(self)
@@ -48,21 +48,14 @@ class ADC_thread(QThread):
 
 		while (1):
 
-			# ~ data1 = self.bus.read_byte_data(i2c_address, ADC_ch0)
-			# ~ data2 = self.bus.read_byte_data(i2c_address, ADC_ch1)
-			# ~ data3 = self.bus.read_byte_data(i2c_address, ADC_ch2)
+			data1 = self.bus.read_byte_data(i2c_address, ADC_ch0)
+			data2 = self.bus.read_byte_data(i2c_address, ADC_ch1)
+			data3 = self.bus.read_byte_data(i2c_address, ADC_ch2)
 			data4 = self.bus.read_byte_data(i2c_address, ADC_ch3)
 			val = ((data4 << 4)) << 1
 			val2 = (val * 2.2)/4096
 			print("ch3: " + str(data4) )
 
-			# ~ data4 = self.bus.read_i2c_block_data(i2c_address, 0x00,2)
-			# ~ val = ((data4[0] << 4) | (data4[1] >> 4)) << 1
-			# ~ val2 = (val * 2.2)/4096
-
-			# ~ data3 = self.bus.read_i2c_block_data(i2c_address, 0x00,2)
-			# ~ val = ((data3[0] << 4) | (data3[1] >> 4)) << 1
-			# ~ val2 = (val * 2.2)/4096
 
 			
 			# ~ print("ch0: " + str(data1) )
@@ -72,7 +65,7 @@ class ADC_thread(QThread):
 			print("val2: " + str(val2) )
 			# ~ print("ch3: " + str(data4) )
 			
-							
+			self.ADC_meas.emit(data1, data2, data3)
 
 			
 			if(self.exitProgram == True):

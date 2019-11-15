@@ -39,9 +39,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.stop_flag_time =  Event()
         self.stop_flag_RS232 =  Event()
 
-        # self.getController = Controller(self.stop_flag_time)
-        # self.getController.start()
-        # self.getController.newTime.connect(self.updateTime)
+        self.getController = Controller(self.stop_flag_time)
+        self.getController.start()
+        self.getController.newTime.connect(self.updateTime)
  
         # self.getArduino = ControlArduino(self.stop_flag_RS232)
         # self.getArduino.newValue.connect(self.updatePoti)  
@@ -60,6 +60,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # ~ self.ADC = ADC_thread()
         # ~ self.ADC.start() 
+        # ~ self.ADC.ADC_meas.connect(self.updateSID)
 
         self.btnExit.clicked.connect(self.on_btnExit_clicked)
 
@@ -92,7 +93,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_btnExit_clicked(self):
         self.stop_flag_time.set()
-        self.stop_flag_RS232.set()
+        # self.stop_flag_RS232.set()
         # self.GPIOthread.Set_Exit_Program(True)
         # self.ADC.Set_Exit_Program(True)
         # GPIO.cleanup()
@@ -101,10 +102,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateTime(self,  timeInterval):
         self.clockTime.setText("Time:  " + timeInterval)
 
-    # def updatePoti(self, poti,  poti2, poti3):
-    #     self.SID1_Data.setText(str(poti) + " in")
-    #     self.SID2_Data.setText(str(poti2) + " in")
-    #     self.SID3_Data.setText(str(poti3) + " in")
+    def updateSID(self, poti,  poti2, poti3):
+        self.SID1_Data.setText(str(poti) + " in")
+        self.SID2_Data.setText(str(poti2) + " in")
+        self.SID3_Data.setText(str(poti3) + " in")
         
     # def updateInfoRS232(self, rs232):
     #     print(rs232)
@@ -154,12 +155,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)  
             self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)  
             self.leftButton4.setStyleSheet(GUI_Style.buttonIdle)  
-            self.leftButton5.setStyleSheet(GUI_Style.buttonIdle)             
             self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)  
             self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)  
             self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)  
             self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)  
-            self.rightButton5.setStyleSheet(GUI_Style.buttonIdle)  
 
 
         if mode == "Mode 1":

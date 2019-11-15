@@ -23,6 +23,9 @@ class Controller(QThread, object):
         global timeInterval
         now = datetime.datetime.now()
         timeInterval="%0.2d:%0.2d" %(now.hour, now.minute)
+        # ~ timeInterval= datetime.datetime.now().strftime('%d %B %Y %I:%M:%S')
+        # ~ timeInterval= datetime.datetime.now().strftime('%I:%M:%S %p')
+        
         self.newTime.emit(timeInterval)
         
 class ControlArduino(QThread):

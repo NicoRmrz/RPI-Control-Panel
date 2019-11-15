@@ -132,17 +132,17 @@ class GPIO_control(QThread):
 				self.run3 = False
 
 
-			# ~ # Mode 4 
-			# ~ if (GPIO.input(LSidePB1) or GPIO.input(RSidePB4) or self.modeSet == "Mode 4"):
-				# ~ if ((self.run1 and self.run2 and self.run3 and self.run5 and self.run6) != True):
-					# ~ self.run4 = True
-					# ~ #set relay
-					# ~ GPIO.output(RlyCtrl6, GPIO.HIGH)
-					# self.handleButtonSig.emit("Mode 4")
+		 # Mode 4 
+			if (GPIO.input(LSidePB1) or GPIO.input(RSidePB4) or self.modeSet == "Mode 4"):
+				if ((self.run1 and self.run2 and self.run3 and self.run5) != True):
+					self.run4 = True
+				 	#set relay
+					# GPIO.output(RlyCtrl6, GPIO.HIGH)
+					self.handleButtonSig.emit("Mode 4")
 
 					
-			# ~ else:
-				# ~ self.run4 = False
+			else:
+				self.run4 = False
 		
 			
 						

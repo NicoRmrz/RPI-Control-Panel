@@ -200,7 +200,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def leftButton2_Released(self):
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
-        self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
+        self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         # self.GPIOthread.SWpushButton("Off")
 
 

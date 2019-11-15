@@ -21,7 +21,7 @@ GUI_Style = GUI_Stylesheets()
 # Icon Image locations
 Main_path = os.getcwd() + "/"
 xray1_Path = Main_path + "/icons/ray.png"
-closex64_Path = Main_path + "/icons/Button-Close-icon x 64.png"
+closex64_Path = Main_path + "/icons/exit.png"
 Main_path = os.getcwd() + "/"
 Icon_Path = Main_path + "/icons/logo.png"
 Mediatech_Path = Main_path + "/icons/Medicatech.png"
@@ -130,7 +130,7 @@ class Ui_MainWindow(object):
         self.btnExit.setStyleSheet(GUI_Style.exitBtn)
         self.btnExit.setText("")
         self.btnExit.setIcon(QIcon(closex64_Path))
-        self.btnExit.setIconSize(QtCore.QSize(200, 200))
+        self.btnExit.setIconSize(QtCore.QSize(45, 45))
         self.btnExit.setAutoDefault(False)
         self.btnExit.setDefault(False)
         self.btnExit.setFlat(False)

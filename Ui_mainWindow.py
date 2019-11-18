@@ -37,6 +37,8 @@ Left_Idle = Main_path + "/icons/left_grey.png"
 Left_Pressed = Main_path + "/icons/left_grey_pressed.png"
 Right_Idle = Main_path + "/icons/right_grey.png"
 Right_Pressed = Main_path + "/icons/right_grey_pressed.png"
+SID1_path = Main_path + "/icons/sid1.png"
+SID2_path = Main_path + "/icons/sid2.png"
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -168,50 +170,72 @@ class Ui_MainWindow(object):
         # ----------------------------------
         # ------------ SID 1 ---------------
         # ----------------------------------
-        self.SID1Layout = QtWidgets.QHBoxLayout()
+        self.SID1Layout = QtWidgets.QVBoxLayout()
         self.SID1Layout.setSpacing(0)
         self.SID1Layout.setContentsMargins(0, 0, 0, 0)       
 
-        # Create Left Button 1
-        self.leftButton1 = QtWidgets.QPushButton()
-        self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
-        self.leftButton1.setMinimumSize(60,60)
-        self.leftButton1.setIcon(QIcon(Rotate_Idle))
-        self.leftButton1.setIconSize(QtCore.QSize(60, 60))
 
-        # Create Graphics view object to rotate widgets
-        self.LBtn1_View = QtWidgets.QGraphicsView()
-        self.LBtn1_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.LBtn1_Scene = QtWidgets.QGraphicsScene(self.LBtn1_View)
-        self.LBtn1_View.setScene(self.LBtn1_Scene)
-        self.LBtn1_Scene.addWidget(self.leftButton1)
 
-        # Create SID Label
-        self.SID1_label = QtWidgets.QLabel()
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+
+
+        # SID 1 Image
+        self.SID1img = QtWidgets.QGraphicsView()
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.SID1_label.sizePolicy().hasHeightForWidth())
-        self.SID1_label.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(24)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.SID1_label.setFont(font)
-        self.SID1_label.setStyleSheet(GUI_Style.SID)
-        self.SID1_label.setScaledContents(True)
-        self.SID1_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.SID1_label.setObjectName("SID1_label")
-        self.SID1_label.setMinimumWidth(75)
+        sizePolicy.setHeightForWidth(self.SID1img.sizePolicy().hasHeightForWidth())
+        self.SID1img.setSizePolicy(sizePolicy)
+        # self.SID1img.setMinimumSize(QtCore.QSize(100, 100))
+        self.SID1img.setMaximumSize(QtCore.QSize(175, 175))
+        self.SID1img.setStyleSheet(GUI_Style.logo)
+        self.SID1img.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.SID1img.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.SID1img.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.SID1img.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.SID1img.setAlignment(QtCore.Qt.AlignCenter)
+        self.SID1img.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
+        self.SID1img.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
+        self.SID1img.setViewportUpdateMode(QtWidgets.QGraphicsView.MinimalViewportUpdate)
+        self.SID1img.setRubberBandSelectionMode(QtCore.Qt.ContainsItemShape)
+        self.SID1img.setOptimizationFlags(QtWidgets.QGraphicsView.DontClipPainter)
+        self.SID1img.setObjectName("SID1img")
 
-        # Create Graphics view object to rotate widgets
-        self.SID1Label_View = QtWidgets.QGraphicsView()
-        self.SID1Label_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SID1Label_Scene = QtWidgets.QGraphicsScene(self.SID1Label_View)
-        self.SID1Label_View.setScene(self.SID1Label_Scene)
-        self.SID1Label_Scene.addWidget(self.SID1_label)
+        self.SID1scene = QtWidgets.QGraphicsScene()
+
+        self.SID1scene.addPixmap(QPixmap(SID1_path))
+
+
+
+        self.SID1img.setScene(self.SID1scene)
+        self.SID1img.fitInView(self.SID1scene.sceneRect(), QtCore.Qt.KeepAspectRatio)
+
+
+        # Create SID Label
+        # self.SID1_label = QtWidgets.QLabel()
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(self.SID1_label.sizePolicy().hasHeightForWidth())
+        # self.SID1_label.setSizePolicy(sizePolicy)
+        # font = QtGui.QFont()
+        # font.setFamily("Arial")
+        # font.setPointSize(24)
+        # font.setBold(False)
+        # font.setItalic(False)
+        # font.setWeight(50)
+        # self.SID1_label.setFont(font)
+        # self.SID1_label.setStyleSheet(GUI_Style.SID)
+        # self.SID1_label.setScaledContents(True)
+        # self.SID1_label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.SID1_label.setObjectName("SID1_label")
+        # self.SID1_label.setMinimumWidth(75)
+
+        # # Create Graphics view object to rotate widgets
+        # self.SID1Label_View = QtWidgets.QGraphicsView()
+        # self.SID1Label_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        # self.SID1Label_Scene = QtWidgets.QGraphicsScene(self.SID1Label_View)
+        # self.SID1Label_View.setScene(self.SID1Label_Scene)
+        # self.SID1Label_Scene.addWidget(self.SID1_label)
 
         # Create SID Data field
         self.SID1_Data = QtWidgets.QLabel()
@@ -233,59 +257,78 @@ class Ui_MainWindow(object):
         self.SID1Data_Scene.addWidget(self.SID1_Data)
 
         # Add objects to layout
-        self.SID1Layout.addWidget(self.LBtn1_View)
-        self.SID1Layout.addWidget(self.SID1Label_View)
-        self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignLeft)
+        # self.SID1Layout.addWidget(self.LBtn1_View)
+        self.SID1Layout.addWidget(self.SID1img)
+        # self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignLeft)
+        self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignTop)
 
 
 
         # ----------------------------------
         # ------------ SID 2 ---------------       
         # ----------------------------------
-        self.SID2Layout = QtWidgets.QHBoxLayout()
+        self.SID2Layout = QtWidgets.QVBoxLayout()
         self.SID2Layout.setSpacing(0)
         self.SID2Layout.setContentsMargins(0, 0, 0, 0)  
 
-        # Create Left Button 2
-        self.leftButton2 = QtWidgets.QPushButton()
-        self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
-        self.leftButton2.setMinimumSize(60,60)
-        self.leftButton2.setIcon(QIcon(Left_Idle))
-        self.leftButton2.setIconSize(QtCore.QSize(60, 60))
-
-        # Create Graphics view object to rotate widgets
-        self.LBtn2_View = QtWidgets.QGraphicsView()
-        self.LBtn2_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.LBtn2_Scene = QtWidgets.QGraphicsScene(self.LBtn2_View)
-        self.LBtn2_View.setScene(self.LBtn2_Scene)
-        self.LBtn2_Scene.addWidget(self.leftButton2)
-
-        # Create SID Label
-        self.SID2_label = QtWidgets.QLabel()
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        # SID 2 Image
+        self.SID2img = QtWidgets.QGraphicsView()
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.SID2_label.sizePolicy().hasHeightForWidth())
-        self.SID2_label.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(24)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.SID2_label.setFont(font)
-        self.SID2_label.setStyleSheet(GUI_Style.SID)
-        self.SID2_label.setScaledContents(True)
-        self.SID2_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.SID2_label.setObjectName("SID2_label")
-        self.SID2_label.setMinimumWidth(75)
+        sizePolicy.setHeightForWidth(self.SID2img.sizePolicy().hasHeightForWidth())
+        self.SID2img.setSizePolicy(sizePolicy)
+        # self.SID1img.setMinimumSize(QtCore.QSize(100, 100))
+        self.SID2img.setMaximumSize(QtCore.QSize(175, 175))
+        self.SID2img.setStyleSheet(GUI_Style.logo)
+        self.SID2img.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.SID2img.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.SID2img.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.SID2img.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.SID2img.setAlignment(QtCore.Qt.AlignCenter)
+        self.SID2img.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
+        self.SID2img.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
+        self.SID2img.setViewportUpdateMode(QtWidgets.QGraphicsView.MinimalViewportUpdate)
+        self.SID2img.setRubberBandSelectionMode(QtCore.Qt.ContainsItemShape)
+        self.SID2img.setOptimizationFlags(QtWidgets.QGraphicsView.DontClipPainter)
+        self.SID2img.setObjectName("SID2img")
 
-        # Create Graphics view object to rotate widgets
-        self.SID2Label_View = QtWidgets.QGraphicsView()
-        self.SID2Label_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SID2Label_Scene = QtWidgets.QGraphicsScene(self.SID2Label_View)
-        self.SID2Label_View.setScene(self.SID2Label_Scene)
-        self.SID2Label_Scene.addWidget(self.SID2_label)
+        self.SID2scene = QtWidgets.QGraphicsScene()
+
+        self.SID2scene.addPixmap(QPixmap(SID2_path))
+
+
+
+        self.SID2img.setScene(self.SID2scene)
+        self.SID2img.fitInView(self.SID2scene.sceneRect(), QtCore.Qt.KeepAspectRatio)
+    
+
+        # # Create SID Label
+        # self.SID2_label = QtWidgets.QLabel()
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(self.SID2_label.sizePolicy().hasHeightForWidth())
+        # self.SID2_label.setSizePolicy(sizePolicy)
+        # font = QtGui.QFont()
+        # font.setFamily("Arial")
+        # font.setPointSize(24)
+        # font.setBold(False)
+        # font.setItalic(False)
+        # font.setWeight(50)
+        # self.SID2_label.setFont(font)
+        # self.SID2_label.setStyleSheet(GUI_Style.SID)
+        # self.SID2_label.setScaledContents(True)
+        # self.SID2_label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.SID2_label.setObjectName("SID2_label")
+        # self.SID2_label.setMinimumWidth(75)
+
+        # # Create Graphics view object to rotate widgets
+        # self.SID2Label_View = QtWidgets.QGraphicsView()
+        # self.SID2Label_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        # self.SID2Label_Scene = QtWidgets.QGraphicsScene(self.SID2Label_View)
+        # self.SID2Label_View.setScene(self.SID2Label_Scene)
+        # self.SID2Label_Scene.addWidget(self.SID2_label)
 
         # Create SID Data field
         self.SID2_Data = QtWidgets.QLabel()
@@ -309,9 +352,11 @@ class Ui_MainWindow(object):
 
 
         # Add objects to layout
-        self.SID2Layout.addWidget(self.LBtn2_View)
-        self.SID2Layout.addWidget(self.SID2Label_View)
-        self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignLeft)
+        # self.SID2Layout.addWidget(self.LBtn2_View)
+        self.SID2Layout.addWidget(self.SID2img)
+        # self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignLeft)
+        self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignTop)
+
 
         # ----------------------------------
         # ------------ SID 3 ---------------
@@ -320,18 +365,7 @@ class Ui_MainWindow(object):
         self.SID3Layout.setSpacing(0)
         self.SID3Layout.setContentsMargins(0, 0, 0, 0)
 
-        # Create Left Button 3
-        self.leftButton3 = QtWidgets.QPushButton()
-        self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
-        self.leftButton3.setMinimumSize(60,60)
-        self.leftButton3.setIcon(QIcon(Up_Idle))
-        self.leftButton3.setIconSize(QtCore.QSize(60, 60))
-        # Create Graphics view object to rotate widgets
-        self.LBtn3_View = QtWidgets.QGraphicsView()
-        self.LBtn3_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.LBtn3_Scene = QtWidgets.QGraphicsScene(self.LBtn3_View)
-        self.LBtn3_View.setScene(self.LBtn3_Scene)
-        self.LBtn3_Scene.addWidget(self.leftButton3)
+       
 
         # Create SID Label
         self.SID3_label = QtWidgets.QLabel()
@@ -380,16 +414,79 @@ class Ui_MainWindow(object):
         self.SID3Data_Scene.addWidget(self.SID3_Data)
 
         # Add objects to layout
-        self.SID3Layout.addWidget(self.LBtn3_View)
+        # self.SID3Layout.addWidget(self.LBtn3_View)
         self.SID3Layout.addWidget(self.SID3Label_View)
         self.SID3Layout.addWidget(self.SID3Data_View, 1, Qt.AlignLeft)
+
+
+
+
+
+
+       
+
+        # ---------------------------------------------------------------------
+        # ----------------- Left Side Button Layout ---------------------------
+        # ---------------------------------------------------------------------
+        # ----------------------------------
+        # ---------- Left Button 1 ---------
+        # ----------------------------------
+
+        # Create Left Button 1
+        self.leftButton1 = QtWidgets.QPushButton()
+        self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
+        self.leftButton1.setMinimumSize(60,60)
+        self.leftButton1.setIcon(QIcon(Rotate_Idle))
+        self.leftButton1.setIconSize(QtCore.QSize(60, 60))
+
+        # Create Graphics view object to rotate widgets
+        self.LBtn1_View = QtWidgets.QGraphicsView()
+        self.LBtn1_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.LBtn1_Scene = QtWidgets.QGraphicsScene(self.LBtn1_View)
+        self.LBtn1_View.setScene(self.LBtn1_Scene)
+        self.LBtn1_Scene.addWidget(self.leftButton1)
+
+
+        # ----------------------------------
+        # ---------- Left Button 2 ---------
+        # ----------------------------------
+        # Create Left Button 2
+        self.leftButton2 = QtWidgets.QPushButton()
+        self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
+        self.leftButton2.setMinimumSize(60,60)
+        self.leftButton2.setIcon(QIcon(Left_Idle))
+        self.leftButton2.setIconSize(QtCore.QSize(60, 60))
+
+        # Create Graphics view object to rotate widgets
+        self.LBtn2_View = QtWidgets.QGraphicsView()
+        self.LBtn2_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.LBtn2_Scene = QtWidgets.QGraphicsScene(self.LBtn2_View)
+        self.LBtn2_View.setScene(self.LBtn2_Scene)
+        self.LBtn2_Scene.addWidget(self.leftButton2)
+
+        # ----------------------------------
+        # ---------- Left Button 3 ---------
+        # ----------------------------------
+
+        # Create Left Button 3
+        self.leftButton3 = QtWidgets.QPushButton()
+        self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
+        self.leftButton3.setMinimumSize(60,60)
+        self.leftButton3.setIcon(QIcon(Up_Idle))
+        self.leftButton3.setIconSize(QtCore.QSize(60, 60))
+        # Create Graphics view object to rotate widgets
+        self.LBtn3_View = QtWidgets.QGraphicsView()
+        self.LBtn3_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.LBtn3_Scene = QtWidgets.QGraphicsScene(self.LBtn3_View)
+        self.LBtn3_View.setScene(self.LBtn3_Scene)
+        self.LBtn3_Scene.addWidget(self.leftButton3)
 
         # ----------------------------------
         # ---------- Left Button 4 ---------
         # ----------------------------------
-        self.Left4Layout = QtWidgets.QHBoxLayout()
-        self.Left4Layout.setSpacing(0)
-        self.Left4Layout.setContentsMargins(0, 0, 0, 0)
+        # self.Left4Layout = QtWidgets.QHBoxLayout()
+        # self.Left4Layout.setSpacing(0)
+        # self.Left4Layout.setContentsMargins(0, 0, 0, 0)
 
         # Create Left Button 4
         self.leftButton4 = QtWidgets.QPushButton()
@@ -402,27 +499,28 @@ class Ui_MainWindow(object):
         self.LBtn4_Scene = QtWidgets.QGraphicsScene(self.LBtn4_View)
         self.LBtn4_View.setScene(self.LBtn4_Scene)
         self.LBtn4_Scene.addWidget(self.leftButton4)
-        self.button4Layout = QtWidgets.QVBoxLayout()
 
-        self.spacerItem1 = QtWidgets.QSpacerItem(400, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        # self.button4Layout = QtWidgets.QVBoxLayout()
+        # self.spacerItem1 = QtWidgets.QSpacerItem(400, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        # self.spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
 
-        self.spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
 
+        # self.Left4Layout.addWidget(self.LBtn4_View, 1, Qt.AlignLeft)
+        # self.Left4Layout.addItem(self.spacerItem1)
+        # self.Left4Layout.addItem(self.spacerItem2
 
-        self.Left4Layout.addWidget(self.LBtn4_View, 1, Qt.AlignLeft)
-        self.Left4Layout.addItem(self.spacerItem1)
-        self.Left4Layout.addItem(self.spacerItem2)
-
-        # ---------------------------------------------------------------------
-        # ----------------- Left Side Button Layout ---------------------------
-        # ---------------------------------------------------------------------
         self.LeftButtonLayout = QtWidgets.QVBoxLayout()
-        self.LeftButtonLayout.setSpacing(0)
+        self.LeftButtonLayout.setSpacing(25)
         self.LeftButtonLayout.setContentsMargins(0, 0, 0, 0)
-        self.LeftButtonLayout.addLayout(self.SID1Layout)
-        self.LeftButtonLayout.addLayout(self.SID2Layout)
-        self.LeftButtonLayout.addLayout(self.SID3Layout)
-        self.LeftButtonLayout.addLayout(self.Left4Layout)
+        # self.LeftButtonLayout.addLayout(self.SID1Layout)
+        # self.LeftButtonLayout.addLayout(self.SID2Layout)
+        # self.LeftButtonLayout.addLayout(self.SID3Layout)        
+        # self.LeftButtonLayout.addLayout(self.Left4Layout)
+
+        self.LeftButtonLayout.addWidget(self.LBtn1_View, 1, Qt.AlignLeft)
+        self.LeftButtonLayout.addWidget(self.LBtn2_View, 1, Qt.AlignLeft)
+        self.LeftButtonLayout.addWidget(self.LBtn3_View, 1, Qt.AlignLeft)
+        self.LeftButtonLayout.addWidget(self.LBtn4_View, 1, Qt.AlignLeft)
 
 
 
@@ -553,12 +651,12 @@ class Ui_MainWindow(object):
 
 
         self.RightButtonLayout = QtWidgets.QVBoxLayout()
-        self.RightButtonLayout.setSpacing(0)
+        self.RightButtonLayout.setSpacing(25)
         self.RightButtonLayout.setContentsMargins(0, 0, 0, 0)
-        self.RightButtonLayout.addWidget(self.RBtn1_View)
-        self.RightButtonLayout.addWidget(self.RBtn2_View)
-        self.RightButtonLayout.addWidget(self.RBtn3_View)
-        self.RightButtonLayout.addWidget(self.RBtn4_View)
+        self.RightButtonLayout.addWidget(self.RBtn1_View, 1, Qt.AlignRight)
+        self.RightButtonLayout.addWidget(self.RBtn2_View, 1, Qt.AlignRight)
+        self.RightButtonLayout.addWidget(self.RBtn3_View, 1, Qt.AlignRight)
+        self.RightButtonLayout.addWidget(self.RBtn4_View, 1, Qt.AlignRight)
 
 
 
@@ -568,7 +666,11 @@ class Ui_MainWindow(object):
         self.BottomLayout = QtWidgets.QHBoxLayout()
         self.BottomLayout.setSpacing(20)
         self.BottomLayout.setContentsMargins(0, 0, 0, 0)
-        self.BottomLayout.addLayout(self.LeftButtonLayout, QtCore.Qt.AlignLeft)
+        # self.BottomLayout.addLayout(self.LeftButtonLayout, QtCore.Qt.AlignLeft)
+        self.BottomLayout.addLayout(self.LeftButtonLayout)
+        self.BottomLayout.addLayout(self.SID1Layout)
+        self.BottomLayout.addLayout(self.SID2Layout)
+        
         self.BottomLayout.addLayout(self.AcelLayout)
         self.BottomLayout.addLayout(self.RightButtonLayout)
 
@@ -601,8 +703,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MX30 GUI"))
         self.SID3_label.setText(_translate("MainWindow", "SID3"))
         self.SID2_Data.setText(_translate("MainWindow", "1000"))
-        self.SID1_label.setText(_translate("MainWindow", "SID1"))
-        self.SID2_label.setText(_translate("MainWindow", "SID2"))
+        # self.SID1_label.setText(_translate("MainWindow", "SID1"))
+        # self.SID2_label.setText(_translate("MainWindow", "SID2"))
         self.SID3_Data.setText(_translate("MainWindow", "1000"))
         self.SID1_Data.setText(_translate("MainWindow", "1000"))
 

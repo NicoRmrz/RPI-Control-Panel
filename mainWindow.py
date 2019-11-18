@@ -150,9 +150,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.RBtn3_View.rotate(degree)
         self.RBtn4_View.rotate(degree)
 
-        self.SID1Label_View.rotate(degree)
-        self.SID2Label_View.rotate(degree)
-        self.SID3Label_View.rotate(degree)
+        self.SID1img.rotate(degree)
+        self.SID2img.rotate(degree)
+        # self.SID3Label_View.rotate(degree)
 
         self.SID1Data_View.rotate(degree)
         self.SID2Data_View.rotate(degree)
@@ -160,6 +160,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.xAx_View.rotate(degree)
         self.yAx_View.rotate(degree)
         self.zAx_View.rotate(degree)
+
+        if degree == 90:
+            self.HeaderLayout.removeWidget(self.MediLogo)
+            self.HeaderLayout.removeWidget(self.timeView)
+            self.HeaderLayout.removeWidget(self.exitBtn_View)
+
+            # self.HeaderLayout.addWidget(self.exitBtn_View)
+            # self.HeaderLayout.addWidget(self.MediLogo)
+            # self.HeaderLayout.addWidget(self.timeView)
+
 
     def buttonHandlers(self, mode):
         if mode == "Off":
@@ -211,6 +221,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.rightButton3.setIcon(QIcon(Down_Pressed))
 
     def leftButton1_Clicked(self):
+
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)        
         self.leftButton1.setIcon(QIcon(Rotate_Pressed))

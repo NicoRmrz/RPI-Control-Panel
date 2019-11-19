@@ -117,7 +117,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateSID(self, poti,  poti2, poti3):
         self.SID1_Data.setText(str(poti) + " in")
         self.SID2_Data.setText(str(poti2) + " in")
-        self.SID3_Data.setText(str(poti3) + " in")
+        # self.SID3_Data.setText(str(poti3) + " in")
         
     # def updateInfoRS232(self, rs232):
     #     print(rs232)

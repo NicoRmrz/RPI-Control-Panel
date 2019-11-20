@@ -105,7 +105,7 @@ class GPIO_control(QThread):
 				if ((self.run2 and self.run3 and self.run4 and self.run5) != True):
 					self.run1 = True
 					#set relay
-					GPIO.output(RlyCtrl3, GPIO.LOW)
+					GPIO.output(RlyCtrl3, GPIO.HIGH)
 					self.handleButtonSig.emit("Mode 1")
 		
 			
@@ -114,7 +114,7 @@ class GPIO_control(QThread):
 				if ((self.run1 and self.run3 and self.run4 and self.run5) != True):
 					self.run2 = True
 					#set relay
-					GPIO.output(RlyCtrl1, GPIO.HIGH)
+					GPIO.output(RlyCtrl1, GPIO.LOW)
 					self.handleButtonSig.emit("Mode 2")
 
 
@@ -124,7 +124,7 @@ class GPIO_control(QThread):
 				if ((self.run1 and self.run2 and self.run4 and self.run5) != True):
 					self.run3 = True
 					#set relay
-					GPIO.output(RlyCtrl3, GPIO.HIGH)
+					GPIO.output(RlyCtrl5, GPIO.HIGH)
 					self.handleButtonSig.emit("Mode 3")
 
 

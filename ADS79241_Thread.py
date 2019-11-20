@@ -61,11 +61,11 @@ class ADC_thread(QThread):
 			# ~ print("ch0: " + str(data1) )
 			# ~ print("ch1: " + str(data2) )
 			# ~ print("ch2: " + str(data3) )
-			print("val: " + str(val) )
-			print("val2: " + str(val2) )
+			# ~ print("val: " + str(val) )
+			# ~ print("val2: " + str(val2) )
 			# ~ print("ch3: " + str(data4) )
 			
-			self.ADC_meas.emit(data1, data2, data3)
+			# ~ self.ADC_meas.emit(data1, data2, data3)
 
 			
 			if(self.exitProgram == True):

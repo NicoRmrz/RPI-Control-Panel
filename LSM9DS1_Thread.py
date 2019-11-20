@@ -23,7 +23,7 @@ class AcellerometerThread(QThread):
 		self.mag = MAG(mag_driver)
 		
 		if self.imu.selfTest() is True:
-			# ~ self.imu.enableGyro()
+			self.imu.enableGyro()
 			self.imu.enableAcc()
 			# ~ self.mag.enable()
 		
@@ -34,7 +34,7 @@ class AcellerometerThread(QThread):
 	def run(self):
 
 		while (1):
-			# ~ gx, gy, gz = self.imu.readGyro()
+			gx, gy, gz = self.imu.readGyro()
 			# ~ mx, my, mz = self.mag.read()
 			# ~ temp = self.imu.readTemp()
 			ax, ay, az = self.imu.readAcc()

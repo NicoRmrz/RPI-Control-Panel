@@ -69,6 +69,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # ~ self.accelerometer = AcellerometerThread()
         # ~ self.accelerometer.start() 
         # ~ self.accelerometer.axisSignals.connect(self.updateAccelerometer)
+        # ~ self.accelerometer.gyroSignals.connect(self.updateGyroscope)
 
         self.ADC = ADC_thread()
         self.ADC.start() 
@@ -115,9 +116,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.clockTime.setText("Time:  " + timeInterval)
 
     def updateSID(self, poti,  poti2, poti3):
-        self.SID1_Data.setText(str(poti) + " in")
-        self.SID2_Data.setText(str(poti2) + " in")
-        self.SID3_Data.setText(str(poti3) + " in")
+        # ~ self.SID1_Data.setText(str(poti) + " in")
+        self.SID1_Data.setText(str(poti))
+        # ~ self.SID2_Data.setText(str(poti2) + " in")
+        self.SID2_Data.setText(str(poti2))
+        # ~ self.SID3_Data.setText(str(poti3) + " in")
         
     # def updateInfoRS232(self, rs232):
     #     print(rs232)
@@ -134,6 +137,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.xAxis.setText("X: " + str(x))
         self.yAxis.setText("Y: " + str(y))
         self.zAxis.setText("Z: " + str(z))
+
+    def updateGyroscope(self, x, y, z):
+        self.xGyro.setText("X: " + str(x))
+        self.yGyro.setText("Y: " + str(y))
+        self.zGyro.setText("Z: " + str(z))
 
 
     def rotateGUI(self, degree):

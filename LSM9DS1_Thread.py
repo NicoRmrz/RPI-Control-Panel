@@ -11,6 +11,7 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal, pyqtSlot
 # --------------------------------------------------------------------------------------------------------------                   
 class AcellerometerThread(QThread):
 	axisSignals = pyqtSignal(int, int, int) 
+	gyroSignals = pyqtSignal(int, int, int) 
     
 	def __init__(self):
 		QThread.__init__(self)
@@ -40,7 +41,7 @@ class AcellerometerThread(QThread):
 			ax, ay, az = self.imu.readAcc()
 			# ~ print ("Accel: " + str(ax) + ", " + str(ay) + ", " + str(az) )
 
-	  
+			self.gyroSignals.emit(gx, gy, gz)
 			self.axisSignals.emit(ax,ay,az)
 			
 			if(self.exitProgram == True):

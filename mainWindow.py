@@ -116,12 +116,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateTime(self,  timeInterval):
         self.clockTime.setText("Time:  " + timeInterval)
 
-    def updateSID(self, poti,  poti2, poti3):
+    def updateSID(self, poti,  poti2):
         # ~ self.SID1_Data.setText(str(poti) + " in")
         self.SID1_Data.setText(str(poti))
         # ~ self.SID2_Data.setText(str(poti2) + " in")
         self.SID2_Data.setText(str(poti2))
-        # ~ self.SID3_Data.setText(str(poti3) + " in")
         
     # def updateInfoRS232(self, rs232):
     #     print(rs232)

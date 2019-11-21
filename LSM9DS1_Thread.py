@@ -13,6 +13,9 @@ aylist = []
 azlist = []
 
 SAMPLESIZE = 10
+
+# ~ DPS = 0.00875 # for degrees/second vallues
+DPS = 0.07
      
 # --------------------------------------------------------------------------------------------------------------
 # ----------------------------- LSM9DS1 Accelerometer Thread Class -----------------------------------------------
@@ -102,9 +105,16 @@ class AcellerometerThread(QThread):
 
 
 
-			self.gyroSignals.emit(self.gxAvg, self.gyAvg, self.gzAvg)
-			self.axisSignals.emit(self.axAvg, self.ayAvg, self.azAvg)
+			# ~ self.gyroSignals.emit(self.gxAvg * DPS, self.gyAvg * DPS, self.gzAvg * DPS)
+			# ~ self.axisSignals.emit(self.axAvg *DPS, self.ayAvg * DPS, self.azAvg * DPS)
 
+
+			self.gyroSignals.emit(self.gxAvg , self.gyAvg , self.gzAvg )
+			self.axisSignals.emit(self.axAvg , self.ayAvg , self.azAvg )
+
+
+			# ~ self.gyroSignals.emit(gx * DPS,gy * DPS,gz * DPS)
+			# ~ self.axisSignals.emit(ax * DPS,ay * DPS,az * DPS)
 
 			# ~ self.gyroSignals.emit(gx,gy,gz)
 			# ~ self.axisSignals.emit(ax,ay,az)

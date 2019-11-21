@@ -109,6 +109,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.stop_flag_RS232.set()
         self.GPIOthread.Set_Exit_Program(True)
         self.ADC.Set_Exit_Program(True)
+        self.accelerometer.Set_Exit_Program(True)
         GPIO.cleanup()
         sys.exit(0);
 

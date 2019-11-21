@@ -101,21 +101,21 @@ class GPIO_control(QThread):
 			self.setInitSettings()
 				
 			# Mode 1 - Left/Right Push Button 1
-			if (GPIO.input(LSidePB4) or GPIO.input(RSidePB1) or self.modeSet == "Mode 1"):
+			if (GPIO.input(LSidePB4) or GPIO.input(RSidePB1) or self.modeSet == "Mode 2"):
 				if ((self.run2 and self.run3 and self.run4 and self.run5) != True):
 					self.run1 = True
 					#set relay
 					GPIO.output(RlyCtrl3, GPIO.HIGH)
-					self.handleButtonSig.emit("Mode 1")
+					self.handleButtonSig.emit("Mode 2")
 		
 			
 			# Mode 2 - Left/Right Push Button 2
-			if (GPIO.input(LSidePB3) or GPIO.input(RSidePB2) or self.modeSet == "Mode 2"):
+			if (GPIO.input(LSidePB3) or GPIO.input(RSidePB2) or self.modeSet == "Mode 1"):
 				if ((self.run1 and self.run3 and self.run4 and self.run5) != True):
 					self.run2 = True
 					#set relay
 					GPIO.output(RlyCtrl1, GPIO.LOW)
-					self.handleButtonSig.emit("Mode 2")
+					self.handleButtonSig.emit("Mode 1")
 
 
 							
@@ -145,7 +145,8 @@ class GPIO_control(QThread):
 				self.run4 = False
 		
 			
-						
+			# ~ print(GPIO.input(RSidePB5))
+			# ~ print(GPIO.input(LSidePB5))
 			# Mode 5 - Bottom Push Button - Set All relays
 			if (GPIO.input(LSidePB5) or self.modeSet == "Mode 5"):
 				if ((self.run1 and self.run2 and self.run3 and self.run4) != True):

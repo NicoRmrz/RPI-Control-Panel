@@ -196,12 +196,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.leftButton3.setIcon(QIcon(Up_Idle))
             self.rightButton3.setIcon(QIcon(Down_Idle))
 
-        if mode == "Mode 1":
+        if mode == "Mode 2":
             self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)        
             self.rightButton1.setStyleSheet(GUI_Style.buttonPressed) 
             self.leftButton1.setIcon(QIcon(Rotate_Pressed))
             self.rightButton1.setIcon(QIcon(Rotate1_Pressed))       
-        if mode == "Mode 2":
+        if mode == "Mode 1":
             self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)        
             self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)    
             self.leftButton2.setIcon(QIcon(Left_Pressed))

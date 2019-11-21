@@ -526,6 +526,66 @@ class Ui_MainWindow(object):
 
 
         # ---------------------------------------------------------------------
+        # ----------------- Gyroscope Layout ------------------------------
+        # --------------------------------------------------------------------
+        # Create X Axis label
+        self.xGyro = QLabel()
+        self.xGyro.setMinimumSize(50, 12)
+        self.xGyro.setStyleSheet(GUI_Style.statusBar_widgets)
+        self.xGyro.setText("x-gyro")
+        # self.xAxis.setAlignment(Qt.AlignCenter)
+
+        # Create Graphics view object to rotate widgets
+        self.xG_View = QtWidgets.QGraphicsView()
+        self.xG_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.xG_Scene = QtWidgets.QGraphicsScene(self.xG_View)
+        self.xG_View.setScene(self.xG_Scene)
+        self.xG_Scene.addWidget(self.xGyro)
+        
+        # Create Y Axis label
+        self.yGyro = QLabel()
+        self.yGyro.setMinimumSize(50, 12)
+        self.yGyro.setStyleSheet(GUI_Style.statusBar_widgets)
+        self.yGyro.setText("y-gyro")
+        # self.yAxis.setAlignment(Qt.AlignCenter)
+        
+        # Create Graphics view object to rotate widgets
+        self.yG_View = QtWidgets.QGraphicsView()
+        self.yG_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.yG_Scene = QtWidgets.QGraphicsScene(self.yG_View)
+        self.yG_View.setScene(self.yG_Scene)
+        self.yG_Scene.addWidget(self.yGyro)
+
+        # Create Z Axis label
+        self.zGyro = QLabel()
+        self.zGyro.setMinimumSize(50, 15)
+        self.zGyro.setStyleSheet(GUI_Style.statusBar_widgets)
+        self.zGyro.setText("z-gyro")
+        # self.zAxis.setAlignment(Qt.AlignCenter)
+
+        # Create Graphics view object to rotate widgets
+        self.zG_View = QtWidgets.QGraphicsView()
+        self.zG_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.zG_Scene = QtWidgets.QGraphicsScene(self.zG_View)
+        self.zG_View.setScene(self.zG_Scene)
+        self.zG_Scene.addWidget(self.zGyro)
+
+
+        self.Gyroscope = QtWidgets.QGroupBox("Gyroscope")
+        VGylayout = QtWidgets.QVBoxLayout()
+        VGylayout.addWidget(self.xG_View)
+        VGylayout.addWidget(self.yG_View)
+        VGylayout.addWidget(self.zG_View)
+        VGylayout.setSpacing(5)
+        VGylayout.setContentsMargins(0, 0, 0, 0)
+
+
+        self.Gyroscope.setLayout(VGylayout)
+        self.Gyroscope.setStyleSheet(GUI_Style.groupBox)
+        self.Gyroscope.setMaximumSize(200, 150)
+
+
+        # ---------------------------------------------------------------------
         # ----------------- Accelerometer Layout ------------------------------
         # ---------------------------------------------------------------------
         self.AcelLayout = QtWidgets.QVBoxLayout()
@@ -588,6 +648,7 @@ class Ui_MainWindow(object):
         self.Accelerometer.setStyleSheet(GUI_Style.groupBox)
         self.Accelerometer.setMaximumSize(200, 150)
 
+        self.AcelLayout.addWidget(self.Gyroscope)
         self.AcelLayout.addWidget(self.Accelerometer)
         # self.AcelLayout.addWidget(self.yAx_View)
         # self.AcelLayout.addWidget(self.zAx_View)

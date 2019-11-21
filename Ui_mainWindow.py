@@ -530,7 +530,7 @@ class Ui_MainWindow(object):
         # --------------------------------------------------------------------
         # Create X Axis label
         self.xGyro = QLabel()
-        self.xGyro.setMinimumSize(50, 12)
+        self.xGyro.setMinimumSize(60, 12)
         self.xGyro.setStyleSheet(GUI_Style.statusBar_widgets)
         self.xGyro.setText("x-gyro")
         # self.xAxis.setAlignment(Qt.AlignCenter)
@@ -544,7 +544,7 @@ class Ui_MainWindow(object):
         
         # Create Y Axis label
         self.yGyro = QLabel()
-        self.yGyro.setMinimumSize(50, 12)
+        self.yGyro.setMinimumSize(60, 12)
         self.yGyro.setStyleSheet(GUI_Style.statusBar_widgets)
         self.yGyro.setText("y-gyro")
         # self.yAxis.setAlignment(Qt.AlignCenter)
@@ -558,7 +558,7 @@ class Ui_MainWindow(object):
 
         # Create Z Axis label
         self.zGyro = QLabel()
-        self.zGyro.setMinimumSize(50, 15)
+        self.zGyro.setMinimumSize(60, 15)
         self.zGyro.setStyleSheet(GUI_Style.statusBar_widgets)
         self.zGyro.setText("z-gyro")
         # self.zAxis.setAlignment(Qt.AlignCenter)
@@ -583,6 +583,7 @@ class Ui_MainWindow(object):
         self.Gyroscope.setLayout(VGylayout)
         self.Gyroscope.setStyleSheet(GUI_Style.groupBox)
         self.Gyroscope.setMaximumSize(200, 150)
+        # ~ self.Gyroscope.setMinimumSize(100, 100)
 
 
         # ---------------------------------------------------------------------
@@ -594,7 +595,7 @@ class Ui_MainWindow(object):
 
         # Create X Axis label
         self.xAxis = QLabel()
-        self.xAxis.setMinimumSize(50, 12)
+        self.xAxis.setMinimumSize(60, 12)
         self.xAxis.setStyleSheet(GUI_Style.statusBar_widgets)
         self.xAxis.setText("x-axis")
         # self.xAxis.setAlignment(Qt.AlignCenter)
@@ -608,7 +609,7 @@ class Ui_MainWindow(object):
         
         # Create Y Axis label
         self.yAxis = QLabel()
-        self.yAxis.setMinimumSize(50, 12)
+        self.yAxis.setMinimumSize(60, 12)
         self.yAxis.setStyleSheet(GUI_Style.statusBar_widgets)
         self.yAxis.setText("y-axis")
         # self.yAxis.setAlignment(Qt.AlignCenter)
@@ -622,7 +623,7 @@ class Ui_MainWindow(object):
 
         # Create Z Axis label
         self.zAxis = QLabel()
-        self.zAxis.setMinimumSize(50, 15)
+        self.zAxis.setMinimumSize(60, 15)
         self.zAxis.setStyleSheet(GUI_Style.statusBar_widgets)
         self.zAxis.setText("z-axis")
         # self.zAxis.setAlignment(Qt.AlignCenter)

@@ -117,10 +117,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.clockTime.setText("Time:  " + timeInterval)
 
     def updateSID(self, poti,  poti2):
-        # ~ self.SID1_Data.setText(str(poti) + " in")
-        self.SID1_Data.setText(str(poti))
-        # ~ self.SID2_Data.setText(str(poti2) + " in")
-        self.SID2_Data.setText(str(poti2))
+        self.SID1_Data.setText(str(poti) + " mm")
+        # ~ self.SID1_Data.setText(str(poti))
+        self.SID2_Data.setText(str(poti2) + " mm")
+        # ~ self.SID2_Data.setText(str(poti2))
         
     # def updateInfoRS232(self, rs232):
     #     print(rs232)
@@ -134,8 +134,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # self.stop_flag_RS232.set()
 
     def updateAccelerometer(self, x, y, z):
-        self.xAxis.setText("X: " + str(x))
-        self.yAxis.setText("Y: " + str(y))
+        # ~ self.xAxis.setText("X: " + str(x))
+        self.xAxis.setText(str(x) + " deg")
+        # ~ self.yAxis.setText("Y: " + str(y))
+        # ~ self.yAxis.setText(str(y) + " deg")
         self.zAxis.setText("Z: " + str(z))
 
     def updateGyroscope(self, x, y, z):

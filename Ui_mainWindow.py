@@ -596,7 +596,7 @@ class Ui_MainWindow(object):
         # Create X Axis label
         self.xAxis = QLabel()
         self.xAxis.setMinimumSize(60, 12)
-        self.xAxis.setStyleSheet(GUI_Style.statusBar_widgets)
+        self.xAxis.setStyleSheet(GUI_Style.statusBar_XY)
         self.xAxis.setText("x-axis")
         # self.xAxis.setAlignment(Qt.AlignCenter)
 
@@ -636,20 +636,20 @@ class Ui_MainWindow(object):
         self.zAx_Scene.addWidget(self.zAxis)
 
 
-        self.Accelerometer = QtWidgets.QGroupBox("Accelerometer")
+        self.Accelerometer = QtWidgets.QGroupBox("Angle")
         Vlayout = QtWidgets.QVBoxLayout()
         Vlayout.addWidget(self.xAx_View)
-        Vlayout.addWidget(self.yAx_View)
-        Vlayout.addWidget(self.zAx_View)
+        # ~ Vlayout.addWidget(self.yAx_View)
+        # ~ Vlayout.addWidget(self.zAx_View)
         Vlayout.setSpacing(5)
         Vlayout.setContentsMargins(0, 0, 0, 0)
 
 
         self.Accelerometer.setLayout(Vlayout)
         self.Accelerometer.setStyleSheet(GUI_Style.groupBox)
-        self.Accelerometer.setMaximumSize(200, 150)
+        self.Accelerometer.setMaximumSize(100, 150)
 
-        self.AcelLayout.addWidget(self.Gyroscope)
+        # ~ self.AcelLayout.addWidget(self.Gyroscope)
         self.AcelLayout.addWidget(self.Accelerometer)
         # self.AcelLayout.addWidget(self.yAx_View)
         # self.AcelLayout.addWidget(self.zAx_View)

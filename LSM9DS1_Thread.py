@@ -14,7 +14,7 @@ azlist = []
 
 SAMPLESIZE = 10
 
-# ~ DPS = 0.00875 # for degrees/second vallues
+# ~ DPS = 0.00875 # for degrees/second values
 # ~ DPS = 1
 DPS = 0.07
      
@@ -60,28 +60,27 @@ class AcellerometerThread(QThread):
 			# ~ mx, my, mz = self.mag.read()
 			# ~ temp = self.imu.readTemp()
 			ax, ay, az = self.imu.readAcc()
-			# ~ print ("Accel: " + str(ax) + ", " + str(ay) + ", " + str(az) )
 
-			# Smooth gx
-			if len(gxlist) < SAMPLESIZE:
-				gxlist.append(gx)
-			else:
-				self.gxAvg = self.Average(gxlist)
-				gxlist.clear()
+			# # Smooth gx
+			# if len(gxlist) < SAMPLESIZE:
+			# 	gxlist.append(gx)
+			# else:
+			# 	self.gxAvg = self.Average(gxlist)
+			# 	gxlist.clear()
 
-			# Smooth gy
-			if len(gylist) < SAMPLESIZE:
-				gylist.append(gy)
-			else:
-				self.gyAvg = self.Average(gylist)
-				gylist.clear()
+			# # Smooth gy
+			# if len(gylist) < SAMPLESIZE:
+			# 	gylist.append(gy)
+			# else:
+			# 	self.gyAvg = self.Average(gylist)
+			# 	gylist.clear()
 
-			# Smooth gz
-			if len(gzlist) < SAMPLESIZE:
-				gzlist.append(gz)
-			else:
-				self.gzAvg = self.Average(gzlist)
-				gzlist.clear()
+			# # Smooth gz
+			# if len(gzlist) < SAMPLESIZE:
+			# 	gzlist.append(gz)
+			# else:
+			# 	self.gzAvg = self.Average(gzlist)
+			# 	gzlist.clear()
 
 			# Smooth ax
 			if len(axlist) < SAMPLESIZE:
@@ -105,18 +104,19 @@ class AcellerometerThread(QThread):
 				azlist.clear()
 
 
-
+			# Smoothed all readings with DPS
 			# ~ self.gyroSignals.emit(self.gxAvg * DPS, self.gyAvg * DPS, self.gzAvg * DPS)
-			# ~ self.axisSignals.emit(self.axAvg *DPS, self.ayAvg * DPS, self.azAvg * DPS)
+			self.axisSignals.emit(self.axAvg * DPS, self.ayAvg * DPS, self.azAvg * DPS)
 
-
+			# Smoothed readings only
 			# ~ self.gyroSignals.emit(self.gxAvg , self.gyAvg , self.gzAvg )
 			# ~ self.axisSignals.emit(self.axAvg , self.ayAvg , self.azAvg )
 
+			# Raw readings with DPS
+			# self.gyroSignals.emit(gx * DPS,gy * DPS,gz * DPS)
+			# self.axisSignals.emit(ay * DPS, ay * DPS,az * DPS)
 
-			self.gyroSignals.emit(gx * DPS,gy * DPS,gz * DPS)
-			self.axisSignals.emit(ax * DPS,ay * DPS,az * DPS)
-
+			# Raw readings
 			# ~ self.gyroSignals.emit(gx,gy,gz)
 			# ~ self.axisSignals.emit(ax,ay,az)
 			

@@ -54,12 +54,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getController = Controller(self.stop_flag_time)
         self.getController.start()
         self.getController.newTime.connect(self.updateTime)
- 
-        # self.getArduino = ControlArduino(self.stop_flag_RS232)
-        # self.getArduino.newValue.connect(self.updatePoti)  
-        # self.getArduino.testRS232.connect(self.updateInfoRS232)          
-        # self.getArduino.start() 
-
 
         self.GPIOthread = GPIO_control()
         self.GPIOthread.start()
@@ -122,23 +116,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.SID2_Data.setText(str(poti2) + " mm")
         # ~ self.SID2_Data.setText(str(poti2))
         
-    # def updateInfoRS232(self, rs232):
-    #     print(rs232)
-    #     if rs232:
-    #         self.lblRSinfo.setText("MCU Connected")
-    #     else:
-    #         self.lblRSinfo.setText("MCU Connection Failed")
-    #         self.SID1_Data.setText("Error")
-    #         self.SID2_Data.setText("Error")
-    #         self.SID3_Data.setText("Error")
-            # self.stop_flag_RS232.set()
 
     def updateAccelerometer(self, x, y, z):
         # ~ self.xAxis.setText("X: " + str(x))
         self.xAxis.setText(str(x) + " deg")
         # ~ self.yAxis.setText("Y: " + str(y))
         # ~ self.yAxis.setText(str(y) + " deg")
-        self.zAxis.setText("Z: " + str(z))
+        # self.zAxis.setText("Z: " + str(z))
 
     def updateGyroscope(self, x, y, z):
         self.xGyro.setText("X: " + str(x))

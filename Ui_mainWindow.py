@@ -1,11 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\USMedimade\Documents\Eric Works\MX30 GUI\ui\mainWindow.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 from PyQt5.QtGui import QPixmap, QIcon
@@ -163,7 +155,6 @@ class Ui_MainWindow(object):
         self.HeaderLayout.addWidget(self.exitBtn_View)
 
 
-
         # ---------------------------------------------------------------------
         # -------------------- SID Layouts ------------------------------------
         # ---------------------------------------------------------------------
@@ -173,8 +164,6 @@ class Ui_MainWindow(object):
         self.SID1Layout = QtWidgets.QVBoxLayout()
         self.SID1Layout.setSpacing(0)
         self.SID1Layout.setContentsMargins(0, 0, 0, 0)       
-
-
 
 
 
@@ -201,41 +190,10 @@ class Ui_MainWindow(object):
         self.SID1img.setObjectName("SID1img")
 
         self.SID1scene = QtWidgets.QGraphicsScene()
-
         self.SID1scene.addPixmap(QPixmap(SID1_path))
-
-
-
         self.SID1img.setScene(self.SID1scene)
         self.SID1img.fitInView(self.SID1scene.sceneRect(), QtCore.Qt.KeepAspectRatio)
 
-
-        # Create SID Label
-        # self.SID1_label = QtWidgets.QLabel()
-        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.SID1_label.sizePolicy().hasHeightForWidth())
-        # self.SID1_label.setSizePolicy(sizePolicy)
-        # font = QtGui.QFont()
-        # font.setFamily("Arial")
-        # font.setPointSize(24)
-        # font.setBold(False)
-        # font.setItalic(False)
-        # font.setWeight(50)
-        # self.SID1_label.setFont(font)
-        # self.SID1_label.setStyleSheet(GUI_Style.SID)
-        # self.SID1_label.setScaledContents(True)
-        # self.SID1_label.setAlignment(QtCore.Qt.AlignCenter)
-        # self.SID1_label.setObjectName("SID1_label")
-        # self.SID1_label.setMinimumWidth(75)
-
-        # # Create Graphics view object to rotate widgets
-        # self.SID1Label_View = QtWidgets.QGraphicsView()
-        # self.SID1Label_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        # self.SID1Label_Scene = QtWidgets.QGraphicsScene(self.SID1Label_View)
-        # self.SID1Label_View.setScene(self.SID1Label_Scene)
-        # self.SID1Label_Scene.addWidget(self.SID1_label)
 
         # Create SID Data field
         self.SID1_Data = QtWidgets.QLabel()
@@ -261,7 +219,6 @@ class Ui_MainWindow(object):
         self.SID1Layout.addWidget(self.SID1img)
         # self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignLeft)
         self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignTop)
-
 
 
         # ----------------------------------
@@ -294,41 +251,9 @@ class Ui_MainWindow(object):
         self.SID2img.setObjectName("SID2img")
 
         self.SID2scene = QtWidgets.QGraphicsScene()
-
         self.SID2scene.addPixmap(QPixmap(SID2_path))
-
-
-
         self.SID2img.setScene(self.SID2scene)
         self.SID2img.fitInView(self.SID2scene.sceneRect(), QtCore.Qt.KeepAspectRatio)
-    
-
-        # # Create SID Label
-        # self.SID2_label = QtWidgets.QLabel()
-        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.SID2_label.sizePolicy().hasHeightForWidth())
-        # self.SID2_label.setSizePolicy(sizePolicy)
-        # font = QtGui.QFont()
-        # font.setFamily("Arial")
-        # font.setPointSize(24)
-        # font.setBold(False)
-        # font.setItalic(False)
-        # font.setWeight(50)
-        # self.SID2_label.setFont(font)
-        # self.SID2_label.setStyleSheet(GUI_Style.SID)
-        # self.SID2_label.setScaledContents(True)
-        # self.SID2_label.setAlignment(QtCore.Qt.AlignCenter)
-        # self.SID2_label.setObjectName("SID2_label")
-        # self.SID2_label.setMinimumWidth(75)
-
-        # # Create Graphics view object to rotate widgets
-        # self.SID2Label_View = QtWidgets.QGraphicsView()
-        # self.SID2Label_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        # self.SID2Label_Scene = QtWidgets.QGraphicsScene(self.SID2Label_View)
-        # self.SID2Label_View.setScene(self.SID2Label_Scene)
-        # self.SID2Label_Scene.addWidget(self.SID2_label)
 
         # Create SID Data field
         self.SID2_Data = QtWidgets.QLabel()
@@ -420,9 +345,6 @@ class Ui_MainWindow(object):
 
 
 
-
-
-
        
 
         # ---------------------------------------------------------------------
@@ -500,29 +422,14 @@ class Ui_MainWindow(object):
         self.LBtn4_View.setScene(self.LBtn4_Scene)
         self.LBtn4_Scene.addWidget(self.leftButton4)
 
-        # self.button4Layout = QtWidgets.QVBoxLayout()
-        # self.spacerItem1 = QtWidgets.QSpacerItem(400, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        # self.spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-
-
-        # self.Left4Layout.addWidget(self.LBtn4_View, 1, Qt.AlignLeft)
-        # self.Left4Layout.addItem(self.spacerItem1)
-        # self.Left4Layout.addItem(self.spacerItem2
 
         self.LeftButtonLayout = QtWidgets.QVBoxLayout()
         self.LeftButtonLayout.setSpacing(25)
         self.LeftButtonLayout.setContentsMargins(0, 0, 0, 0)
-        # self.LeftButtonLayout.addLayout(self.SID1Layout)
-        # self.LeftButtonLayout.addLayout(self.SID2Layout)
-        # self.LeftButtonLayout.addLayout(self.SID3Layout)        
-        # self.LeftButtonLayout.addLayout(self.Left4Layout)
-
         self.LeftButtonLayout.addWidget(self.LBtn1_View, 1, Qt.AlignLeft)
         self.LeftButtonLayout.addWidget(self.LBtn2_View, 1, Qt.AlignLeft)
         self.LeftButtonLayout.addWidget(self.LBtn3_View, 1, Qt.AlignLeft)
         self.LeftButtonLayout.addWidget(self.LBtn4_View, 1, Qt.AlignLeft)
-
-
 
 
         # ---------------------------------------------------------------------
@@ -635,7 +542,6 @@ class Ui_MainWindow(object):
         self.zAx_View.setScene(self.zAx_Scene)
         self.zAx_Scene.addWidget(self.zAxis)
 
-
         self.Accelerometer = QtWidgets.QGroupBox("Angle")
         Vlayout = QtWidgets.QVBoxLayout()
         Vlayout.addWidget(self.xAx_View)
@@ -643,7 +549,6 @@ class Ui_MainWindow(object):
         # ~ Vlayout.addWidget(self.zAx_View)
         Vlayout.setSpacing(5)
         Vlayout.setContentsMargins(0, 0, 0, 0)
-
 
         self.Accelerometer.setLayout(Vlayout)
         self.Accelerometer.setStyleSheet(GUI_Style.groupBox)
@@ -711,7 +616,6 @@ class Ui_MainWindow(object):
         self.RBtn4_View.setScene(self.RBtn4_Scene)
         self.RBtn4_Scene.addWidget(self.rightButton4)
 
-
         self.RightButtonLayout = QtWidgets.QVBoxLayout()
         self.RightButtonLayout.setSpacing(25)
         self.RightButtonLayout.setContentsMargins(0, 0, 0, 0)
@@ -721,18 +625,16 @@ class Ui_MainWindow(object):
         self.RightButtonLayout.addWidget(self.RBtn4_View, 1, Qt.AlignRight)
 
 
-
         # ---------------------------------------------------------------------
         # ----------------- Bottom Horizontal Layout --------------------------
         # ---------------------------------------------------------------------
         self.BottomLayout = QtWidgets.QHBoxLayout()
         self.BottomLayout.setSpacing(20)
         self.BottomLayout.setContentsMargins(0, 0, 0, 0)
-        # self.BottomLayout.addLayout(self.LeftButtonLayout, QtCore.Qt.AlignLeft)
         self.BottomLayout.addLayout(self.LeftButtonLayout)
         self.BottomLayout.addLayout(self.SID1Layout)
         self.BottomLayout.addLayout(self.SID2Layout)
-        
+
         self.BottomLayout.addLayout(self.AcelLayout)
         self.BottomLayout.addLayout(self.RightButtonLayout)
 
@@ -745,8 +647,6 @@ class Ui_MainWindow(object):
         self.FinalLayout.setContentsMargins(0, 0, 0, 0)
         self.FinalLayout.addLayout(self.HeaderLayout)
         self.FinalLayout.addLayout(self.BottomLayout)
-
-
 
 
 

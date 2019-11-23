@@ -8,8 +8,6 @@ class GUI_Stylesheets(QObject):
 	 # Initializes the necessary objects into the slider class for control
 	def __init__(self):
 		super(GUI_Stylesheets, self).__init__()
-		
-
 
 		# ~ self.mainWidget = ("background-color: rgb(119, 136, 153);")	
 		self.mainWidget = ("background-color: #05090C;")	

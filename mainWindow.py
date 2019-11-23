@@ -13,10 +13,10 @@ from threading import Event
 
 #imports from user made file
 from newValue import Controller,  ControlArduino    
-# from GPIO_buttonThread import GPIO_control
-# import RPi.GPIO as GPIO
-# from LSM9DS1_Thread import AcellerometerThread
-# from ADS79241_Thread import ADC_thread
+from GPIO_buttonThread import GPIO_control
+import RPi.GPIO as GPIO
+from LSM9DS1_Thread import AcellerometerThread
+from ADS79241_Thread import ADC_thread
 from GUI_Stylesheets import GUI_Stylesheets
 
 GUI_Style = GUI_Stylesheets()
@@ -55,19 +55,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getController.start()
         self.getController.newTime.connect(self.updateTime)
 
-        # self.GPIOthread = GPIO_control()
-        # self.GPIOthread.start()
-        # self.GPIOthread.setInitSettings()
-        # self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
+        self.GPIOthread = GPIO_control()
+        self.GPIOthread.start()
+        self.GPIOthread.setInitSettings()
+        self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
 
-        # self.accelerometer = AcellerometerThread()
-        # self.accelerometer.start() 
-        # self.accelerometer.axisSignals.connect(self.updateAccelerometer)
-        # self.accelerometer.gyroSignals.connect(self.updateGyroscope)
+        self.accelerometer = AcellerometerThread()
+        self.accelerometer.start() 
+        self.accelerometer.axisSignals.connect(self.updateAccelerometer)
+        self.accelerometer.gyroSignals.connect(self.updateGyroscope)
 
-        # self.ADC = ADC_thread()
-        # self.ADC.start() 
-        # self.ADC.ADC_meas.connect(self.updateSID)
+        self.ADC = ADC_thread()
+        self.ADC.start() 
+        self.ADC.ADC_meas.connect(self.updateSID)
 
         self.btnExit.clicked.connect(self.on_btnExit_clicked)
 

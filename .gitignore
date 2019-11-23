@@ -5,3 +5,4 @@ __pycache__/newValue.cpython-37.pyc
 __pycache__/Ui_mainWindow.cpython-37.pyc
 
 _pycache_/
+*.pyc

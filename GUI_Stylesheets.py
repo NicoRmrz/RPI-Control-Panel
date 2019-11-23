@@ -1,7 +1,5 @@
 from PyQt5.QtCore import QObject
 
-
-
 # --------------------------------------------------------------------------------------------------------------
 # --------------------------------- GUI setStylesheet Class ----------------------------------------------------
 # -------------------------------------------------------------------------------------------------------------- 
@@ -10,8 +8,6 @@ class GUI_Stylesheets(QObject):
 	 # Initializes the necessary objects into the slider class for control
 	def __init__(self):
 		super(GUI_Stylesheets, self).__init__()
-		
-
 
 		# ~ self.mainWidget = ("background-color: rgb(119, 136, 153);")	
 		self.mainWidget = ("background-color: #05090C;")	
@@ -42,7 +38,7 @@ class GUI_Stylesheets(QObject):
 								"background-color: qlineargradient(spread:pad x1:0.45, y1:0.3695, x2:0.427, y2:0, "
 								"stop:0 rgba(242, 242, 242, 0), "
 								"stop:1 rgba(242,242,242, 0)); "						
-								"font: 20 px; "
+								"font: 40 px; "
 								"font-weight: bold; "
 								"color: white; }"			
 							)			
@@ -60,9 +56,9 @@ class GUI_Stylesheets(QObject):
 							
 		self.SID = ("color: rgb(255, 255, 255);\n"
 						"background-color: rgba(255, 255, 255, 0);\n"
-						"font: 24pt \"Arial\";")
+						"font: 18pt \"Arial\";")
 
-		self.SID_Data = ("font: 36pt \"Arial\";\n"
+		self.SID_Data = ("font: 32pt \"Arial\";\n"
 						"color: rgb(255, 255, 255);\n"
 						"background-color: rgba(255, 255, 255, 0); border: none;")
 

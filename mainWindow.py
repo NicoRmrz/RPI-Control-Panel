@@ -25,6 +25,18 @@ GUI_Style = GUI_Stylesheets()
 Main_path = os.getcwd() + "/"
 Icon_Path = Main_path + "/icons/logo.png"
 Mediatech_Path = Main_path + "/icons/Medicatech.png"
+Down_Idle = Main_path + "/icons/down_grey.png"
+Down_Pressed = Main_path + "/icons/down_grey_pressed.png"
+Up_Idle = Main_path + "/icons/up_grey.png"
+Up_Pressed = Main_path + "/icons/up_grey_pressed.png"
+Rotate_Idle = Main_path + "/icons/rotation.png"
+Rotate_Pressed = Main_path + "/icons/rotation_pressed.png"
+Rotate1_Idle = Main_path + "/icons/rotation1.png"
+Rotate1_Pressed = Main_path + "/icons/rotation1_pressed.png"
+Left_Idle = Main_path + "/icons/left_grey.png"
+Left_Pressed = Main_path + "/icons/left_grey_pressed.png"
+Right_Idle = Main_path + "/icons/right_grey.png"
+Right_Pressed = Main_path + "/icons/right_grey_pressed.png"
         
 class MainWindow(QMainWindow, Ui_MainWindow):
     
@@ -42,25 +54,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getController = Controller(self.stop_flag_time)
         self.getController.start()
         self.getController.newTime.connect(self.updateTime)
- 
-        # self.getArduino = ControlArduino(self.stop_flag_RS232)
-        # self.getArduino.newValue.connect(self.updatePoti)  
-        # self.getArduino.testRS232.connect(self.updateInfoRS232)          
-        # self.getArduino.start() 
-
 
         # self.GPIOthread = GPIO_control()
         # self.GPIOthread.start()
         # self.GPIOthread.setInitSettings()
         # self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
 
-        # ~ self.accelerometer = AcellerometerThread()
-        # ~ self.accelerometer.start() 
-        # ~ self.accelerometer.axisSignals.connect(self.updateAccelerometer)
+        # self.accelerometer = AcellerometerThread()
+        # self.accelerometer.start() 
+        # self.accelerometer.axisSignals.connect(self.updateAccelerometer)
+        # self.accelerometer.gyroSignals.connect(self.updateGyroscope)
 
-        # ~ self.ADC = ADC_thread()
-        # ~ self.ADC.start() 
-        # ~ self.ADC.ADC_meas.connect(self.updateSID)
+        # self.ADC = ADC_thread()
+        # self.ADC.start() 
+        # self.ADC.ADC_meas.connect(self.updateSID)
 
         self.btnExit.clicked.connect(self.on_btnExit_clicked)
 
@@ -93,35 +100,34 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_btnExit_clicked(self):
         self.stop_flag_time.set()
-        # self.stop_flag_RS232.set()
-        # self.GPIOthread.Set_Exit_Program(True)
-        # self.ADC.Set_Exit_Program(True)
-        # GPIO.cleanup()
+        self.stop_flag_RS232.set()
+        self.GPIOthread.Set_Exit_Program(True)
+        self.ADC.Set_Exit_Program(True)
+        self.accelerometer.Set_Exit_Program(True)
+        GPIO.cleanup()
         sys.exit(0);
 
     def updateTime(self,  timeInterval):
         self.clockTime.setText("Time:  " + timeInterval)
 
-    def updateSID(self, poti,  poti2, poti3):
-        self.SID1_Data.setText(str(poti) + " in")
-        self.SID2_Data.setText(str(poti2) + " in")
-        self.SID3_Data.setText(str(poti3) + " in")
+    def updateSID(self, poti,  poti2):
+        self.SID1_Data.setText(str(poti) + " mm")
+        # ~ self.SID1_Data.setText(str(poti))
+        self.SID2_Data.setText(str(poti2) + " mm")
+        # ~ self.SID2_Data.setText(str(poti2))
         
-    # def updateInfoRS232(self, rs232):
-    #     print(rs232)
-    #     if rs232:
-    #         self.lblRSinfo.setText("MCU Connected")
-    #     else:
-    #         self.lblRSinfo.setText("MCU Connection Failed")
-    #         self.SID1_Data.setText("Error")
-    #         self.SID2_Data.setText("Error")
-    #         self.SID3_Data.setText("Error")
-            # self.stop_flag_RS232.set()
 
     def updateAccelerometer(self, x, y, z):
-        self.xAxis.setText("X: " + str(x))
-        self.yAxis.setText("Y: " + str(y))
-        self.zAxis.setText("Z: " + str(z))
+        # ~ self.xAxis.setText("X: " + str(x))
+        self.xAxis.setText(str(x) + " \N{DEGREE SIGN}")
+        # ~ self.yAxis.setText("Y: " + str(y))
+        # ~ self.yAxis.setText(str(y) + " deg")
+        # self.zAxis.setText("Z: " + str(z))
+
+    def updateGyroscope(self, x, y, z):
+        self.xGyro.setText("X: " + str(x))
+        self.yGyro.setText("Y: " + str(y))
+        self.zGyro.setText("Z: " + str(z))
 
 
     def rotateGUI(self, degree):
@@ -138,9 +144,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.RBtn3_View.rotate(degree)
         self.RBtn4_View.rotate(degree)
 
-        self.SID1Label_View.rotate(degree)
-        self.SID2Label_View.rotate(degree)
-        self.SID3Label_View.rotate(degree)
+        self.SID1img.rotate(degree)
+        self.SID2img.rotate(degree)
+        # self.SID3Label_View.rotate(degree)
 
         self.SID1Data_View.rotate(degree)
         self.SID2Data_View.rotate(degree)
@@ -148,6 +154,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.xAx_View.rotate(degree)
         self.yAx_View.rotate(degree)
         self.zAx_View.rotate(degree)
+
+        if degree == 90:
+            self.HeaderLayout.removeWidget(self.MediLogo)
+            self.HeaderLayout.removeWidget(self.timeView)
+            self.HeaderLayout.removeWidget(self.exitBtn_View)
+
+            # self.HeaderLayout.addWidget(self.exitBtn_View)
+            # self.HeaderLayout.addWidget(self.MediLogo)
+            # self.HeaderLayout.addWidget(self.timeView)
+
 
     def buttonHandlers(self, mode):
         if mode == "Off":
@@ -159,19 +175,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)  
             self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)  
             self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)  
+            self.leftButton1.setIcon(QIcon(Rotate_Idle))
+            self.rightButton1.setIcon(QIcon(Rotate1_Idle))
+            self.leftButton2.setIcon(QIcon(Left_Idle))
+            self.rightButton2.setIcon(QIcon(Right_Idle))
+            self.leftButton3.setIcon(QIcon(Up_Idle))
+            self.rightButton3.setIcon(QIcon(Down_Idle))
 
-
-        if mode == "Mode 1":
-            self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)        
-            self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)        
         if mode == "Mode 2":
+            self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)        
+            self.rightButton1.setStyleSheet(GUI_Style.buttonPressed) 
+            self.leftButton1.setIcon(QIcon(Rotate_Pressed))
+            self.rightButton1.setIcon(QIcon(Rotate1_Pressed))       
+        if mode == "Mode 1":
             self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)        
-            self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)        
+            self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)    
+            self.leftButton2.setIcon(QIcon(Left_Pressed))
+            self.rightButton2.setIcon(QIcon(Right_Pressed))
         if mode == "Mode 3":
             self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)  
             self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)  
+            self.leftButton3.setIcon(QIcon(Up_Pressed))
+            self.rightButton3.setIcon(QIcon(Down_Pressed))
         if mode == "Mode 4":
-            pass       
+            self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
+            self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
         if mode == "Mode 5":
             self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)        
             self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)
@@ -179,90 +207,117 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
             self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)  
             self.rightButton3.setStyleSheet(GUI_Style.buttonPressed) 
+            self.leftButton1.setIcon(QIcon(Rotate_Pressed))
+            self.rightButton1.setIcon(QIcon(Rotate1_Pressed)) 
+            self.leftButton2.setIcon(QIcon(Left_Pressed))
+            self.rightButton2.setIcon(QIcon(Right_Pressed))
+            self.leftButton3.setIcon(QIcon(Up_Pressed))
+            self.rightButton3.setIcon(QIcon(Down_Pressed))
 
     def leftButton1_Clicked(self):
+
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)
-        self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Mode 1")
+        self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)        
+        self.leftButton1.setIcon(QIcon(Rotate_Pressed))
+        self.rightButton1.setIcon(QIcon(Rotate1_Pressed))
+        self.GPIOthread.SWpushButton("Mode 2")
 
     def leftButton1_Released(self):
+        self.leftButton1.setIcon(QIcon(Rotate_Idle))
+        self.rightButton1.setIcon(QIcon(Rotate1_Idle))
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
-        self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
-
+        self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)        
+        self.GPIOthread.SWpushButton("Off")
         
     def leftButton2_Clicked(self):
         self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
-        # self.GPIOthread.SWpushButton("Mode 2")
-
+        self.leftButton2.setIcon(QIcon(Left_Pressed))
+        self.rightButton2.setIcon(QIcon(Right_Pressed))
+        self.GPIOthread.SWpushButton("Mode 1")
 
     def leftButton2_Released(self):
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
-
+        self.leftButton2.setIcon(QIcon(Left_Idle))
+        self.rightButton2.setIcon(QIcon(Right_Idle))
+        self.GPIOthread.SWpushButton("Off")
 
     def leftButton3_Clicked(self):
         self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)
-        # self.GPIOthread.SWpushButton("Mode 3")
-
+        self.leftButton3.setIcon(QIcon(Up_Pressed))
+        self.rightButton3.setIcon(QIcon(Down_Pressed))
+        self.GPIOthread.SWpushButton("Mode 3")
 
     def leftButton3_Released(self):
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
+        self.leftButton3.setIcon(QIcon(Up_Idle))
+        self.rightButton3.setIcon(QIcon(Down_Idle))
+        self.GPIOthread.SWpushButton("Off")
 
     def leftButton4_Clicked(self):
-        self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)
-        self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)
-        # self.GPIOthread.SWpushButton("Mode 4")
+        self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
+        self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
+        self.GPIOthread.SWpushButton("Mode 4")
 
 
     def leftButton4_Released(self):
-        self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
-        self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
+        self.leftButton4.setStyleSheet(GUI_Style.buttonIdle)
+        self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)
+        self.GPIOthread.SWpushButton("Off")
 
     def rightButton1_Clicked(self):
         self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)
-        # self.GPIOthread.SWpushButton("Mode 1")
+        self.leftButton1.setIcon(QIcon(Rotate_Pressed))
+        self.rightButton1.setIcon(QIcon(Rotate1_Pressed))
+        self.GPIOthread.SWpushButton("Mode 2")
 
     def rightButton1_Released(self):
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
+        self.leftButton1.setIcon(QIcon(Rotate_Idle))
+        self.rightButton1.setIcon(QIcon(Rotate1_Idle))
+        self.GPIOthread.SWpushButton("Off")
 
     def rightButton2_Clicked(self):
         self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)
-        # self.GPIOthread.SWpushButton("Mode 2")
+        self.leftButton2.setIcon(QIcon(Left_Pressed))
+        self.rightButton2.setIcon(QIcon(Right_Pressed))
+        self.GPIOthread.SWpushButton("Mode 1")
 
 
     def rightButton2_Released(self):
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
+        self.leftButton2.setIcon(QIcon(Left_Idle))
+        self.rightButton2.setIcon(QIcon(Right_Idle))
+        self.GPIOthread.SWpushButton("Off")
 
     def rightButton3_Clicked(self):
         self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)
-        # self.GPIOthread.SWpushButton("Mode 3")
+        self.leftButton3.setIcon(QIcon(Up_Pressed))
+        self.rightButton3.setIcon(QIcon(Down_Pressed))
+        self.GPIOthread.SWpushButton("Mode 3")
 
     def rightButton3_Released(self):
         self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
+        self.leftButton3.setIcon(QIcon(Up_Idle))
+        self.rightButton3.setIcon(QIcon(Down_Idle))       
+        self.GPIOthread.SWpushButton("Off")
 
     def rightButton4_Clicked(self):
         self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
-        # self.GPIOthread.SWpushButton("Mode 4")
+        self.GPIOthread.SWpushButton("Mode 4")
 
 
     def rightButton4_Released(self):
         self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton4.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")

@@ -32,6 +32,7 @@ Right_Idle = Main_path + "/icons/right_grey.png"
 Right_Pressed = Main_path + "/icons/right_grey_pressed.png"
 SID1_path = Main_path + "/icons/sid1.png"
 SID2_path = Main_path + "/icons/sid2.png"
+Rotate_path = Main_path + "/icons/rotate.png"
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -523,7 +524,7 @@ class Ui_MainWindow(object):
         self.angleImg.setObjectName("angleImg")
 
         self.Anglescene = QtWidgets.QGraphicsScene()
-        self.Anglescene.addPixmap(QPixmap(SID2_path))
+        self.Anglescene.addPixmap(QPixmap(Rotate_path))
         self.angleImg.setScene(self.Anglescene)
         self.angleImg.fitInView(self.Anglescene.sceneRect(), QtCore.Qt.KeepAspectRatio)
 

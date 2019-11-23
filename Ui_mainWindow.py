@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 from PyQt5.QtGui import QPixmap, QIcon
@@ -536,7 +537,7 @@ class Ui_MainWindow(object):
         self.xAxis.setStyleSheet(GUI_Style.SID_Data)
         self.xAxis.setScaledContents(True)
         self.xAxis.setAlignment(QtCore.Qt.AlignCenter)
-        self.xAxis.setText("Angle")
+        self.xAxis.setText("Angle \N{DEGREE SIGN}")
         self.xAxis.setMaximumSize(120,50)
 
         # Create Graphics view object to rotate widgets

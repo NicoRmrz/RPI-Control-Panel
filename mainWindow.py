@@ -119,7 +119,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def updateAccelerometer(self, x, y, z):
         # ~ self.xAxis.setText("X: " + str(x))
-        self.xAxis.setText(str(x) + " deg")
+        self.xAxis.setText(str(x) + " \N{DEGREE SIGN}")
         # ~ self.yAxis.setText("Y: " + str(y))
         # ~ self.yAxis.setText(str(y) + " deg")
         # self.zAxis.setText("Z: " + str(z))

@@ -85,7 +85,8 @@ class Ui_MainWindow(object):
         self.MediLogo.setObjectName("MediLogo")
 
         self.logoscene = QtWidgets.QGraphicsScene()
-        self.logoscene.addPixmap(QPixmap(Mediatech_Path))
+        self.pixLogo = QPixmap(Mediatech_Path)
+        self.logoscene.addPixmap(self.pixLogo)
 
         self.MediLogo.setScene(self.logoscene)
 
@@ -110,6 +111,8 @@ class Ui_MainWindow(object):
         self.clockTime.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.clockTime.setObjectName("clockTime")
         self.clockTime.setMinimumSize(150, 50)
+        self.clockTime.setMaximumWidth(115)
+        self.clockTime.setMaximumHeight(20)
 
         # Create Graphics view object to rotate widgets
         self.timeView = QtWidgets.QGraphicsView()
@@ -128,8 +131,8 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.btnExit.sizePolicy().hasHeightForWidth())
         self.btnExit.setSizePolicy(sizePolicy)
-        self.btnExit.setMinimumSize(QtCore.QSize(67, 67))
-        self.btnExit.setMaximumSize(QtCore.QSize(67, 67))
+        self.btnExit.setMinimumSize(QtCore.QSize(57, 57))
+        self.btnExit.setMaximumSize(QtCore.QSize(57, 57))
         self.btnExit.setAutoFillBackground(False)
         self.btnExit.setStyleSheet(GUI_Style.exitBtn)
         self.btnExit.setText("")
@@ -199,8 +202,8 @@ class Ui_MainWindow(object):
         self.SID1_Data.setScaledContents(True)
         self.SID1_Data.setAlignment(QtCore.Qt.AlignCenter)
         self.SID1_Data.setObjectName("SID1_Data")
-        self.SID1_Data.setMaximumSize(120,50)
-
+        self.SID1_Data.setMaximumWidth(120)
+        self.SID1_Data.setMaximumHeight(50)
       
         # Create Graphics view object to rotate widgets
         self.SID1Data_View = QtWidgets.QGraphicsView()
@@ -261,7 +264,8 @@ class Ui_MainWindow(object):
         self.SID2_Data.setScaledContents(True)
         self.SID2_Data.setAlignment(QtCore.Qt.AlignCenter)
         self.SID2_Data.setObjectName("SID2_Data")
-        self.SID2_Data.setMaximumSize(120,50)
+        self.SID2_Data.setMaximumWidth(120)
+        self.SID2_Data.setMaximumHeight(50)
 
 
          # Create Graphics view object to rotate widgets
@@ -285,65 +289,65 @@ class Ui_MainWindow(object):
         # ---------------------------------------------------------------------
         # -------------------- SID 3 Layout [NOT USED]-------------------------
         # ---------------------------------------------------------------------
-        self.SID3Layout = QtWidgets.QHBoxLayout()
-        self.SID3Layout.setSpacing(0)
-        self.SID3Layout.setContentsMargins(0, 0, 0, 0)
+        # self.SID3Layout = QtWidgets.QHBoxLayout()
+        # self.SID3Layout.setSpacing(0)
+        # self.SID3Layout.setContentsMargins(0, 0, 0, 0)
 
-        # Create SID Label
-        self.SID3_label = QtWidgets.QLabel()
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.SID3_label.sizePolicy().hasHeightForWidth())
-        self.SID3_label.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Arial")
-        font.setPointSize(24)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.SID3_label.setFont(font)
-        self.SID3_label.setStyleSheet(GUI_Style.SID)
-        self.SID3_label.setScaledContents(True)
-        self.SID3_label.setAlignment(QtCore.Qt.AlignCenter)
-        self.SID3_label.setObjectName("SID3_label")
-        self.SID3_label.setMinimumWidth(75)
+        # # Create SID Label
+        # self.SID3_label = QtWidgets.QLabel()
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(self.SID3_label.sizePolicy().hasHeightForWidth())
+        # self.SID3_label.setSizePolicy(sizePolicy)
+        # font = QtGui.QFont()
+        # font.setFamily("Arial")
+        # font.setPointSize(24)
+        # font.setBold(False)
+        # font.setItalic(False)
+        # font.setWeight(50)
+        # self.SID3_label.setFont(font)
+        # self.SID3_label.setStyleSheet(GUI_Style.SID)
+        # self.SID3_label.setScaledContents(True)
+        # self.SID3_label.setAlignment(QtCore.Qt.AlignCenter)
+        # self.SID3_label.setObjectName("SID3_label")
+        # self.SID3_label.setMinimumWidth(75)
 
-        # Create Graphics view object to rotate widgets
-        self.SID3Label_View = QtWidgets.QGraphicsView()
-        self.SID3Label_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SID3Label_Scene = QtWidgets.QGraphicsScene(self.SID3Label_View)
-        self.SID3Label_View.setScene(self.SID3Label_Scene)
-        self.SID3Label_Scene.addWidget(self.SID3_label)
+        # # Create Graphics view object to rotate widgets
+        # self.SID3Label_View = QtWidgets.QGraphicsView()
+        # self.SID3Label_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        # self.SID3Label_Scene = QtWidgets.QGraphicsScene(self.SID3Label_View)
+        # self.SID3Label_View.setScene(self.SID3Label_Scene)
+        # self.SID3Label_Scene.addWidget(self.SID3_label)
 
-        # Create SID Data field
-        self.SID3_Data = QtWidgets.QLabel()
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.SID3_Data.sizePolicy().hasHeightForWidth())
-        self.SID3_Data.setSizePolicy(sizePolicy)
-        self.SID3_Data.setStyleSheet(GUI_Style.SID_Data)
-        self.SID3_Data.setScaledContents(True)
-        self.SID3_Data.setAlignment(QtCore.Qt.AlignCenter)
-        self.SID3_Data.setObjectName("SID3_Data")
-        self.SID3_Data.setMaximumSize(120,50)
+        # # Create SID Data field
+        # self.SID3_Data = QtWidgets.QLabel()
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(self.SID3_Data.sizePolicy().hasHeightForWidth())
+        # self.SID3_Data.setSizePolicy(sizePolicy)
+        # self.SID3_Data.setStyleSheet(GUI_Style.SID_Data)
+        # self.SID3_Data.setScaledContents(True)
+        # self.SID3_Data.setAlignment(QtCore.Qt.AlignCenter)
+        # self.SID3_Data.setObjectName("SID3_Data")
+        # self.SID3_Data.setMaximumSize(120,50)
 
 
-        # Create Graphics view object to rotate widgets
-        self.SID3Data_View = QtWidgets.QGraphicsView()
-        self.SID3Data_View.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.SID3Data_Scene = QtWidgets.QGraphicsScene(self.SID3Data_View)
-        self.SID3Data_View.setScene(self.SID3Data_Scene)
-        self.SID3Data_Scene.addWidget(self.SID3_Data)
+        # # Create Graphics view object to rotate widgets
+        # self.SID3Data_View = QtWidgets.QGraphicsView()
+        # self.SID3Data_View.setFrameShape(QtWidgets.QFrame.NoFrame)
+        # self.SID3Data_Scene = QtWidgets.QGraphicsScene(self.SID3Data_View)
+        # self.SID3Data_View.setScene(self.SID3Data_Scene)
+        # self.SID3Data_Scene.addWidget(self.SID3_Data)
 
-        # ----------------------------------
-        # ---- Add Objects to layout -------
-        # ----------------------------------
-        # Add objects to layout
-        # self.SID3Layout.addWidget(self.LBtn3_View)
-        self.SID3Layout.addWidget(self.SID3Label_View)
-        self.SID3Layout.addWidget(self.SID3Data_View, 1, Qt.AlignLeft)
+        # # ----------------------------------
+        # # ---- Add Objects to layout -------
+        # # ----------------------------------
+        # # Add objects to layout
+        # # self.SID3Layout.addWidget(self.LBtn3_View)
+        # self.SID3Layout.addWidget(self.SID3Label_View)
+        # self.SID3Layout.addWidget(self.SID3Data_View, 1, Qt.AlignLeft)
 
 
         # ---------------------------------------------------------------------
@@ -502,7 +506,7 @@ class Ui_MainWindow(object):
         # ------ Acceleromter X-Axis ------- 
         # ------ Using this as angle ------- 
         # ----------------------------------
-        #SID 2 Image
+        # Angle Meas Image
         self.angleImg = QtWidgets.QGraphicsView()
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -539,7 +543,9 @@ class Ui_MainWindow(object):
         self.xAxis.setScaledContents(True)
         self.xAxis.setAlignment(QtCore.Qt.AlignCenter)
         self.xAxis.setText("Angle \N{DEGREE SIGN}")
-        self.xAxis.setMaximumSize(120,50)
+        # self.xAxis.setMaximumSize(120,50)
+        self.xAxis.setMaximumWidth(140)
+        self.xAxis.setMaximumHeight(50)
 
         # Create Graphics view object to rotate widgets
         self.xAx_View = QtWidgets.QGraphicsView()
@@ -677,18 +683,31 @@ class Ui_MainWindow(object):
         # ---------------------------------------------------------------------
         # ----------------- Bottom Horizontal Layout --------------------------
         # ---------------------------------------------------------------------
+        self.rightLogoLayout = QtWidgets.QVBoxLayout()
+        self.leftLogoLayout = QtWidgets.QVBoxLayout()
+        self.rightHeaderLayout = QtWidgets.QVBoxLayout()
+        self.leftHeaderLayout = QtWidgets.QVBoxLayout()
+
+
+
         self.BottomLayout = QtWidgets.QHBoxLayout()
         self.BottomLayout.setSpacing(30)
         self.BottomLayout.setContentsMargins(0, 0, 0, 0)
         self.BottomLayout.addLayout(self.LeftButtonLayout)
+        self.BottomLayout.addLayout(self.leftLogoLayout)
+        self.BottomLayout.addLayout(self.leftHeaderLayout)
         self.BottomLayout.addLayout(self.SID1Layout)
         self.BottomLayout.addLayout(self.SID2Layout)
         self.BottomLayout.addLayout(self.AcelLayout)
+        self.BottomLayout.addLayout(self.rightHeaderLayout)
+        self.BottomLayout.addLayout(self.rightLogoLayout)
+
         self.BottomLayout.addLayout(self.RightButtonLayout)
 
         # ---------------------------------------------------------------------
         # ----------------- Final  Layout -------------------------------------
         # ---------------------------------------------------------------------
+
         self.FinalLayout = QtWidgets.QVBoxLayout()
         self.FinalLayout.setSpacing(0)
         self.FinalLayout.setContentsMargins(0, 0, 0, 0)
@@ -707,11 +726,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MX30 GUI"))
-        self.SID3_label.setText(_translate("MainWindow", "SID3"))
         self.SID2_Data.setText(_translate("MainWindow", "1000"))
-        # self.SID1_label.setText(_translate("MainWindow", "SID1"))
-        # self.SID2_label.setText(_translate("MainWindow", "SID2"))
-        self.SID3_Data.setText(_translate("MainWindow", "1000"))
         self.SID1_Data.setText(_translate("MainWindow", "1000"))
 
 

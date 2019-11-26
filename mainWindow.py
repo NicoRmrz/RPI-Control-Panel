@@ -6,17 +6,19 @@ from PyQt5.QtWidgets import QMainWindow
 
 from Ui_mainWindow import Ui_MainWindow
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore, QtGui
 
 from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtCore import Qt
 from threading import Event
 
+# import RPi.GPIO as GPIO
+
 #imports from user made file
-from newValue import Controller,  ControlArduino    
-from GPIO_buttonThread import GPIO_control
-import RPi.GPIO as GPIO
-from LSM9DS1_Thread import AcellerometerThread
-from ADS79241_Thread import ADC_thread
+from newValue import Controller    
+# from GPIO_buttonThread import GPIO_control
+# from LSM9DS1_Thread import AcellerometerThread
+# from ADS79241_Thread import ADC_thread
 from GUI_Stylesheets import GUI_Stylesheets
 
 GUI_Style = GUI_Stylesheets()
@@ -55,19 +57,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getController.start()
         self.getController.newTime.connect(self.updateTime)
 
-        self.GPIOthread = GPIO_control()
-        self.GPIOthread.start()
-        self.GPIOthread.setInitSettings()
-        self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
+        # self.GPIOthread = GPIO_control()
+        # self.GPIOthread.start()
+        # self.GPIOthread.setInitSettings()
+        # self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
 
-        self.accelerometer = AcellerometerThread()
-        self.accelerometer.start() 
-        self.accelerometer.axisSignals.connect(self.updateAccelerometer)
-        self.accelerometer.gyroSignals.connect(self.updateGyroscope)
+        # self.accelerometer = AcellerometerThread()
+        # self.accelerometer.start() 
+        # self.accelerometer.axisSignals.connect(self.updateAccelerometer)
+        # self.accelerometer.gyroSignals.connect(self.updateGyroscope)
 
-        self.ADC = ADC_thread()
-        self.ADC.start() 
-        self.ADC.ADC_meas.connect(self.updateSID)
+        # self.ADC = ADC_thread()
+        # self.ADC.start() 
+        # self.ADC.ADC_meas.connect(self.updateSID)
 
         self.btnExit.clicked.connect(self.on_btnExit_clicked)
 
@@ -150,19 +152,119 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.SID1Data_View.rotate(degree)
         self.SID2Data_View.rotate(degree)
-        self.SID3Data_View.rotate(degree)
+        self.angleImg.rotate(degree)
         self.xAx_View.rotate(degree)
         self.yAx_View.rotate(degree)
         self.zAx_View.rotate(degree)
 
-        if degree == 90:
+        if degree >= 85:
+        	# --- Layout Clockwise view ---
+        	# Remove Widget from normal view
             self.HeaderLayout.removeWidget(self.MediLogo)
             self.HeaderLayout.removeWidget(self.timeView)
             self.HeaderLayout.removeWidget(self.exitBtn_View)
 
-            # self.HeaderLayout.addWidget(self.exitBtn_View)
-            # self.HeaderLayout.addWidget(self.MediLogo)
-            # self.HeaderLayout.addWidget(self.timeView)
+            # Layout New Header
+            self.rightLogoLayout.addWidget(self.MediLogo, 1, Qt.AlignTop)
+            self.MediLogo.setMinimumSize(QtCore.QSize(50, 400))
+            self.rightHeaderLayout.addWidget(self.timeView, 1, Qt.AlignBottom)
+            self.rightHeaderLayout.addWidget(self.exitBtn_View, 1, Qt.AlignBottom)
+
+            # Relayout center objects
+            # First remove
+            self.SID1Layout.removeWidget(self.SID1img)
+            self.SID1Layout.removeWidget(self.SID1Data_View)
+            self.SID2Layout.removeWidget(self.SID2img)
+            self.SID2Layout.removeWidget(self.SID2Data_View)
+            self.AcelLayout.removeWidget(self.angleImg)
+            self.AcelLayout.removeWidget(self.xAx_View)
+
+            # Then layout
+            self.SID1Layout.addWidget(self.SID1img)
+            self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignTop)            
+            self.SID2Layout.addWidget(self.SID2img)
+            self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignTop)
+            self.AcelLayout.addWidget(self.angleImg)
+            self.AcelLayout.addWidget(self.xAx_View, 1, Qt.AlignTop)
+
+            # Align center objects
+            self.SID1Layout.setSpacing(50)
+            self.SID1Layout.setContentsMargins(0, 75, 0, 0)
+            self.SID2Layout.setSpacing(50)
+            self.SID2Layout.setContentsMargins(0, 75, 0, 0)
+            self.AcelLayout.setSpacing(50)
+            self.AcelLayout.setContentsMargins(0, 75, 0, 0)
+
+        elif  degree <= -85:
+            # --- Layout CounterClockwise view ---
+			# Remove Widget from normal view
+            self.HeaderLayout.removeWidget(self.MediLogo)
+            self.HeaderLayout.removeWidget(self.timeView)
+            self.HeaderLayout.removeWidget(self.exitBtn_View)
+
+            # Layout New Header            
+            self.leftLogoLayout.addWidget(self.MediLogo, 1, Qt.AlignBottom)
+            self.MediLogo.setMinimumSize(QtCore.QSize(50, 400))
+            self.leftHeaderLayout.addWidget(self.exitBtn_View, 1, Qt.AlignTop)
+            self.leftHeaderLayout.addWidget(self.timeView, 1,Qt.AlignTop)
+
+  			# Relayout center objects
+            # First remove
+            self.SID1Layout.removeWidget(self.SID1img)
+            self.SID1Layout.removeWidget(self.SID1Data_View)
+            self.SID2Layout.removeWidget(self.SID2img)
+            self.SID2Layout.removeWidget(self.SID2Data_View)
+            self.AcelLayout.removeWidget(self.angleImg)
+            self.AcelLayout.removeWidget(self.xAx_View)
+
+            # Then layout
+            self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignBottom)       
+            self.SID1Layout.addWidget(self.SID1img)
+            self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignBottom)
+            self.SID2Layout.addWidget(self.SID2img)
+            self.AcelLayout.addWidget(self.xAx_View, 1, Qt.AlignBottom)
+            self.AcelLayout.addWidget(self.angleImg)
+
+            # Align center objects
+            self.SID1Layout.setSpacing(50)
+            self.SID1Layout.setContentsMargins(0, 0, 0, 75)
+            self.SID2Layout.setSpacing(50)
+            self.SID2Layout.setContentsMargins(0, 0, 0, 75)
+            self.AcelLayout.setSpacing(50)
+            self.AcelLayout.setContentsMargins(0, 0, 0, 75)
+
+        else:
+        	# check which orientatio the screen currently is
+            if (self.rightHeaderLayout.count() > 1):
+                self.rightLogoLayout.removeWidget(self.MediLogo)
+                self.rightHeaderLayout.removeWidget(self.timeView)
+                self.rightHeaderLayout.removeWidget(self.exitBtn_View)
+
+            if (self.leftHeaderLayout.count() > 1):
+                self.leftLogoLayout.removeWidget(self.MediLogo)
+                self.leftHeaderLayout.removeWidget(self.timeView)
+                self.leftHeaderLayout.removeWidget(self.exitBtn_View)
+
+
+            # Add widgets to layout
+            self.HeaderLayout.addWidget(self.MediLogo, Qt.AlignLeft)
+            self.HeaderLayout.addWidget(self.timeView, Qt.AlignRight)
+            self.HeaderLayout.addWidget(self.exitBtn_View)
+
+            # Restore mediatech logo size
+            self.MediLogo.setMinimumSize(QtCore.QSize(378, 78))
+            self.MediLogo.setMaximumSize(QtCore.QSize(759, 159))
+
+            # Restore center objects
+            self.SID1Layout.setSpacing(0)
+            self.SID1Layout.setContentsMargins(0, 0, 0, 0)
+            self.SID2Layout.setSpacing(0)
+            self.SID2Layout.setContentsMargins(0, 0, 0, 0)
+            self.AcelLayout.setSpacing(0)
+            self.AcelLayout.setContentsMargins(0, 0, 0, 0)
+
+
+
 
 
     def buttonHandlers(self, mode):

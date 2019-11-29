@@ -12,13 +12,13 @@ from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt
 from threading import Event
 
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 #imports from user made file
 from newValue import Controller    
-# from GPIO_buttonThread import GPIO_control
-# from LSM9DS1_Thread import AcellerometerThread
-# from ADS79241_Thread import ADC_thread
+from GPIO_buttonThread import GPIO_control
+from LSM9DS1_Thread import AcellerometerThread
+from ADS79241_Thread import ADC_thread
 from GUI_Stylesheets import GUI_Stylesheets
 
 GUI_Style = GUI_Stylesheets()
@@ -39,6 +39,13 @@ Left_Idle = Main_path + "/icons/left_grey.png"
 Left_Pressed = Main_path + "/icons/left_grey_pressed.png"
 Right_Idle = Main_path + "/icons/right_grey.png"
 Right_Pressed = Main_path + "/icons/right_grey_pressed.png"
+
+ROTATE_RIGHT = 80
+ROTATE_LEFT = -80
+
+RESET_RIGHT = -90
+RESET_LEFT = 90
+Default = 0
         
 class MainWindow(QMainWindow, Ui_MainWindow):
     
@@ -47,8 +54,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         
         self.setWindowIcon(QIcon(Icon_Path))
-        
-        self.rotateGUI(0)
+        self.prevOrientation = "Normal"
+
+        self.rotateGUI(Default)
 
         self.stop_flag_time =  Event()
         self.stop_flag_RS232 =  Event()
@@ -57,19 +65,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getController.start()
         self.getController.newTime.connect(self.updateTime)
 
-        # self.GPIOthread = GPIO_control()
-        # self.GPIOthread.start()
-        # self.GPIOthread.setInitSettings()
-        # self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
+        self.GPIOthread = GPIO_control()
+        self.GPIOthread.start()
+        self.GPIOthread.setInitSettings()
+        self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
 
-        # self.accelerometer = AcellerometerThread()
-        # self.accelerometer.start() 
-        # self.accelerometer.axisSignals.connect(self.updateAccelerometer)
-        # self.accelerometer.gyroSignals.connect(self.updateGyroscope)
+        self.accelerometer = AcellerometerThread()
+        self.accelerometer.start() 
+        self.accelerometer.axisSignals.connect(self.updateAccelerometer)
+        self.accelerometer.gyroSignals.connect(self.updateGyroscope)
 
-        # self.ADC = ADC_thread()
-        # self.ADC.start() 
-        # self.ADC.ADC_meas.connect(self.updateSID)
+        self.ADC = ADC_thread()
+        self.ADC.start() 
+        self.ADC.ADC_meas.connect(self.updateSID)
 
         self.btnExit.clicked.connect(self.on_btnExit_clicked)
 
@@ -126,16 +134,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # ~ self.yAxis.setText(str(y) + " deg")
         # self.zAxis.setText("Z: " + str(z))
 
+        # For Screen Rotation
+        self.rotateGUI(x)
+
+
     def updateGyroscope(self, x, y, z):
         self.xGyro.setText("X: " + str(x))
         self.yGyro.setText("Y: " + str(y))
         self.zGyro.setText("Z: " + str(z))
 
-
-    def rotateGUI(self, degree):
+    def rotateObjects(self, degree):
         self.MediLogo.rotate(degree)
         self.timeView.rotate(degree)
-
         self.exitBtn_View.rotate(degree)
         self.LBtn1_View.rotate(degree)
         self.LBtn2_View.rotate(degree)
@@ -145,11 +155,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.RBtn2_View.rotate(degree)
         self.RBtn3_View.rotate(degree)
         self.RBtn4_View.rotate(degree)
-
         self.SID1img.rotate(degree)
         self.SID2img.rotate(degree)
-        # self.SID3Label_View.rotate(degree)
-
         self.SID1Data_View.rotate(degree)
         self.SID2Data_View.rotate(degree)
         self.angleImg.rotate(degree)
@@ -157,7 +164,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.yAx_View.rotate(degree)
         self.zAx_View.rotate(degree)
 
-        if degree >= 85:
+    def rotateGUI(self, degree):
+        if (degree >= ROTATE_RIGHT and self.prevOrientation!="Right"):
+            self.rotateObjects(degree)
+            self.prevOrientation = "Right"
+
         	# --- Layout Clockwise view ---
         	# Remove Widget from normal view
             self.HeaderLayout.removeWidget(self.MediLogo)
@@ -195,7 +206,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.AcelLayout.setSpacing(50)
             self.AcelLayout.setContentsMargins(0, 75, 0, 0)
 
-        elif  degree <= -85:
+        elif  (degree <= ROTATE_LEFT and self.prevOrientation!="Left"):
+            self.rotateObjects(degree)
+            self.prevOrientation = "Left"
+
             # --- Layout CounterClockwise view ---
 			# Remove Widget from normal view
             self.HeaderLayout.removeWidget(self.MediLogo)
@@ -233,17 +247,41 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.AcelLayout.setSpacing(50)
             self.AcelLayout.setContentsMargins(0, 0, 0, 75)
 
-        else:
-        	# check which orientatio the screen currently is
+        elif (degree > ROTATE_LEFT and degree < ROTATE_RIGHT and self.prevOrientation!="Normal"):
+            self.rotateObjects(degree)
+            self.prevOrientation ="Normal"
+
+        	# check which orientation the screen currently is
             if (self.rightHeaderLayout.count() > 1):
+                self.rotateObjects(RESET_RIGHT)
+
                 self.rightLogoLayout.removeWidget(self.MediLogo)
                 self.rightHeaderLayout.removeWidget(self.timeView)
                 self.rightHeaderLayout.removeWidget(self.exitBtn_View)
 
             if (self.leftHeaderLayout.count() > 1):
+                self.rotateObjects(RESET_LEFT)
+
                 self.leftLogoLayout.removeWidget(self.MediLogo)
                 self.leftHeaderLayout.removeWidget(self.timeView)
                 self.leftHeaderLayout.removeWidget(self.exitBtn_View)
+
+
+            # Relayout center objects
+            # First remove
+            self.SID1Layout.removeWidget(self.SID1img)
+            self.SID1Layout.removeWidget(self.SID1Data_View)
+            self.SID2Layout.removeWidget(self.SID2img)
+            self.SID2Layout.removeWidget(self.SID2Data_View)
+            self.AcelLayout.removeWidget(self.angleImg)
+            self.AcelLayout.removeWidget(self.xAx_View)
+
+            self.SID1Layout.addWidget(self.SID1img)
+            self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignTop)
+            self.SID2Layout.addWidget(self.SID2img)
+            self.AcelLayout.addWidget(self.angleImg)
+            self.AcelLayout.addWidget(self.xAx_View, 1, Qt.AlignTop)
+            self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignTop)
 
 
             # Add widgets to layout
@@ -317,7 +355,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.rightButton3.setIcon(QIcon(Down_Pressed))
 
     def leftButton1_Clicked(self):
-
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)        
         self.leftButton1.setIcon(QIcon(Rotate_Pressed))
@@ -364,6 +401,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
         self.GPIOthread.SWpushButton("Mode 4")
 
+        #Test Left Screen Rotation
+        # self.rotateGUI(-90)
+
 
     def leftButton4_Released(self):
         self.leftButton4.setStyleSheet(GUI_Style.buttonIdle)
@@ -391,7 +431,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton2.setIcon(QIcon(Right_Pressed))
         self.GPIOthread.SWpushButton("Mode 1")
 
-
     def rightButton2_Released(self):
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
@@ -406,6 +445,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton3.setIcon(QIcon(Down_Pressed))
         self.GPIOthread.SWpushButton("Mode 3")
 
+        #Test Normal Screen Rotation
+        # self.rotateGUI(0)
+
     def rightButton3_Released(self):
         self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
@@ -418,6 +460,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
         self.GPIOthread.SWpushButton("Mode 4")
 
+        #Test Right Screen Rotation
+        # self.rotateGUI(90)
 
     def rightButton4_Released(self):
         self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)

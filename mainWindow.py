@@ -165,6 +165,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.zAx_View.rotate(degree)
 
     def rotateGUI(self, degree):
+        # Greater than 80 degrees for Right orientation
         if (degree >= ROTATE_RIGHT and self.prevOrientation!="Right"):
             self.rotateObjects(degree)
             self.prevOrientation = "Right"
@@ -206,6 +207,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.AcelLayout.setSpacing(50)
             self.AcelLayout.setContentsMargins(0, 75, 0, 0)
 
+        # Less than -80 degrees for Left orientation
         elif  (degree <= ROTATE_LEFT and self.prevOrientation!="Left"):
             self.rotateObjects(degree)
             self.prevOrientation = "Left"
@@ -247,6 +249,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.AcelLayout.setSpacing(50)
             self.AcelLayout.setContentsMargins(0, 0, 0, 75)
 
+        # Default orientation 0 degrees +/-80
         elif (degree > ROTATE_LEFT and degree < ROTATE_RIGHT and self.prevOrientation!="Normal"):
             self.rotateObjects(degree)
             self.prevOrientation ="Normal"
@@ -283,7 +286,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.AcelLayout.addWidget(self.xAx_View, 1, Qt.AlignTop)
             self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignTop)
 
-
             # Add widgets to layout
             self.HeaderLayout.addWidget(self.MediLogo, Qt.AlignLeft)
             self.HeaderLayout.addWidget(self.timeView, Qt.AlignRight)
@@ -300,10 +302,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.SID2Layout.setContentsMargins(0, 0, 0, 0)
             self.AcelLayout.setSpacing(0)
             self.AcelLayout.setContentsMargins(0, 0, 0, 0)
-
-
-
-
+            
 
     def buttonHandlers(self, mode):
         if mode == "Off":

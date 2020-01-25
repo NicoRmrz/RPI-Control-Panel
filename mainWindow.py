@@ -12,13 +12,13 @@ from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt
 from threading import Event
 
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
 #imports from user made file
 from newValue import Controller    
-from GPIO_buttonThread import GPIO_control
-from LSM9DS1_Thread import AcellerometerThread
-from ADS79241_Thread import ADC_thread
+#from GPIO_buttonThread import GPIO_control
+#from LSM9DS1_Thread import AcellerometerThread
+#from ADS79241_Thread import ADC_thread
 from GUI_Stylesheets import GUI_Stylesheets
 
 GUI_Style = GUI_Stylesheets()
@@ -65,19 +65,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getController.start()
         self.getController.newTime.connect(self.updateTime)
 
-        self.GPIOthread = GPIO_control()
-        self.GPIOthread.start()
-        self.GPIOthread.setInitSettings()
-        self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
+        # self.GPIOthread = GPIO_control()
+        # self.GPIOthread.start()
+        # self.GPIOthread.setInitSettings()
+        # self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
 
-        self.accelerometer = AcellerometerThread()
-        self.accelerometer.start() 
-        self.accelerometer.axisSignals.connect(self.updateAccelerometer)
-        self.accelerometer.gyroSignals.connect(self.updateGyroscope)
+        # self.accelerometer = AcellerometerThread()
+        # self.accelerometer.start() 
+        # self.accelerometer.axisSignals.connect(self.updateAccelerometer)
+        # self.accelerometer.gyroSignals.connect(self.updateGyroscope)
 
-        self.ADC = ADC_thread()
-        self.ADC.start() 
-        self.ADC.ADC_meas.connect(self.updateSID)
+        # self.ADC = ADC_thread()
+        # self.ADC.start() 
+        # self.ADC.ADC_meas.connect(self.updateSID)
 
         self.btnExit.clicked.connect(self.on_btnExit_clicked)
 
@@ -136,6 +136,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # For Screen Rotation
         self.rotateGUI(x)
+
+    def updateRotation_Graphic(self, degree):
+        pass
+
+
+
+
+
 
 
     def updateGyroscope(self, x, y, z):

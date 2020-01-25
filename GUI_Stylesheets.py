@@ -96,4 +96,9 @@ class GUI_Stylesheets(QObject):
 							  "stop:0 rgba(202, 51, 52, 0), "
 							  "stop:1 rgba(255,255,255,0)); "
 							  "border: none; "
+							  )		
+
+		self.degreeTick = ("font: bold 12px Verdana; "
+							  "background-color: white;  "
+							  "border: none; "
 							  )

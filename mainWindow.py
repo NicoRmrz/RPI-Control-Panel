@@ -15,11 +15,12 @@ from threading import Event
 #import RPi.GPIO as GPIO
 
 #imports from user made file
-from newValue import Controller    
+from timeValue import Controller    
 #from GPIO_buttonThread import GPIO_control
 #from LSM9DS1_Thread import AcellerometerThread
 #from ADS79241_Thread import ADC_thread
 from GUI_Stylesheets import GUI_Stylesheets
+from angleMeasGraphic import angleGraphic
 
 GUI_Style = GUI_Stylesheets()
 
@@ -45,7 +46,7 @@ ROTATE_LEFT = -80
 
 RESET_RIGHT = -90
 RESET_LEFT = 90
-Default = 0
+DEFAULT_POS = 0
         
 class MainWindow(QMainWindow, Ui_MainWindow):
     
@@ -56,11 +57,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QIcon(Icon_Path))
         self.prevOrientation = "Normal"
 
-        self.rotateGUI(Default)
 
         self.stop_flag_time =  Event()
-        self.stop_flag_RS232 =  Event()
-
         self.getController = Controller(self.stop_flag_time)
         self.getController.start()
         self.getController.newTime.connect(self.updateTime)
@@ -79,6 +77,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.ADC.start() 
         # self.ADC.ADC_meas.connect(self.updateSID)
 
+
+
+
+        self.angleImg = angleGraphic()
+        self.angleImg.setScreenOrientation(self.prevOrientation)
+        self.angleImg.setAngleTick(DEFAULT_POS)
+        self.rotateGUI(DEFAULT_POS)
+
+        self.AcelLayout.addWidget(self.angleImg)
+        self.AcelLayout.addWidget(self.xAx_View, 1,Qt.AlignTop)
+        # self.AcelLayout.addWidget(self.xAx_View)
+
+        # connect signals to slots
         self.btnExit.clicked.connect(self.on_btnExit_clicked)
 
         self.leftButton1.pressed.connect(self.leftButton1_Clicked)
@@ -110,11 +121,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     @pyqtSlot()
     def on_btnExit_clicked(self):
         self.stop_flag_time.set()
-        self.stop_flag_RS232.set()
         self.GPIOthread.Set_Exit_Program(True)
+        self.GPIOthread.wait(100)        
         self.ADC.Set_Exit_Program(True)
+        self.ADC.wait(100)        
         self.accelerometer.Set_Exit_Program(True)
-        GPIO.cleanup()
+        self.accelerometer.wait(100)        
+        # GPIO.cleanup()
         sys.exit(0);
 
     def updateTime(self,  timeInterval):
@@ -136,8 +149,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # For Screen Rotation
         self.rotateGUI(x)
+        # self.angleImg.setAngleTick(self.x)
 
-    def updateRotation_Graphic(self, degree):
+
+    def updateRotationMeter(self, degree):
         pass
 
 
@@ -167,16 +182,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.SID2img.rotate(degree)
         self.SID1Data_View.rotate(degree)
         self.SID2Data_View.rotate(degree)
-        self.angleImg.rotate(degree)
         self.xAx_View.rotate(degree)
         self.yAx_View.rotate(degree)
         self.zAx_View.rotate(degree)
 
+
     def rotateGUI(self, degree):
+
         # Greater than 80 degrees for Right orientation
         if (degree >= ROTATE_RIGHT and self.prevOrientation!="Right"):
             self.rotateObjects(degree)
             self.prevOrientation = "Right"
+            self.angleImg.setScreenOrientation(self.prevOrientation)
 
         	# --- Layout Clockwise view ---
         	# Remove Widget from normal view
@@ -219,6 +236,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         elif  (degree <= ROTATE_LEFT and self.prevOrientation!="Left"):
             self.rotateObjects(degree)
             self.prevOrientation = "Left"
+            self.angleImg.setScreenOrientation(self.prevOrientation)
 
             # --- Layout CounterClockwise view ---
 			# Remove Widget from normal view
@@ -261,6 +279,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         elif (degree > ROTATE_LEFT and degree < ROTATE_RIGHT and self.prevOrientation!="Normal"):
             self.rotateObjects(degree)
             self.prevOrientation ="Normal"
+            self.angleImg.setScreenOrientation(self.prevOrientation)
 
         	# check which orientation the screen currently is
             if (self.rightHeaderLayout.count() > 1):
@@ -366,42 +385,51 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)        
         self.leftButton1.setIcon(QIcon(Rotate_Pressed))
         self.rightButton1.setIcon(QIcon(Rotate1_Pressed))
-        self.GPIOthread.SWpushButton("Mode 2")
+        # self.GPIOthread.SWpushButton("Mode 2")
+        self.rotateGUI(90)
+        self.angleImg.setAngleTick(90)
 
     def leftButton1_Released(self):
         self.leftButton1.setIcon(QIcon(Rotate_Idle))
         self.rightButton1.setIcon(QIcon(Rotate1_Idle))
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)        
-        self.GPIOthread.SWpushButton("Off")
+        # self.GPIOthread.SWpushButton("Off")
         
     def leftButton2_Clicked(self):
         self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton2.setIcon(QIcon(Left_Pressed))
         self.rightButton2.setIcon(QIcon(Right_Pressed))
-        self.GPIOthread.SWpushButton("Mode 1")
+        # self.GPIOthread.SWpushButton("Mode 1")
+        self.rotateGUI(0)
+        self.angleImg.setAngleTick(0)
+
 
     def leftButton2_Released(self):
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setIcon(QIcon(Left_Idle))
         self.rightButton2.setIcon(QIcon(Right_Idle))
-        self.GPIOthread.SWpushButton("Off")
+        # self.GPIOthread.SWpushButton("Off")
+
 
     def leftButton3_Clicked(self):
         self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton3.setIcon(QIcon(Up_Pressed))
         self.rightButton3.setIcon(QIcon(Down_Pressed))
-        self.GPIOthread.SWpushButton("Mode 3")
+        # self.GPIOthread.SWpushButton("Mode 3")
+        self.rotateGUI(-90)
+        self.angleImg.setAngleTick(-90)
+
 
     def leftButton3_Released(self):
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton3.setIcon(QIcon(Up_Idle))
         self.rightButton3.setIcon(QIcon(Down_Idle))
-        self.GPIOthread.SWpushButton("Off")
+        # self.GPIOthread.SWpushButton("Off")
 
     def leftButton4_Clicked(self):
         self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
@@ -422,35 +450,40 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton1.setIcon(QIcon(Rotate_Pressed))
         self.rightButton1.setIcon(QIcon(Rotate1_Pressed))
-        self.GPIOthread.SWpushButton("Mode 2")
+        # self.GPIOthread.SWpushButton("Mode 2")
 
     def rightButton1_Released(self):
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton1.setIcon(QIcon(Rotate_Idle))
         self.rightButton1.setIcon(QIcon(Rotate1_Idle))
-        self.GPIOthread.SWpushButton("Off")
+        # self.GPIOthread.SWpushButton("Off")
+        self.angleImg.setAngleTick(15)
+
 
     def rightButton2_Clicked(self):
         self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton2.setIcon(QIcon(Left_Pressed))
         self.rightButton2.setIcon(QIcon(Right_Pressed))
-        self.GPIOthread.SWpushButton("Mode 1")
+        # self.GPIOthread.SWpushButton("Mode 1")
 
     def rightButton2_Released(self):
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setIcon(QIcon(Left_Idle))
         self.rightButton2.setIcon(QIcon(Right_Idle))
-        self.GPIOthread.SWpushButton("Off")
+        # self.GPIOthread.SWpushButton("Off")
+        self.angleImg.setAngleTick(45)
+
 
     def rightButton3_Clicked(self):
         self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton3.setIcon(QIcon(Up_Pressed))
         self.rightButton3.setIcon(QIcon(Down_Pressed))
-        self.GPIOthread.SWpushButton("Mode 3")
+        # self.GPIOthread.SWpushButton("Mode 3")
+
 
         #Test Normal Screen Rotation
         # self.rotateGUI(0)
@@ -460,12 +493,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton3.setIcon(QIcon(Up_Idle))
         self.rightButton3.setIcon(QIcon(Down_Idle))       
-        self.GPIOthread.SWpushButton("Off")
+        # self.GPIOthread.SWpushButton("Off")
+        self.angleImg.setAngleTick(-15)
+
 
     def rightButton4_Clicked(self):
         self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
-        self.GPIOthread.SWpushButton("Mode 4")
+        # self.GPIOthread.SWpushButton("Mode 4")
 
         #Test Right Screen Rotation
         # self.rotateGUI(90)
@@ -473,4 +508,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def rightButton4_Released(self):
         self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton4.setStyleSheet(GUI_Style.buttonIdle)
-        self.GPIOthread.SWpushButton("Off")
+        # self.GPIOthread.SWpushButton("Off")
+        self.angleImg.setAngleTick(-45)
+
+
+    # ------------------------------------------------------------------
+    # ----------- Close All Threads at app closure ---------------------
+    # ------------------------------------------------------------------             
+    # Stop all threads when GUI is closed
+    def closeEvent(self, *args, **kwargs):
+        self.GPIOthread.Set_Exit_Program(True)
+        self.GPIOthread.wait(100)        
+        self.accelerometer.Set_Exit_Program(True)
+        self.accelerometer.wait(100)       
+        self.ADC.Set_Exit_Program(True)
+        self.ADC.wait(100)
+        # GPIO.cleanup()
+        sys.exit(0);

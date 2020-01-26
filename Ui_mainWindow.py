@@ -7,7 +7,6 @@ from PyQt5.QtCore import Qt, QPoint
 
 # User made files
 from GUI_Stylesheets import GUI_Stylesheets
-from angleMeasGraphic import angleGraphic
 
 GUI_Style = GUI_Stylesheets()
 
@@ -160,7 +159,6 @@ class Ui_MainWindow(object):
         self.HeaderLayout.addWidget(self.MediLogo, Qt.AlignLeft)
         self.HeaderLayout.addWidget(self.timeView, Qt.AlignRight)
         self.HeaderLayout.addWidget(self.exitBtn_View)
-
 
         # ---------------------------------------------------------------------
         # -------------------- SID 1 Layout -----------------------------------
@@ -443,33 +441,43 @@ class Ui_MainWindow(object):
         # ------ Using this as angle ------- 
         # ----------------------------------
         # Angle Meas Image
-        self.angleImg = QtWidgets.QGraphicsView()
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.angleImg.sizePolicy().hasHeightForWidth())
-        self.angleImg.setSizePolicy(sizePolicy)
-        self.angleImg.setMaximumSize(QtCore.QSize(175, 175))
-        self.angleImg.setStyleSheet(GUI_Style.logo)
-        self.angleImg.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.angleImg.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.angleImg.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.angleImg.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.angleImg.setAlignment(QtCore.Qt.AlignCenter)
-        self.angleImg.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
-        self.angleImg.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
-        self.angleImg.setViewportUpdateMode(QtWidgets.QGraphicsView.MinimalViewportUpdate)
-        self.angleImg.setRubberBandSelectionMode(QtCore.Qt.ContainsItemShape)
-        self.angleImg.setOptimizationFlags(QtWidgets.QGraphicsView.DontClipPainter)
-        self.angleImg.setObjectName("angleImg")
+        # self.angleImg = QtWidgets.QGraphicsView()
+        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        # sizePolicy.setHorizontalStretch(0)
+        # sizePolicy.setVerticalStretch(0)
+        # sizePolicy.setHeightForWidth(self.angleImg.sizePolicy().hasHeightForWidth())
+        # self.angleImg.setSizePolicy(sizePolicy)
+        # self.angleImg.setMaximumSize(QtCore.QSize(175, 175))
+        # self.angleImg.setStyleSheet(GUI_Style.logo)
+        # self.angleImg.setFrameShape(QtWidgets.QFrame.NoFrame)
+        # self.angleImg.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        # self.angleImg.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        # self.angleImg.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        # self.angleImg.setAlignment(QtCore.Qt.AlignCenter)
+        # self.angleImg.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
+        # self.angleImg.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
+        # self.angleImg.setViewportUpdateMode(QtWidgets.QGraphicsView.MinimalViewportUpdate)
+        # self.angleImg.setRubberBandSelectionMode(QtCore.Qt.ContainsItemShape)
+        # self.angleImg.setOptimizationFlags(QtWidgets.QGraphicsView.DontClipPainter)
+        # self.angleImg.setObjectName("angleImg")
 
-        self.Anglescene = QtWidgets.QGraphicsScene()
-        self.Anglescene.addPixmap(QPixmap(Rotate_path))
-        self.angleImg.setScene(self.Anglescene)
-        self.angleImg.fitInView(self.Anglescene.sceneRect(), QtCore.Qt.KeepAspectRatio)
+        # self.Anglescene = QtWidgets.QGraphicsScene()
+        # # self.Anglescene.addPixmap(QPixmap(Rotate_path))
+        # self.AngleGraphicsItem = QtWidgets.QGraphicsProxyWidget()
+
+        # self.angleImg.setScene(self.Anglescene)
+        # self.angleImg.fitInView(self.Anglescene.sceneRect(), QtCore.Qt.KeepAspectRatio)
 
 
-        self.moveAngle = angleGraphic()
+
+
+        # # self.moveAngle = angleGraphic()
+        # self.AngleGraphicsItem = self.Anglescene.addWidget(self.moveAngle)
+
+        # print(self.AngleGraphicsItem.isVisible())
+
+
+        # self.moveAngle = angleGraphic()
   
 
         # QPaint angle degree tick
@@ -483,6 +491,8 @@ class Ui_MainWindow(object):
         # xBoundingRect = fontMetrics.boundingRect(tr("x"))
         # yBoundingRect = fontMetrics.boundingRect(tr("y"))
 
+
+
         # Create X Axis label
         self.xAxis = QLabel()
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -493,7 +503,7 @@ class Ui_MainWindow(object):
         self.xAxis.setStyleSheet(GUI_Style.SID_Data)
         self.xAxis.setScaledContents(True)
         self.xAxis.setAlignment(QtCore.Qt.AlignCenter)
-        self.xAxis.setText("Angle \N{DEGREE SIGN}")
+        self.xAxis.setText("\N{DEGREE SIGN}")
         # self.xAxis.setMaximumSize(120,50)
         self.xAxis.setMaximumWidth(140)
         self.xAxis.setMaximumHeight(50)
@@ -546,10 +556,12 @@ class Ui_MainWindow(object):
         self.AcelLayout = QtWidgets.QVBoxLayout()
         self.AcelLayout.setSpacing(0)
         self.AcelLayout.setContentsMargins(0, 0, 0, 0)
-       # self.AcelLayout.addWidget(self.angleImg)
-        self.AcelLayout.addWidget(self.moveAngle)
 
-        self.AcelLayout.addWidget(self.xAx_View, 1, Qt.AlignTop)
+  
+       # self.AcelLayout.addWidget(self.angleImg)
+        # self.AcelLayout.addWidget(self.moveAngle)
+
+        # self.AcelLayout.addWidget(self.xAx_View, 1, Qt.AlignTop)
         # self.AcelLayout.addWidget(self.yAx_View)
         # self.AcelLayout.addWidget(self.zAx_View)
 

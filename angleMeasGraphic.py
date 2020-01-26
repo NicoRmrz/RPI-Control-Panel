@@ -2,104 +2,144 @@ from PyQt5.QtCore import QPoint, Qt, QTime, QTimer, QRectF
 from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen
 from PyQt5.QtWidgets import QApplication, QWidget
 
+
+
+ANGLEREADING = 0
+
 class angleGraphic(QWidget):
-    hourHand = QPolygon([
-        QPoint(7, 8),
-        QPoint(-7, 8),
-        QPoint(0, -40)
+
+    measHand = QPolygon([
+        QPoint(15, 0),
+        QPoint(-15, 0),
+        QPoint(0, -100)
     ])
 
-    minuteHand = QPolygon([
-        QPoint(7, 8),
-        QPoint(-7, 8),
-        QPoint(0, -70)
-    ])
+    PURP = QColor(127, 0, 127)
+    TEAL = QColor(0, 127, 127, 191)
+    LIGHTBLUE = QColor(123, 177, 223, 255)
+    LIGHTBLUEFADE = QColor(123, 177, 223, 100)
+    YELLOW = QColor(255, 253, 208, 200)
 
-    hourColor = QColor(127, 0, 127)
-    minuteColor = QColor(0, 127, 127, 191)
 
     def __init__(self, parent=None):
         super(angleGraphic, self).__init__(parent)
+        self.setMinimumSize(150, 175)
+        self.setMaximumSize(200, 200)
 
-        timer = QTimer(self)
-        timer.timeout.connect(self.update)
-        timer.start(1000)
-        self.setMinimumSize(200, 200)
+    def setAngleTick(self, reading):
+    	self.moveTick = reading
+
+    def setScreenOrientation (self, orientaion):
+    	self.POS = orientaion
+
 
     def paintEvent(self, event):
         side = min(self.width(), self.height())
 
-
-        time = QTime.currentTime()
-
         painter = QPainter(self)
-        #painter.begin(self)
-
         painter.setRenderHint(QPainter.Antialiasing)
-        painter.translate(self.width() / 2, self.height() / 2)
-        painter.scale(side / 200.0, side / 200.0)
-        painter.drawArc(15, 15, 70, 70, 0 * 16, -180 * 16)         # <-----------        
+        val = 180 - self.moveTick
+        print(val)
 
-        painter.setPen(Qt.NoPen)
-        painter.setBrush(angleGraphic.hourColor)
+        if (self.POS == "Normal"):
+	        self.setMinimumSize(150, 175)
+        	self.setMaximumSize(200, 200)
+        	painter.translate(self.width() / 2, self.height() / 50)
+        	painter.scale(side / 220.0, side / 130.0)
 
+	        # Draw top line 
+	        pen = QPen()
+	        pen.setWidth(15)
+	        pen.setBrush(angleGraphic.LIGHTBLUE);
+	        painter.setPen(pen)
+	        for i in range(90):
+	            painter.drawLine(1 ,0 , 100, 0)
+	            painter.rotate(180.0)
 
+	        # Measurement Hand
+	        painter.setPen(Qt.NoPen)
+	        painter.setBrush(angleGraphic.YELLOW)
+	        painter.save()
 
-        painter.save()
-        painter.rotate(30.0 * ((time.hour() + time.minute() / 60.0)))
-        painter.drawConvexPolygon(angleGraphic.hourHand)
-        painter.restore()
+	        #self.moveTick = 180 - self.moveTick
+	        painter.rotate(val)
 
-        pen = QPen()
-        pen.setWidth(3)
-        pen.setBrush(angleGraphic.hourColor);
-
-        # painter.setPen(angleGraphic.hourColor)
-        painter.setPen(pen)
-
-        for i in range(90):
-            painter.drawLine(1 ,0 , 90, 0)
-            painter.rotate(180.0)
-
-
-        painter.setPen(Qt.NoPen)
-        painter.setBrush(angleGraphic.minuteColor)
-
-        painter.save()
-        painter.rotate(6.0 * (time.minute() + time.second() / 60.0))
-        painter.drawConvexPolygon(angleGraphic.minuteHand)
-        painter.restore()
-
-        painter.setPen(angleGraphic.minuteColor)
+	        painter.drawConvexPolygon(angleGraphic.measHand)
+	        painter.restore()
 
 
-        for j in range(30):
-            if (j % 5) != 0:
-                painter.drawLine(92, 0, 96, 0)
-            painter.rotate(6.0)
+	        # Tick marks
+	        painter.setPen(angleGraphic.LIGHTBLUEFADE)
+	        for j in range(180):
+	            if (j % 2) != 0:
+	                painter.drawLine(100, 0, 0, 0)
+	            painter.rotate(1.0)
+
+        elif (self.POS == "Right"):
+
+       		self.setMinimumSize(175, 175)
+        	self.setMaximumSize(200, 200)
+
+        	painter.scale(side / 220.0, side / 130.0)
+        	painter.translate(self.width() / 1.70, self.height() / 30)
+
+	        # Draw top line 
+	        pen = QPen()
+	        pen.setWidth(15)
+	        pen.setBrush(angleGraphic.LIGHTBLUE);
+	        painter.setPen(pen)
+	        for i in range(90):
+	            painter.drawLine(1 ,0 , 100, 0)
+	            painter.rotate(180.0)
+
+	        # Measurement Hand
+	        painter.setPen(Qt.NoPen)
+	        painter.setBrush(angleGraphic.YELLOW)
+	        painter.save()
+	        painter.rotate(val)
+	        painter.drawConvexPolygon(angleGraphic.measHand)
+	        painter.restore()
+
+	        # Tick marks
+	        painter.setPen(angleGraphic.LIGHTBLUEFADE)
+	        for j in range(180):
+	            if (j % 2) != 0:
+	                painter.drawLine(100, 0, 0, 0)
+	            painter.rotate(1.0)
+
+        elif (self.POS == "Left"):
+
+       		self.setMinimumSize(175, 175)
+        	self.setMaximumSize(250, 250)
+
+        	painter.scale(side / 220.0, side / 130.0)
+        	painter.translate(self.width() / 1.7, self.height() / 30)
+
+	        # Draw top line 
+	        pen = QPen()
+	        pen.setWidth(15)
+	        pen.setBrush(angleGraphic.LIGHTBLUE);
+	        painter.setPen(pen)
+	        for i in range(90):
+	            painter.drawLine(1 ,0 , 100, 0)
+	            painter.rotate(180.0)
 
 
-        # make a white drawing background
-        # painter.setBrush(Qt.white)
-        # painter.drawRect(event.rect())
+	        # Measurement Hand
+	        painter.setPen(Qt.NoPen)
+	        painter.setBrush(angleGraphic.YELLOW)
+	        painter.save()
+	        painter.rotate(val)
+	        painter.drawConvexPolygon(angleGraphic.measHand)
+	        painter.restore()
 
 
-        painter.setPen(Qt.green)
-        painter.setBrush(Qt.white)
-    #   # painter.drawArc(100, 70, 300, 300, 0 * 16, 180 * 16)
-    #     # upside down
-        #painter.drawArc(100, 70, 175, 175, 0 * 16, -180 * 16)
-        #painter.drawArc(15, 15, 70, 70, 0 * 16, -180 * 16)         # <-----------        
-
-        painter.setPen(QPen(Qt.red))
-    #     painter.restore()
-        painter.end()
-
-
-        self.update()
-
-
-
+	        # Tick marks
+	        painter.setPen(angleGraphic.LIGHTBLUEFADE)
+	        for j in range(180):
+	            if (j % 2) != 0:
+	                painter.drawLine(100, 0, 0, 0)
+	            painter.rotate(1.0)
 
     # def paintEvent(self, event):
     #     side = min(self.width(), self.height())
@@ -122,4 +162,4 @@ class angleGraphic(QWidget):
     #     painter.end()
 
 
-    #     self.update()
+        self.update()

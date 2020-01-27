@@ -87,7 +87,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.AcelLayout.addWidget(self.angleImg)
         self.AcelLayout.addWidget(self.xAx_View, 1,Qt.AlignTop)
-        # self.AcelLayout.addWidget(self.xAx_View)
 
         # connect signals to slots
         self.btnExit.clicked.connect(self.on_btnExit_clicked)
@@ -149,16 +148,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # For Screen Rotation
         self.rotateGUI(x)
+
+        # Set Angle tick rotation value
         # self.angleImg.setAngleTick(self.x)
-
-
-    def updateRotationMeter(self, degree):
-        pass
-
-
-
-
-
 
 
     def updateGyroscope(self, x, y, z):

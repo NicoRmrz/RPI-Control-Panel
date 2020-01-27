@@ -16,7 +16,6 @@ class GUI_Stylesheets(QObject):
 						"color: rgb(255, 255, 255);\n"
 						"background-color: rgba(255, 255, 255, 0);")
 
-
 		self.logo = ("background-color: rgba(255, 255, 255, 0);\n"
 						"selection-color: rgba(255, 255, 255, 0);\n"
 						"color: rgba(255, 255, 255, 0);\n"
@@ -32,8 +31,6 @@ class GUI_Stylesheets(QObject):
 								"background-color: rgba(242,242,242, 0)}"
 							)
 		
-		
-							
 		self.statusBar_XY	= (	"QLabel {border: none; "
 								"background-color: qlineargradient(spread:pad x1:0.45, y1:0.3695, x2:0.427, y2:0, "
 								"stop:0 rgba(242, 242, 242, 0), "
@@ -42,8 +39,6 @@ class GUI_Stylesheets(QObject):
 								"font-weight: bold; "
 								"color: white; }"			
 							)			
-							
-		
 							
 		self.statusBar_widgets	= (	"QLabel {border: none; "
 								"background-color: qlineargradient(spread:pad x1:0.45, y1:0.3695, x2:0.427, y2:0, "

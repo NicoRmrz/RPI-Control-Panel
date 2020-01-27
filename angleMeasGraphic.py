@@ -2,8 +2,6 @@ from PyQt5.QtCore import QPoint, Qt, QTime, QTimer, QRectF
 from PyQt5.QtGui import QColor, QPainter, QPolygon, QPen
 from PyQt5.QtWidgets import QApplication, QWidget
 
-
-
 ANGLEREADING = 0
 
 class angleGraphic(QWidget):
@@ -17,7 +15,7 @@ class angleGraphic(QWidget):
     PURP = QColor(127, 0, 127)
     TEAL = QColor(0, 127, 127, 191)
     LIGHTBLUE = QColor(123, 177, 223, 255)
-    LIGHTBLUEFADE = QColor(123, 177, 223, 100)
+    WHITE = QColor(255,255,255,75)
     YELLOW = QColor(255, 253, 208, 200)
 
 
@@ -63,17 +61,17 @@ class angleGraphic(QWidget):
 
 	        #self.moveTick = 180 - self.moveTick
 	        painter.rotate(val)
-
 	        painter.drawConvexPolygon(angleGraphic.measHand)
 	        painter.restore()
 
 
-	        # Tick marks
-	        painter.setPen(angleGraphic.LIGHTBLUEFADE)
+            # Tick marks
+	        painter.setPen(angleGraphic.WHITE)
+
 	        for j in range(180):
 	            if (j % 2) != 0:
-	                painter.drawLine(100, 0, 0, 0)
-	            painter.rotate(1.0)
+	                painter.drawLine(40, 0, 100, 0)
+	            painter.rotate(2.0)
 
         elif (self.POS == "Right"):
 
@@ -100,12 +98,12 @@ class angleGraphic(QWidget):
 	        painter.drawConvexPolygon(angleGraphic.measHand)
 	        painter.restore()
 
-	        # Tick marks
-	        painter.setPen(angleGraphic.LIGHTBLUEFADE)
+            # Tick marks
+	        painter.setPen(angleGraphic.WHITE)
 	        for j in range(180):
 	            if (j % 2) != 0:
-	                painter.drawLine(100, 0, 0, 0)
-	            painter.rotate(1.0)
+	                painter.drawLine(40, 0, 100, 0)
+	            painter.rotate(2.0)
 
         elif (self.POS == "Left"):
 
@@ -124,7 +122,6 @@ class angleGraphic(QWidget):
 	            painter.drawLine(1 ,0 , 100, 0)
 	            painter.rotate(180.0)
 
-
 	        # Measurement Hand
 	        painter.setPen(Qt.NoPen)
 	        painter.setBrush(angleGraphic.YELLOW)
@@ -133,33 +130,12 @@ class angleGraphic(QWidget):
 	        painter.drawConvexPolygon(angleGraphic.measHand)
 	        painter.restore()
 
-
-	        # Tick marks
-	        painter.setPen(angleGraphic.LIGHTBLUEFADE)
+            # Tick marks
+	        painter.setPen(angleGraphic.WHITE)
 	        for j in range(180):
 	            if (j % 2) != 0:
-	                painter.drawLine(100, 0, 0, 0)
-	            painter.rotate(1.0)
-
-    # def paintEvent(self, event):
-    #     side = min(self.width(), self.height())
-
-    #     painter = QPainter()
-    #     painter.begin(self)
-      
-    #     painter.setRenderHint(QPainter.Antialiasing)
-    #     painter.setPen(Qt.green)
-    #     painter.setBrush(Qt.white)
-    #   # painter.drawArc(100, 70, 300, 300, 0 * 16, 180 * 16)
-    #     # upside down
-    #     painter.save()
-
-    #     painter.drawArc(100, 70, 300, 300, 0 * 16, -180 * 16)
-    #     painter.setPen(QPen(Qt.red))
-    #     painter.restore()
-
-      
-    #     painter.end()
+	                painter.drawLine(40, 0, 100, 0)
+	            painter.rotate(2.0)
 
 
         self.update()

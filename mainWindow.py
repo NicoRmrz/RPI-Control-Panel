@@ -12,11 +12,11 @@ from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt
 from threading import Event
 
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 #imports from user made file
 from timeValue import Controller    
-#from GPIO_buttonThread import GPIO_control
+from GPIO_buttonThread import GPIO_control
 #from LSM9DS1_Thread import AcellerometerThread
 #from ADS79241_Thread import ADC_thread
 from GUI_Stylesheets import GUI_Stylesheets
@@ -63,10 +63,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.getController.start()
         self.getController.newTime.connect(self.updateTime)
 
-        # self.GPIOthread = GPIO_control()
-        # self.GPIOthread.start()
-        # self.GPIOthread.setInitSettings()
-        # self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
+        self.GPIOthread = GPIO_control()
+        self.GPIOthread.start()
+        self.GPIOthread.setInitSettings()
+        self.GPIOthread.handleButtonSig.connect(self.buttonHandlers)
 
         # self.accelerometer = AcellerometerThread()
         # self.accelerometer.start() 
@@ -126,7 +126,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ADC.wait(100)        
         self.accelerometer.Set_Exit_Program(True)
         self.accelerometer.wait(100)        
-        # GPIO.cleanup()
+        GPIO.cleanup()
         sys.exit(0);
 
     def updateTime(self,  timeInterval):
@@ -150,7 +150,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rotateGUI(x)
 
         # Set Angle tick rotation value
-        # self.angleImg.setAngleTick(self.x)
+        self.angleImg.setAngleTick(self.x)
 
 
     def updateGyroscope(self, x, y, z):
@@ -377,7 +377,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)        
         self.leftButton1.setIcon(QIcon(Rotate_Pressed))
         self.rightButton1.setIcon(QIcon(Rotate1_Pressed))
-        # self.GPIOthread.SWpushButton("Mode 2")
+        self.GPIOthread.SWpushButton("Mode 2")
         self.rotateGUI(90)
         self.angleImg.setAngleTick(90)
 
@@ -386,14 +386,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton1.setIcon(QIcon(Rotate1_Idle))
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)        
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
         
     def leftButton2_Clicked(self):
         self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton2.setIcon(QIcon(Left_Pressed))
         self.rightButton2.setIcon(QIcon(Right_Pressed))
-        # self.GPIOthread.SWpushButton("Mode 1")
+        self.GPIOthread.SWpushButton("Mode 1")
         self.rotateGUI(0)
         self.angleImg.setAngleTick(0)
 
@@ -403,7 +403,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setIcon(QIcon(Left_Idle))
         self.rightButton2.setIcon(QIcon(Right_Idle))
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
 
 
     def leftButton3_Clicked(self):
@@ -411,7 +411,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton3.setIcon(QIcon(Up_Pressed))
         self.rightButton3.setIcon(QIcon(Down_Pressed))
-        # self.GPIOthread.SWpushButton("Mode 3")
+        self.GPIOthread.SWpushButton("Mode 3")
         self.rotateGUI(-90)
         self.angleImg.setAngleTick(-90)
 
@@ -421,7 +421,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton3.setIcon(QIcon(Up_Idle))
         self.rightButton3.setIcon(QIcon(Down_Idle))
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
 
     def leftButton4_Clicked(self):
         self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
@@ -442,14 +442,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton1.setIcon(QIcon(Rotate_Pressed))
         self.rightButton1.setIcon(QIcon(Rotate1_Pressed))
-        # self.GPIOthread.SWpushButton("Mode 2")
+        self.GPIOthread.SWpushButton("Mode 2")
 
     def rightButton1_Released(self):
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton1.setIcon(QIcon(Rotate_Idle))
         self.rightButton1.setIcon(QIcon(Rotate1_Idle))
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
         self.angleImg.setAngleTick(15)
 
 
@@ -458,14 +458,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton2.setIcon(QIcon(Left_Pressed))
         self.rightButton2.setIcon(QIcon(Right_Pressed))
-        # self.GPIOthread.SWpushButton("Mode 1")
+        self.GPIOthread.SWpushButton("Mode 1")
 
     def rightButton2_Released(self):
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setIcon(QIcon(Left_Idle))
         self.rightButton2.setIcon(QIcon(Right_Idle))
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
         self.angleImg.setAngleTick(45)
 
 
@@ -474,7 +474,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton3.setIcon(QIcon(Up_Pressed))
         self.rightButton3.setIcon(QIcon(Down_Pressed))
-        # self.GPIOthread.SWpushButton("Mode 3")
+        self.GPIOthread.SWpushButton("Mode 3")
 
 
         #Test Normal Screen Rotation
@@ -485,14 +485,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton3.setIcon(QIcon(Up_Idle))
         self.rightButton3.setIcon(QIcon(Down_Idle))       
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
         self.angleImg.setAngleTick(-15)
 
 
     def rightButton4_Clicked(self):
         self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
-        # self.GPIOthread.SWpushButton("Mode 4")
+        self.GPIOthread.SWpushButton("Mode 4")
 
         #Test Right Screen Rotation
         # self.rotateGUI(90)
@@ -500,7 +500,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def rightButton4_Released(self):
         self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton4.setStyleSheet(GUI_Style.buttonIdle)
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
         self.angleImg.setAngleTick(-45)
 
 
@@ -515,5 +515,5 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.accelerometer.wait(100)       
         self.ADC.Set_Exit_Program(True)
         self.ADC.wait(100)
-        # GPIO.cleanup()
+        GPIO.cleanup()
         sys.exit(0);

@@ -27,7 +27,6 @@ class AcellerometerThread(QThread):
     
 	def __init__(self):
 		QThread.__init__(self)
-		self.exitProgram = False
 		self.gxAvg = 0
 		self.gyAvg = 0
 		self.gzAvg = 0
@@ -45,10 +44,6 @@ class AcellerometerThread(QThread):
 			self.imu.enableGyro()
 			self.imu.enableAcc()
 			# ~ self.mag.enable()
-		
-    #Sets up the program to exit when the main window is shutting down
-	def Set_Exit_Program(self, exiter):
-		self.exitProgram = exiter,
         
 	def Average(self, lst):
 		return sum(lst) / len (lst)
@@ -119,10 +114,7 @@ class AcellerometerThread(QThread):
 			# Raw readings
 			# ~ self.gyroSignals.emit(gx,gy,gz)
 			# ~ self.axisSignals.emit(ax,ay,az)
-			
-			if(self.exitProgram == True):
-				self.exitProgram = False
-				break
+
             
 			time.sleep(0.1)
           

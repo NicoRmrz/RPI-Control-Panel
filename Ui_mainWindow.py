@@ -10,7 +10,6 @@ from GUI_Stylesheets import GUI_Stylesheets
 
 GUI_Style = GUI_Stylesheets()
 
-
 # Icon Image locations
 Main_path = os.getcwd() + "/"
 xray1_Path = Main_path + "/icons/ray.png"
@@ -656,7 +655,7 @@ class Ui_MainWindow(object):
 
 
         self.BottomLayout = QtWidgets.QHBoxLayout()
-        self.BottomLayout.setSpacing(30)
+        self.BottomLayout.setSpacing(20)
         self.BottomLayout.setContentsMargins(0, 0, 0, 0)
         self.BottomLayout.addLayout(self.LeftButtonLayout)
         self.BottomLayout.addLayout(self.leftLogoLayout)

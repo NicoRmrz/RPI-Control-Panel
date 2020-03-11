@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 ANGLEREADING = 0
 
 class angleGraphic(QWidget):
-
+    moveTick = 0
     measHand = QPolygon([
         QPoint(15, 0),
         QPoint(-15, 0),
@@ -37,11 +37,11 @@ class angleGraphic(QWidget):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
         val = 180 - self.moveTick
-        print(val)
+        # ~ print(val)
 
         if (self.POS == "Normal"):
-	        self.setMinimumSize(150, 175)
-        	self.setMaximumSize(200, 200)
+	        # ~ self.setMinimumSize(150, 175)
+        	# ~ self.setMaximumSize(200, 200)
         	painter.translate(self.width() / 2, self.height() / 50)
         	painter.scale(side / 220.0, side / 130.0)
 
@@ -75,8 +75,8 @@ class angleGraphic(QWidget):
 
         elif (self.POS == "Right"):
 
-       		self.setMinimumSize(175, 175)
-        	self.setMaximumSize(200, 200)
+       		# ~ self.setMinimumSize(175, 175)
+        	# ~ self.setMaximumSize(175, 175)
 
         	painter.scale(side / 220.0, side / 130.0)
         	painter.translate(self.width() / 1.70, self.height() / 30)
@@ -107,8 +107,8 @@ class angleGraphic(QWidget):
 
         elif (self.POS == "Left"):
 
-       		self.setMinimumSize(175, 175)
-        	self.setMaximumSize(250, 250)
+       		# ~ self.setMinimumSize(175, 175)
+        	# ~ self.setMaximumSize(200, 200)
 
         	painter.scale(side / 220.0, side / 130.0)
         	painter.translate(self.width() / 1.7, self.height() / 30)

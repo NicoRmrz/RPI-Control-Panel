@@ -13,8 +13,6 @@ sudo nano /boot/config.txt
 display_hdmi_rotate=2
 dtoverlay=rpi-ft5406,touchscreen-swapped-x-y=2,touchscreen-inverted-x=2 # rotates touches
 
-# Update bootup image 
-sudo cp [path to new .png to add] /usr/share/plymouth/themes/pix/splash.png
 
 # GUI
 ![](./Screenshots/GUInew.png)

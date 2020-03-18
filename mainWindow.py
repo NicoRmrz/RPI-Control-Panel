@@ -18,7 +18,7 @@ import RPi.GPIO as GPIO
 from timeValue import Controller    
 from GPIO_buttonThread import GPIO_control
 from LSM9DS1_Thread import AcellerometerThread
-#from ADS79241_Thread import ADC_thread
+#from ADS1115_Thread import ADC_thread
 from GUI_Stylesheets import GUI_Stylesheets
 from angleMeasGraphic import angleGraphic
 

@@ -35,8 +35,8 @@ class AcellerometerThread(QThread):
 		self.azAvg = 0
 		
 		# I2C connection:
-		acc_driver = SMBusDriver(ACC_GYRO.ADDRESS, 3)
-		mag_driver = SMBusDriver(MAG.ADDRESS, 3)
+		acc_driver = SMBusDriver(ACC_GYRO.ADDRESS, 4)
+		mag_driver = SMBusDriver(MAG.ADDRESS, 4)
 		self.imu = ACC_GYRO(acc_driver)
 		self.mag = MAG(mag_driver)
 		

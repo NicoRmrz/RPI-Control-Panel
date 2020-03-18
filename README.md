@@ -5,18 +5,22 @@ Raspberry Pi Python application for a control panel
 
  # Set new i2c bus (bus 4) on pi for ADC:
 cd /boot
+
 sudo nano config.txt
+
 dtoverlay=i2c-gpio,bus=4,i2c_gpio_delay_us=1,i2c_gpio_sda=4,i2c_gpio_scl=5
 
-# Rotate screen and touch
+# Rotate screen and touch (Rev A with touch display)
 sudo nano /boot/config.txt
+
 display_hdmi_rotate=2
+
 dtoverlay=rpi-ft5406,touchscreen-swapped-x-y=2,touchscreen-inverted-x=2 # rotates touches
 
 
 # GUI
 ![](./Screenshots/GUInew.png)
 
-# Raspberry Pi GPIO Pinout
+# Raspberry Pi GPIO Pinout (Rev B)
 ![](./Schematics/RaspberryPiGPIO.png)
 

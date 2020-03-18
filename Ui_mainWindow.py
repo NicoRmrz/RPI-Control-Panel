@@ -437,60 +437,7 @@ class Ui_MainWindow(object):
         # ---------------------------------------------------------------------
         # ----------------------------------
         # ------ Acceleromter X-Axis ------- 
-        # ------ Using this as angle ------- 
         # ----------------------------------
-        # Angle Meas Image
-        # self.angleImg = QtWidgets.QGraphicsView()
-        # sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        # sizePolicy.setHorizontalStretch(0)
-        # sizePolicy.setVerticalStretch(0)
-        # sizePolicy.setHeightForWidth(self.angleImg.sizePolicy().hasHeightForWidth())
-        # self.angleImg.setSizePolicy(sizePolicy)
-        # self.angleImg.setMaximumSize(QtCore.QSize(175, 175))
-        # self.angleImg.setStyleSheet(GUI_Style.logo)
-        # self.angleImg.setFrameShape(QtWidgets.QFrame.NoFrame)
-        # self.angleImg.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        # self.angleImg.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        # self.angleImg.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        # self.angleImg.setAlignment(QtCore.Qt.AlignCenter)
-        # self.angleImg.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
-        # self.angleImg.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
-        # self.angleImg.setViewportUpdateMode(QtWidgets.QGraphicsView.MinimalViewportUpdate)
-        # self.angleImg.setRubberBandSelectionMode(QtCore.Qt.ContainsItemShape)
-        # self.angleImg.setOptimizationFlags(QtWidgets.QGraphicsView.DontClipPainter)
-        # self.angleImg.setObjectName("angleImg")
-
-        # self.Anglescene = QtWidgets.QGraphicsScene()
-        # # self.Anglescene.addPixmap(QPixmap(Rotate_path))
-        # self.AngleGraphicsItem = QtWidgets.QGraphicsProxyWidget()
-
-        # self.angleImg.setScene(self.Anglescene)
-        # self.angleImg.fitInView(self.Anglescene.sceneRect(), QtCore.Qt.KeepAspectRatio)
-
-
-
-
-        # # self.moveAngle = angleGraphic()
-        # self.AngleGraphicsItem = self.Anglescene.addWidget(self.moveAngle)
-
-        # print(self.AngleGraphicsItem.isVisible())
-
-
-        # self.moveAngle = angleGraphic()
-  
-
-        # QPaint angle degree tick
-        # self.newfont = QFont("font")
-        # self.newfont.setPixelSize(12)
-        # self.moveAngle.setFont(self.newfont)
-
-        # metrics = QFontMetrics("font")
-        # metrics.fontMetrics(self.newFont)
-        # #QFontMetrics fontMetrics(newFont)
-        # xBoundingRect = fontMetrics.boundingRect(tr("x"))
-        # yBoundingRect = fontMetrics.boundingRect(tr("y"))
-
-
 
         # Create X Axis label
         self.xAxis = QLabel()
@@ -556,13 +503,6 @@ class Ui_MainWindow(object):
         self.AcelLayout.setSpacing(0)
         self.AcelLayout.setContentsMargins(0, 0, 0, 0)
 
-  
-       # self.AcelLayout.addWidget(self.angleImg)
-        # self.AcelLayout.addWidget(self.moveAngle)
-
-        # self.AcelLayout.addWidget(self.xAx_View, 1, Qt.AlignTop)
-        # self.AcelLayout.addWidget(self.yAx_View)
-        # self.AcelLayout.addWidget(self.zAx_View)
 
         # ---------------------------------------------------------------------
         # ----------------- Right Side Button Layout --------------------------

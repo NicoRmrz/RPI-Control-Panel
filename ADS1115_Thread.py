@@ -46,19 +46,23 @@ class ADC_thread(QThread):
 
 		while (1):
 
-			# ~ floorSensorADC_V = (1000000 * self.chan0.voltage)
+			# ~ floorSensorADC_V = (1000000 * self.chan0.voltage * 0.7)
 			# ~ towerSensorADC_V = (1000000 * self.chan1.voltage)
-			floorSensorADC_V = self.chan0.value
-			towerSensorADC_V = self.chan1.value
-			print("Channel 0: " + str(floorSensorADC_V) + " v  Channel 1: " + str(towerSensorADC_V) + " v")
-			# ~ print("Channel 0: " + str(self.chan0.value) + " v  Channel 1: " + str(self.chan1.value ) + " v")
+			
+			# ~ floorSensorADC_V = ((self.chan0.voltage*14.166) * 1000)
+			# ~ towerSensorADC_V = (1000 * self.chan1.voltage * .474)
+			
+			# ~ floorSensorADC_V = self.chan0.value
+			# ~ towerSensorADC_V = self.chan1.value
+			
+			# Value converted to mm
+			floorSensorADC_V = abs(self.chan0.value * 0.45)
+			towerSensorADC_V = self.chan1.value * 2.75
+			
+			# ~ print("Channel 0: " + str(floorSensorADC_V) + " v  Channel 1: " + str(towerSensorADC_V) + " v")
 
-			# ~ LeftRightSlider = self.adc.read_adc(0, gain=self.GAIN)
-			# ~ UpDownSlider = self.adc.read_adc(1, gain=self.GAIN)
 			
 			self.ADC_meas.emit(floorSensorADC_V, towerSensorADC_V)
-
-            
-			time.sleep(0.3)
+			time.sleep(0.2)
 
 

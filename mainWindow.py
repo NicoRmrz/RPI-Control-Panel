@@ -125,9 +125,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateTime(self,  timeInterval):
         self.clockTime.setText("Time:  " + timeInterval)
 
-    def updateSID(self, poti,  poti2):
-        self.SID1_Data.setText(str(poti) + " mm")
-        self.SID2_Data.setText(str(poti2) + " mm")        
+    def updateSID(self, floorSensor, verticalSensor):
+        self.SID1_Data.setText(str(floorSensor) + " mm")
+        self.SID2_Data.setText(str(verticalSensor) + " mm")        
 
     def updateAccelerometer(self, x, y, z):
         self.xAxis.setText(str(y) + " \N{DEGREE SIGN}")

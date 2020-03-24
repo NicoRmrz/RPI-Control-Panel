@@ -26,9 +26,10 @@ class ADC_thread(QThread):
 		self.ads = ADS.ADS1115(i2c, address=i2c_address)
 
 		# set Channel
+		# 	chan0 - bottom draw wire sensor
+		# 	chan1 - verticle tower draw wire sensor
 		self.chan0 = AnalogIn(self.ads, ADS.P0)
 		self.chan1 = AnalogIn(self.ads, ADS.P1)
-		self.chan2 = AnalogIn(self.ads, ADS.P2)
 
 		# Set Gain
 		# 	2/3 = +/- 6.144V
@@ -45,20 +46,19 @@ class ADC_thread(QThread):
 
 		while (1):
 
-			# ~ print(str(self.chan1.value) + ", " + str(self.chan1.voltage))
-			print(self.chan0.value, self.chan0.voltage)
-			print(self.chan1.value, self.chan1.voltage)
-			print(self.chan2.value, self.chan2.voltage)
-			# ~ print(self.chan1.value)
+			# ~ floorSensorADC_V = (1000000 * self.chan0.voltage)
+			# ~ towerSensorADC_V = (1000000 * self.chan1.voltage)
+			floorSensorADC_V = self.chan0.value
+			towerSensorADC_V = self.chan1.value
+			print("Channel 0: " + str(floorSensorADC_V) + " v  Channel 1: " + str(towerSensorADC_V) + " v")
+			# ~ print("Channel 0: " + str(self.chan0.value) + " v  Channel 1: " + str(self.chan1.value ) + " v")
+
 			# ~ LeftRightSlider = self.adc.read_adc(0, gain=self.GAIN)
 			# ~ UpDownSlider = self.adc.read_adc(1, gain=self.GAIN)
-			# ~ x = self.adc.read_adc(2, gain=self.GAIN)
-			# ~ y = self.adc.read_adc(3, gain=self.GAIN)
 			
-			# ~ self.ADC_meas.emit(LeftRightSlider, UpDownSlider)
-			# ~ print(LeftRightSlider + ", " + UpDownSlider + ", " + x+ ", " +y)
+			self.ADC_meas.emit(floorSensorADC_V, towerSensorADC_V)
 
             
-			time.sleep(0.5)
+			time.sleep(0.3)
 
 

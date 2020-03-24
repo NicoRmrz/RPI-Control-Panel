@@ -9,6 +9,7 @@ from PyQt5.QtCore import Qt, QPoint
 from GUI_Stylesheets import GUI_Stylesheets
 
 GUI_Style = GUI_Stylesheets()
+SIDWIDTH = 200
 
 # Icon Image locations
 Main_path = os.getcwd() + "/"
@@ -200,7 +201,7 @@ class Ui_MainWindow(object):
         self.SID1_Data.setScaledContents(True)
         self.SID1_Data.setAlignment(QtCore.Qt.AlignCenter)
         self.SID1_Data.setObjectName("SID1_Data")
-        self.SID1_Data.setMaximumWidth(120)
+        self.SID1_Data.setMaximumWidth(SIDWIDTH)
         self.SID1_Data.setMaximumHeight(50)
       
         # Create Graphics view object to rotate widgets
@@ -262,7 +263,7 @@ class Ui_MainWindow(object):
         self.SID2_Data.setScaledContents(True)
         self.SID2_Data.setAlignment(QtCore.Qt.AlignCenter)
         self.SID2_Data.setObjectName("SID2_Data")
-        self.SID2_Data.setMaximumWidth(120)
+        self.SID2_Data.setMaximumWidth(SIDWIDTH)
         self.SID2_Data.setMaximumHeight(50)
 
 

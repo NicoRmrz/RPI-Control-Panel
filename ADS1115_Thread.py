@@ -40,6 +40,8 @@ class ADC_thread(QThread):
 		# 	16  = +/- 0.256V
 		self.ads.gain = 1
 		
+		
+		
         
 	def run(self):
 		self.setPriority(QThread.HighestPriority)
@@ -53,16 +55,21 @@ class ADC_thread(QThread):
 			# ~ towerSensorADC_V = (1000 * self.chan1.voltage * .474)
 			
 			# ~ floorSensorADC_V = self.chan0.value
+			floorSensorADC_Volt = self.chan0.voltage *360
 			# ~ towerSensorADC_V = self.chan1.value
+			towerSensorADC_Volt = self.chan1.voltage
 			
 			# Value converted to mm
-			floorSensorADC_V = abs(self.chan0.value * 0.45)
-			towerSensorADC_V = self.chan1.value * 2.75
+			# ~ floorSensorADC_V = abs(self.chan0.value * 0.45)
+			# ~ towerSensorADC_V = self.chan1.value * 2.75
 			
 			# ~ print("Channel 0: " + str(floorSensorADC_V) + " v  Channel 1: " + str(towerSensorADC_V) + " v")
+			# ~ print("Channel 0: " + str(floorSensorADC_V) + "  " + str(floorSensorADC_Volt) + " v")
+			print("Channel 0: " +str(floorSensorADC_Volt) + " V. Channel 1: "  + str(towerSensorADC_Volt) + " v")
+			# ~ print("Channel 1: " + str(towerSensorADC_V) + "  " + str(self.chan1.voltage) + " v")
 
 			
-			self.ADC_meas.emit(floorSensorADC_V, towerSensorADC_V)
-			time.sleep(0.2)
+			self.ADC_meas.emit(floorSensorADC_Volt, towerSensorADC_Volt)
+			time.sleep(0.25)
 
 

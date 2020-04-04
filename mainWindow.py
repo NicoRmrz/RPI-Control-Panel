@@ -128,6 +128,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateSID(self, floorSensor, verticalSensor):
         self.SID1_Data.setText(str(floorSensor) + " mm")
         self.SID2_Data.setText(str(verticalSensor) + " mm")        
+        # ~ self.SID1_Data.setText(str(floorSensor) + " in")
+        # ~ self.SID2_Data.setText(str(verticalSensor) + " in")        
 
     def updateAccelerometer(self, x, y, z):
         self.xAxis.setText(str(y) + " \N{DEGREE SIGN}")

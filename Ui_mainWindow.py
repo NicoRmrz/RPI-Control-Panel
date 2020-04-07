@@ -30,8 +30,8 @@ Left_Idle = Main_path + "/icons/left_grey.png"
 Left_Pressed = Main_path + "/icons/left_grey_pressed.png"
 Right_Idle = Main_path + "/icons/right_grey.png"
 Right_Pressed = Main_path + "/icons/right_grey_pressed.png"
-SID1_path = Main_path + "/icons/sid1.png"
-SID2_path = Main_path + "/icons/sid2.png"
+SID2_path = Main_path + "/icons/sid1.png"
+SID1_path = Main_path + "/icons/sid2.png"
 Rotate_path = Main_path + "/icons/rotate.png"
 
 class Ui_MainWindow(object):
@@ -294,7 +294,7 @@ class Ui_MainWindow(object):
         self.leftButton1 = QtWidgets.QPushButton()
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton1.setMinimumSize(60,60)
-        self.leftButton1.setIcon(QIcon(Rotate_Idle))
+        self.leftButton1.setIcon(QIcon(Up_Idle))
         self.leftButton1.setIconSize(QtCore.QSize(60, 60))
 
         # Create Graphics view object to rotate widgets
@@ -311,7 +311,7 @@ class Ui_MainWindow(object):
         self.leftButton2 = QtWidgets.QPushButton()
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setMinimumSize(60,60)
-        self.leftButton2.setIcon(QIcon(Left_Idle))
+        self.leftButton2.setIcon(QIcon(Rotate_Idle))
         self.leftButton2.setIconSize(QtCore.QSize(60, 60))
 
         # Create Graphics view object to rotate widgets
@@ -328,8 +328,9 @@ class Ui_MainWindow(object):
         self.leftButton3 = QtWidgets.QPushButton()
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton3.setMinimumSize(60,60)
-        self.leftButton3.setIcon(QIcon(Up_Idle))
+        # ~ self.leftButton3.setIcon(QIcon(Up_Idle))
         self.leftButton3.setIconSize(QtCore.QSize(60, 60))
+        
         # Create Graphics view object to rotate widgets
         self.LBtn3_View = QtWidgets.QGraphicsView()
         self.LBtn3_View.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -343,7 +344,9 @@ class Ui_MainWindow(object):
         # Create Left Button 4
         self.leftButton4 = QtWidgets.QPushButton()
         self.leftButton4.setStyleSheet(GUI_Style.buttonIdle)
-        self.leftButton4.setMinimumSize(75,60)
+        self.leftButton4.setMinimumSize(60,60)
+        self.leftButton4.setIcon(QIcon(Left_Idle))
+        self.leftButton4.setIconSize(QtCore.QSize(60, 60))
 
         # Create Graphics view object to rotate widgets
         self.LBtn4_View = QtWidgets.QGraphicsView()
@@ -515,7 +518,7 @@ class Ui_MainWindow(object):
         self.rightButton1 = QtWidgets.QPushButton()
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton1.setMinimumSize(60,60)
-        self.rightButton1.setIcon(QIcon(Rotate1_Idle))
+        self.rightButton1.setIcon(QIcon(Down_Idle))
         self.rightButton1.setIconSize(QtCore.QSize(60, 60))
 
         # Create Graphics view object to rotate widgets
@@ -532,7 +535,7 @@ class Ui_MainWindow(object):
         self.rightButton2 = QtWidgets.QPushButton()
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton2.setMinimumSize(60,60)
-        self.rightButton2.setIcon(QIcon(Right_Idle))
+        self.rightButton2.setIcon(QIcon(Rotate1_Idle))
         self.rightButton2.setIconSize(QtCore.QSize(60, 60))
 
         # Create Graphics view object to rotate widgets
@@ -549,8 +552,9 @@ class Ui_MainWindow(object):
         self.rightButton3 = QtWidgets.QPushButton()
         self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton3.setMinimumSize(60,60)
-        self.rightButton3.setIcon(QIcon(Down_Idle))
+        # ~ self.rightButton3.setIcon(QIcon(Down_Idle))
         self.rightButton3.setIconSize(QtCore.QSize(60, 60))
+        
         # Create Graphics view object to rotate widgets
         self.RBtn3_View = QtWidgets.QGraphicsView()
         self.RBtn3_View.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -564,7 +568,9 @@ class Ui_MainWindow(object):
         # Create Right Button 4
         self.rightButton4 = QtWidgets.QPushButton()
         self.rightButton4.setStyleSheet(GUI_Style.buttonIdle)
-        self.rightButton4.setMinimumSize(75,60)
+        self.rightButton4.setMinimumSize(60,60)
+        self.rightButton4.setIcon(QIcon(Right_Idle))
+        self.rightButton4.setIconSize(QtCore.QSize(60, 60))
 
         # Create Graphics view object to rotate widgets
         self.RBtn4_View = QtWidgets.QGraphicsView()

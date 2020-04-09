@@ -35,6 +35,14 @@ Left_Idle = Main_path + "/icons/left_grey.png"
 Left_Pressed = Main_path + "/icons/left_grey_pressed.png"
 Right_Idle = Main_path + "/icons/right_grey.png"
 Right_Pressed = Main_path + "/icons/right_grey_pressed.png"
+Telescope_Idle = Main_path + "/icons/Telescope_Idle.png"
+Telescope1_Idle = Main_path + "/icons/Telescope1_Idle.png"
+Telescope_Pressed = Main_path + "/icons/Telescope_Pressed.png"
+Telescope1_Pressed = Main_path + "/icons/Telescope1_Pressed.png"
+UpDown_Idle = Main_path + "/icons/UpDown_Idle.png"
+UpDown_Pressed = Main_path + "/icons/UpDown_Pressed.png"
+LeftRight_Idle = Main_path + "/icons/LeftRight_Idle.png" 
+LeftRight_Pressed = Main_path + "/icons/LeftRight_Pressed.png"
 
 ROTATE_RIGHT = 80
 ROTATE_LEFT = -80
@@ -46,24 +54,24 @@ DEFAULT_SIZE = 175
 SIDE_SIZE = 120
 
 # IDLE
-LEFT1_ICON = Up_Idle
+LEFT1_ICON = UpDown_Idle
 LEFT2_ICON = Rotate_Idle
-# LEFT3_ICON = 
-LEFT4_ICON = Left_Idle
-RIGHT1_ICON = Down_Idle
+LEFT3_ICON = Telescope_Idle
+LEFT4_ICON = LeftRight_Idle
+RIGHT1_ICON = UpDown_Idle
 RIGHT2_ICON = Rotate1_Idle
-# RIGHT3_ICON = 
-RIGHT4_ICON = Right_Idle
+RIGHT3_ICON = Telescope1_Idle
+RIGHT4_ICON = LeftRight_Idle
 
 # PRESSED
-LEFT1_ICON_PRES = Up_Pressed
+LEFT1_ICON_PRES = UpDown_Pressed
 LEFT2_ICON_PRES = Rotate_Pressed
-# LEFT3_ICON_PRES = 
-LEFT4_ICON_PRES = Left_Pressed
-RIGHT1_ICON_PRES = Down_Pressed
+LEFT3_ICON_PRES = Telescope_Pressed
+LEFT4_ICON_PRES = LeftRight_Pressed
+RIGHT1_ICON_PRES = UpDown_Pressed
 RIGHT2_ICON_PRES = Rotate1_Pressed
-# RIGHT3_ICON_PRES = 
-RIGHT4_ICON_PRES = Right_Pressed
+RIGHT3_ICON_PRES = Telescope1_Pressed
+RIGHT4_ICON_PRES = LeftRight_Pressed
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     
@@ -349,8 +357,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.rightButton1.setIcon(QIcon(RIGHT1_ICON))
             self.leftButton2.setIcon(QIcon(LEFT2_ICON))
             self.rightButton2.setIcon(QIcon(RIGHT2_ICON))
-            # ~ self.leftButton3.setIcon(QIcon(Up_Idle))
-            # ~ self.rightButton3.setIcon(QIcon(Down_Idle))
+            self.leftButton3.setIcon(QIcon(LEFT3_ICON))
+            self.rightButton3.setIcon(QIcon(RIGHT3_ICON))
             self.leftButton4.setIcon(QIcon(LEFT4_ICON))
             self.rightButton4.setIcon(QIcon(RIGHT4_ICON))
 
@@ -368,8 +376,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if mode == "Mode 3":
             self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)  
             self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)  
-            # ~ self.leftButton3.setIcon(QIcon(LEFT3_ICON_PRES))
-            # ~ self.rightButton3.setIcon(QIcon(RIGHT3_ICON_PRES))
+            self.leftButton3.setIcon(QIcon(LEFT3_ICON_PRES))
+            self.rightButton3.setIcon(QIcon(RIGHT3_ICON_PRES))
         if mode == "Mode 4":
             self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
             self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
@@ -425,15 +433,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def Button3_Clicked(self):
         self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)
-        # ~ self.leftButton3.setIcon(QIcon(LEFT3_ICON_PRES))
-        # ~ self.rightButton3.setIcon(QIcon(RIGHT3_ICON_PRES))
+        self.leftButton3.setIcon(QIcon(LEFT3_ICON_PRES))
+        self.rightButton3.setIcon(QIcon(RIGHT3_ICON_PRES))
         self.GPIOthread.SWpushButton("Mode 3")
 
     def Button3_Released(self):
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
-        # ~ self.leftButton3.setIcon(QIcon(LEFT3_ICON))
-        # ~ self.rightButton3.setIcon(QIcon(RIGHT3_ICON))
+        self.leftButton3.setIcon(QIcon(LEFT3_ICON))
+        self.rightButton3.setIcon(QIcon(RIGHT3_ICON))
         self.GPIOthread.SWpushButton("Off")
 
     def Button4_Clicked(self):

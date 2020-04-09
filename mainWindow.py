@@ -60,7 +60,7 @@ LEFT3_ICON = Telescope_Idle
 LEFT4_ICON = LeftRight_Idle
 RIGHT1_ICON = UpDown_Idle
 RIGHT2_ICON = Rotate1_Idle
-RIGHT3_ICON = Telescope1_Idle
+RIGHT3_ICON = Telescope_Idle
 RIGHT4_ICON = LeftRight_Idle
 
 # PRESSED
@@ -70,7 +70,7 @@ LEFT3_ICON_PRES = Telescope_Pressed
 LEFT4_ICON_PRES = LeftRight_Pressed
 RIGHT1_ICON_PRES = UpDown_Pressed
 RIGHT2_ICON_PRES = Rotate1_Pressed
-RIGHT3_ICON_PRES = Telescope1_Pressed
+RIGHT3_ICON_PRES = Telescope_Pressed
 RIGHT4_ICON_PRES = LeftRight_Pressed
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -384,23 +384,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.leftButton4.setIcon(QIcon(LEFT4_ICON_PRES))
             self.rightButton4.setIcon(QIcon(RIGHT4_ICON_PRES))
         if mode == "Mode 5":
-            pass
-            # ~ self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)        
-            # ~ self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)
-            # ~ self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)        
-            # ~ self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
-            # ~ self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)  
-            # ~ self.rightButton3.setStyleSheet(GUI_Style.buttonPressed) 
-            # ~ self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
-            # ~ self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
-            # ~ self.leftButton1.setIcon(QIcon(LEFT1_ICON_PRES))
-            # ~ self.rightButton1.setIcon(QIcon(RIGHT1_ICON_PRES)) 
-            # ~ self.leftButton2.setIcon(QIcon(LEFT2_ICON_PRES))
-            # ~ self.rightButton2.setIcon(QIcon(RIGHT2_ICON_PRES))
-            # ~ self.leftButton3.setIcon(QIcon(LEFT3_ICON_PRES))
-            # ~ self.rightButton3.setIcon(QIcon(RIGHT3_ICON_PRES))
-            # ~ self.leftButton4.setIcon(QIcon(LEFT4_ICON_PRES))
-            # ~ self.rightButton4.setIcon(QIcon(RIGHT4_ICON_PRES))
+            # ~ pass
+            self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)        
+            self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)
+            self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)        
+            self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
+            self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)  
+            self.rightButton3.setStyleSheet(GUI_Style.buttonPressed) 
+            self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)
+            self.rightButton4.setStyleSheet(GUI_Style.buttonPressed)
+            self.leftButton1.setIcon(QIcon(LEFT1_ICON_PRES))
+            self.rightButton1.setIcon(QIcon(RIGHT1_ICON_PRES)) 
+            self.leftButton2.setIcon(QIcon(LEFT2_ICON_PRES))
+            self.rightButton2.setIcon(QIcon(RIGHT2_ICON_PRES))
+            self.leftButton3.setIcon(QIcon(LEFT3_ICON_PRES))
+            self.rightButton3.setIcon(QIcon(RIGHT3_ICON_PRES))
+            self.leftButton4.setIcon(QIcon(LEFT4_ICON_PRES))
+            self.rightButton4.setIcon(QIcon(RIGHT4_ICON_PRES))
 
     def Button1_Clicked(self):
         self.leftButton1.setStyleSheet(GUI_Style.buttonPressed)

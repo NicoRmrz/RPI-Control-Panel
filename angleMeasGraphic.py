@@ -36,12 +36,12 @@ class angleGraphic(QWidget):
 
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
-        val = 180 - self.moveTick
+        # ~ val = 180 - self.moveTick
         # ~ print(val)
 
         if (self.POS == "Normal"):
-	        # ~ self.setMinimumSize(150, 175)
-        	# ~ self.setMaximumSize(200, 200)
+        	val = 180 - self.moveTick
+
         	painter.translate(self.width() / 2, self.height() / 50)
         	painter.scale(side / 220.0, side / 130.0)
 
@@ -75,8 +75,7 @@ class angleGraphic(QWidget):
 
         elif (self.POS == "Right"):
 
-       		# ~ self.setMinimumSize(175, 175)
-        	# ~ self.setMaximumSize(175, 175)
+        	val = 180 - self.moveTick + 90
 
         	painter.scale(side / 220.0, side / 130.0)
         	painter.translate(self.width() / 1.70, self.height() / 30)
@@ -106,9 +105,8 @@ class angleGraphic(QWidget):
 	            painter.rotate(2.0)
 
         elif (self.POS == "Left"):
+        	val = 180 - self.moveTick - 90
 
-       		# ~ self.setMinimumSize(175, 175)
-        	# ~ self.setMaximumSize(200, 200)
 
         	painter.scale(side / 220.0, side / 130.0)
         	painter.translate(self.width() / 1.7, self.height() / 30)

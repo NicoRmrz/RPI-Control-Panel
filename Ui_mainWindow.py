@@ -30,8 +30,8 @@ Left_Idle = Main_path + "/icons/left_grey.png"
 Left_Pressed = Main_path + "/icons/left_grey_pressed.png"
 Right_Idle = Main_path + "/icons/right_grey.png"
 Right_Pressed = Main_path + "/icons/right_grey_pressed.png"
-SID2_path = Main_path + "/icons/sid1.png"
-SID1_path = Main_path + "/icons/sid2.png"
+SID1_path = Main_path + "/icons/sid1.png"
+SID2_path = Main_path + "/icons/sid2.png"
 Rotate_path = Main_path + "/icons/rotate.png"
 Telescope_Idle = Main_path + "/icons/Telescope_Idle.png"
 Telescope1_Idle = Main_path + "/icons/Telescope1_Idle.png"
@@ -49,7 +49,7 @@ LEFT3_ICON = Telescope_Idle
 LEFT4_ICON = LeftRight_Idle
 RIGHT1_ICON = UpDown_Idle
 RIGHT2_ICON = Rotate1_Idle
-RIGHT3_ICON = Telescope1_Idle
+RIGHT3_ICON = Telescope_Idle
 RIGHT4_ICON = LeftRight_Idle
 
 # PRESSED
@@ -59,7 +59,7 @@ LEFT3_ICON_PRES = Telescope_Pressed
 LEFT4_ICON_PRES = LeftRight_Pressed
 RIGHT1_ICON_PRES = UpDown_Pressed
 RIGHT2_ICON_PRES = Rotate1_Pressed
-RIGHT3_ICON_PRES = Telescope1_Pressed
+RIGHT3_ICON_PRES = Telescope_Pressed
 RIGHT4_ICON_PRES = LeftRight_Pressed
 
 class Ui_MainWindow(object):

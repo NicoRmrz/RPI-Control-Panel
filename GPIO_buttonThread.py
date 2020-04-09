@@ -142,7 +142,10 @@ class GPIO_control(QThread):
 			if (GPIO.input(TpHldPBEn) or GPIO.input(BotHldPBEn) or self.modeSet == "Mode 5"):
 				if ((self.run1 and self.run2 and self.run3 and self.run4 and self.run5) != True):
 					self.run6 = True
-
+					GPIO.output(RlyCtrl1, GPIO.HIGH)
+					GPIO.output(RlyCtrl2, GPIO.HIGH)
+					GPIO.output(RlyCtrl3, GPIO.HIGH)
+					GPIO.output(RlyCtrl4, GPIO.LOW)
 					self.handleButtonSig.emit("Mode 5")
 
 			else:

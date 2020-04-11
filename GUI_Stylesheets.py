@@ -64,26 +64,30 @@ class GUI_Stylesheets(QObject):
 
 
 		self.buttonIdle = ("font: bold 12px Verdana; "
-                           "background-color: #6d6e70; "
+                           "background-color: #05090C; "
+                           # "background-color: #6d6e70; "
                            # ~ "background-color: qlineargradient(spread:pad x1:0.45, y1:0.3695, x2:0.427, y2:0, "
                                 # ~ "stop:0 rgba(88, 139, 174, 240), "
                                 # ~ "stop:1 rgba(255,255,255,255)); "
-                           "border-style: outset; "
-                           "border-radius: 9px; "
-                           "border-width: 1px; "
+                           "border-style: solid; "
+                           "border-radius: 10px; "
+                           "border-width: 8px; "
+                           # "border-color: #05090C; "
                            "border-color: #6d6e70; "
                            # ~ "border: none; "
 			   				"color: white; "
-                           "padding: 4px;"
+                           "padding: -4px;"
                            )
 			   
 		self.buttonPressed = ("font: bold 12px Verdana; "
-							  "background-color: rgba(72,146,73,240); "
+							  "background-color: #05090C; "
+							  # "background-color: rgba(72,146,73,240); "
 							  "border-style: outset; "
 							  "border-radius: 9px; "
-							  "border-width: 1px; "
+							  "border-width: 8px; "
+							  # "border-color: #05090C; "
 							  "border-color: rgba(72,146,73,240); "
-							  "padding: 4px;"
+							  # "padding: 1px;"
 							  )
 			   
 		self.exitBtn = ("font: bold 12px Verdana; "

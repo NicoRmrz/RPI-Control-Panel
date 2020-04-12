@@ -12,7 +12,7 @@ axlist = []
 aylist = []
 azlist = []
 
-SAMPLESIZE = 6
+SAMPLESIZE = 4 
 
 # ~ DPS = 0.00875 # for degrees/second values
 # ~ DPS = 1
@@ -99,9 +99,12 @@ class AcellerometerThread(QThread):
 				azlist.clear()
 
 
+			updated_x = self.axAvg * DPS
+			updated_x = updated_x
+			
 			# Smoothed all readings with DPS
 			# ~ self.gyroSignals.emit(self.gxAvg * DPS, self.gyAvg * DPS, self.gzAvg * DPS)
-			self.axisSignals.emit(self.axAvg * DPS, self.ayAvg * DPS, self.azAvg * DPS)
+			self.axisSignals.emit(updated_x, self.ayAvg * DPS, self.azAvg * DPS)
 			# ~ print("X " + str(self.axAvg * DPS) +", Y "+ str(self.ayAvg * DPS))
 
 			# Smoothed readings only

@@ -21,8 +21,8 @@ class angleGraphic(QWidget):
 
     def __init__(self, parent=None):
         super(angleGraphic, self).__init__(parent)
-        self.setMinimumSize(150, 175)
-        self.setMaximumSize(200, 200)
+        self.setMinimumSize(450, 325)
+        self.setMaximumSize(450, 325)
 
     def setAngleTick(self, reading):
     	self.moveTick = reading
@@ -75,10 +75,10 @@ class angleGraphic(QWidget):
 
         elif (self.POS == "Right"):
 
-        	val = 180 - self.moveTick + 90
+        	val = 180 - self.moveTick + 45
 
         	painter.scale(side / 220.0, side / 130.0)
-        	painter.translate(self.width() / 1.70, self.height() / 30)
+        	painter.translate(self.width() / 3, self.height() / 30)
 
 	        # Draw top line 
 	        pen = QPen()
@@ -105,11 +105,11 @@ class angleGraphic(QWidget):
 	            painter.rotate(2.0)
 
         elif (self.POS == "Left"):
-        	val = 180 - self.moveTick - 90
-
+        	val = 180 - self.moveTick - 45
 
         	painter.scale(side / 220.0, side / 130.0)
-        	painter.translate(self.width() / 1.7, self.height() / 30)
+        	painter.translate(self.width() / 3, self.height() / 30)
+        	# painter.translate(self.width() / 1.7, self.height() / 30)
 
 	        # Draw top line 
 	        pen = QPen()

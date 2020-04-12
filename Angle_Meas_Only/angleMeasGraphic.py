@@ -78,7 +78,7 @@ class angleGraphic(QWidget):
         	val = 180 - self.moveTick + 45
 
         	painter.scale(side / 220.0, side / 130.0)
-        	painter.translate(self.width() / 1.70, self.height() / 30)
+        	painter.translate(self.width() / 3, self.height() / 30)
 
 	        # Draw top line 
 	        pen = QPen()
@@ -108,7 +108,8 @@ class angleGraphic(QWidget):
         	val = 180 - self.moveTick - 45
 
         	painter.scale(side / 220.0, side / 130.0)
-        	painter.translate(self.width() / 1.7, self.height() / 30)
+        	painter.translate(self.width() / 3, self.height() / 30)
+        	# painter.translate(self.width() / 1.7, self.height() / 30)
 
 	        # Draw top line 
 	        pen = QPen()

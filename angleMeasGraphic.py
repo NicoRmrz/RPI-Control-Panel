@@ -27,6 +27,9 @@ class angleGraphic(QWidget):
 	
     # degMarker = 45
     # angleText = {0: "0", 45: "45", 90: "90", 135: "45", 180: "0", 225: "-45", 270: "-90", 315: "315"}
+
+    degMarker = 90
+    angleText = {0: "0", 90: "-90",  180: "0", 270: "90"}
 	
     def __init__(self, parent=None):
         super(angleGraphic, self).__init__(parent)

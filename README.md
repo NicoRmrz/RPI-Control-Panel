@@ -15,7 +15,12 @@ dtoverlay=rpi-ft5406,touchscreen-swapped-x-y=2,touchscreen-inverted-x=2 # rotate
 
 
 # GUI
+### UI #1
 ![](./Screenshots/GUInew.png)
+
+### UI #2
+![](./Screenshots/GUI_1.png)
+
 
 # Raspberry Pi GPIO Pinout
 ![](./Schematics/RaspberryPiGPIO.png)

@@ -255,7 +255,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # Layout New Header            
             self.leftLogoLayout.addWidget(self.MediLogo, 1, Qt.AlignBottom)
-            self.MediLogo.setMinimumSize(QtCore.QSize(45, 400))
+            self.MediLogo.setMinimumSize(QtCore.QSize(50, 400))
             self.leftHeaderLayout.addWidget(self.exitBtn_View, 1, Qt.AlignTop)
             self.leftHeaderLayout.addWidget(self.timeView, 1,Qt.AlignTop)
 
@@ -426,7 +426,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton2.setIcon(QIcon(LEFT2_ICON_PRES))
         self.rightButton2.setIcon(QIcon(RIGHT2_ICON_PRES))
         self.GPIOthread.SWpushButton("Mode 2")
-        # # self.updateAccelerometer(0,1,1)
+        # self.updateAccelerometer(0,1,1)
 
 
     def Button2_Released(self):

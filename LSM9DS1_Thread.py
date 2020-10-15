@@ -12,7 +12,7 @@ axlist = []
 aylist = []
 azlist = []
 
-SAMPLESIZE = 4 
+SAMPLESIZE = 20 
 
 # ~ DPS = 0.00875 # for degrees/second values
 # ~ DPS = 1
@@ -47,6 +47,17 @@ class AcellerometerThread(QThread):
         
 	def Average(self, lst):
 		return sum(lst) / len (lst)
+		
+	def configMeasurement(self, x, y):
+		finalMeas = x
+		if (x < 0 and y > 0):
+			y = -1 * y
+			finalMeas = -90 + y
+			
+		if (x > 0 and y > 0):
+			finalMeas = 90 + y
+			
+		return finalMeas
         
 	def run(self):
 
@@ -56,19 +67,19 @@ class AcellerometerThread(QThread):
 			# ~ temp = self.imu.readTemp()
 			ax, ay, az = self.imu.readAcc()
 
-			# # Smooth gx
-			# if len(gxlist) < SAMPLESIZE:
-			# 	gxlist.append(gx)
-			# else:
-			# 	self.gxAvg = self.Average(gxlist)
-			# 	gxlist.clear()
+			# Smooth gx
+			# ~ if len(gxlist) < SAMPLESIZE:
+			 	# ~ gxlist.append(gx)
+			# ~ else:
+			 	# ~ self.gxAvg = self.Average(gxlist)
+			 	# ~ gxlist.clear()
 
-			# # Smooth gy
-			# if len(gylist) < SAMPLESIZE:
-			# 	gylist.append(gy)
-			# else:
-			# 	self.gyAvg = self.Average(gylist)
-			# 	gylist.clear()
+			 # Smooth gy
+			# ~ if len(gylist) < SAMPLESIZE:
+				# ~ gylist.append(gy)
+			# ~ else:
+				# ~ self.gyAvg = self.Average(gylist)
+				# ~ gylist.clear()
 
 			# # Smooth gz
 			# if len(gzlist) < SAMPLESIZE:
@@ -98,14 +109,20 @@ class AcellerometerThread(QThread):
 				self.azAvg = self.Average(azlist)
 				azlist.clear()
 
-
 			updated_x = self.axAvg * DPS
-			updated_x = updated_x
+			updated_y = self.ayAvg * DPS
+			updated_z = self.azAvg * DPS
 			
+			calibratedMeas = self.configMeasurement(self.axAvg * DPS, self.ayAvg * DPS) 
+
 			# Smoothed all readings with DPS
 			# ~ self.gyroSignals.emit(self.gxAvg * DPS, self.gyAvg * DPS, self.gzAvg * DPS)
-			self.axisSignals.emit(updated_x, self.ayAvg * DPS, self.azAvg * DPS)
-			# ~ print("X " + str(self.axAvg * DPS) +", Y "+ str(self.ayAvg * DPS))
+			self.axisSignals.emit(calibratedMeas, updated_y, self.azAvg * DPS)
+			print("X " + str(updated_x) +", Y "+ str(updated_y))
+			# ~ print("x "+ str(updated_x))
+			# ~ print("Y "+ str(updated_y))
+			# ~ print("NEW "+ str(calibratedMeas))
+			# ~ print("gX "+ str(self.gyAvg * DPS))
 
 			# Smoothed readings only
 			# ~ self.gyroSignals.emit(self.gxAvg , self.gyAvg , self.gzAvg )
@@ -120,7 +137,6 @@ class AcellerometerThread(QThread):
 			# ~ self.axisSignals.emit(ax,ay,az)
 
             
-			time.sleep(0.1)
+			time.sleep(0.01)
           
-				
-            
+

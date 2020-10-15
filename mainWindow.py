@@ -161,9 +161,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # For Screen Rotation
         self.rotateGUI(-1*x)
+        # ~ self.rotateGUI(y)
 
         # Set Angle tick rotation value
-        self.angleImg.setAngleTick((-1*x)/2)
+        self.angleImg.setAngleTick((-1*x))
+        # ~ self.angleImg.setAngleTick(y)
 
     def updateGyroscope(self, x, y, z):
         self.xGyro.setText("X: " + str(x))
@@ -255,7 +257,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # Layout New Header            
             self.leftLogoLayout.addWidget(self.MediLogo, 1, Qt.AlignBottom)
-            self.MediLogo.setMinimumSize(QtCore.QSize(45, 400))
+            self.MediLogo.setMinimumSize(QtCore.QSize(50, 400))
             self.leftHeaderLayout.addWidget(self.exitBtn_View, 1, Qt.AlignTop)
             self.leftHeaderLayout.addWidget(self.timeView, 1,Qt.AlignTop)
 
@@ -410,23 +412,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton1.setStyleSheet(GUI_Style.buttonPressed)        
         self.leftButton1.setIcon(QIcon(LEFT1_ICON_PRES))
         self.rightButton1.setIcon(QIcon(RIGHT1_ICON_PRES))
-        # self.GPIOthread.SWpushButton("Mode 1")
-        self.updateAccelerometer(90,1,1)
+        self.GPIOthread.SWpushButton("Mode 1")
+        # self.updateAccelerometer(90,1,1)
 
     def Button1_Released(self):
         self.leftButton1.setIcon(QIcon(LEFT1_ICON))
         self.rightButton1.setIcon(QIcon(RIGHT1_ICON))
         self.leftButton1.setStyleSheet(GUI_Style.buttonIdle)
         self.rightButton1.setStyleSheet(GUI_Style.buttonIdle)        
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
         
     def Button2_Clicked(self):
         self.leftButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton2.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton2.setIcon(QIcon(LEFT2_ICON_PRES))
         self.rightButton2.setIcon(QIcon(RIGHT2_ICON_PRES))
-        # self.GPIOthread.SWpushButton("Mode 2")
-        self.updateAccelerometer(0,1,1)
+        self.GPIOthread.SWpushButton("Mode 2")
+        # self.updateAccelerometer(0,1,1)
 
 
     def Button2_Released(self):
@@ -434,15 +436,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton2.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton2.setIcon(QIcon(LEFT2_ICON))
         self.rightButton2.setIcon(QIcon(RIGHT2_ICON))
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
 
     def Button3_Clicked(self):
         self.leftButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.rightButton3.setStyleSheet(GUI_Style.buttonPressed)
         self.leftButton3.setIcon(QIcon(LEFT3_ICON_PRES))
         self.rightButton3.setIcon(QIcon(RIGHT3_ICON_PRES))
-        # self.GPIOthread.SWpushButton("Mode 3")
-        self.updateAccelerometer(-90,1,1)
+        self.GPIOthread.SWpushButton("Mode 3")
+        # self.updateAccelerometer(-90,1,1)
 
 
     def Button3_Released(self):
@@ -450,7 +452,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rightButton3.setStyleSheet(GUI_Style.buttonIdle)
         self.leftButton3.setIcon(QIcon(LEFT3_ICON))
         self.rightButton3.setIcon(QIcon(RIGHT3_ICON))
-        # self.GPIOthread.SWpushButton("Off")
+        self.GPIOthread.SWpushButton("Off")
 
     def Button4_Clicked(self):
         self.leftButton4.setStyleSheet(GUI_Style.buttonPressed)

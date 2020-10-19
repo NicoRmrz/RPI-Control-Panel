@@ -48,11 +48,6 @@ class ADC_thread(QThread):
 			floorSensorADC_Volt = self.chan0.voltage *36 		# inches
 			towerSensorADC_Volt = self.chan1.voltage *323.07 	# inches
 
-			# ~ floorSensorADC_Volt = self.chan0.voltage *914.755 	# mm
-			# ~ towerSensorADC_Volt = self.chan1.voltage *8206.15	# mm
-			
-			# ~ print("Channel 0: " +str(floorSensorADC_Volt) + " V. Channel 1: "  + str(towerSensorADC_Volt) + " v")
-
 			self.ADC_meas.emit(floorSensorADC_Volt, towerSensorADC_Volt)
 			time.sleep(0.25)
 

@@ -14,8 +14,6 @@ azlist = []
 
 SAMPLESIZE = 20 
 
-# ~ DPS = 0.00875 # for degrees/second values
-# ~ DPS = 1
 DPS = 0.07
      
 # --------------------------------------------------------------------------------------------------------------
@@ -63,30 +61,7 @@ class AcellerometerThread(QThread):
 
 		while (1):
 			gx, gy, gz = self.imu.readGyro()
-			# ~ mx, my, mz = self.mag.read()
-			# ~ temp = self.imu.readTemp()
 			ax, ay, az = self.imu.readAcc()
-
-			# Smooth gx
-			# ~ if len(gxlist) < SAMPLESIZE:
-			 	# ~ gxlist.append(gx)
-			# ~ else:
-			 	# ~ self.gxAvg = self.Average(gxlist)
-			 	# ~ gxlist.clear()
-
-			 # Smooth gy
-			# ~ if len(gylist) < SAMPLESIZE:
-				# ~ gylist.append(gy)
-			# ~ else:
-				# ~ self.gyAvg = self.Average(gylist)
-				# ~ gylist.clear()
-
-			# # Smooth gz
-			# if len(gzlist) < SAMPLESIZE:
-			# 	gzlist.append(gz)
-			# else:
-			# 	self.gzAvg = self.Average(gzlist)
-			# 	gzlist.clear()
 
 			# Smooth ax
 			if len(axlist) < SAMPLESIZE:
@@ -113,30 +88,12 @@ class AcellerometerThread(QThread):
 			updated_y = self.ayAvg * DPS
 			updated_z = self.azAvg * DPS
 			
+			# fix readings over 90 deg 
 			calibratedMeas = self.configMeasurement(self.axAvg * DPS, self.ayAvg * DPS) 
 
 			# Smoothed all readings with DPS
-			# ~ self.gyroSignals.emit(self.gxAvg * DPS, self.gyAvg * DPS, self.gzAvg * DPS)
 			self.axisSignals.emit(calibratedMeas, updated_y, self.azAvg * DPS)
-			print("X " + str(updated_x) +", Y "+ str(updated_y))
-			# ~ print("x "+ str(updated_x))
-			# ~ print("Y "+ str(updated_y))
-			# ~ print("NEW "+ str(calibratedMeas))
-			# ~ print("gX "+ str(self.gyAvg * DPS))
-
-			# Smoothed readings only
-			# ~ self.gyroSignals.emit(self.gxAvg , self.gyAvg , self.gzAvg )
-			# ~ self.axisSignals.emit(self.axAvg , self.ayAvg , self.azAvg )
-
-			# Raw readings with DPS
-			# self.gyroSignals.emit(gx * DPS,gy * DPS,gz * DPS)
-			# self.axisSignals.emit(ay * DPS, ay * DPS,az * DPS)
-
-			# Raw readings
-			# ~ self.gyroSignals.emit(gx,gy,gz)
-			# ~ self.axisSignals.emit(ax,ay,az)
-
-            
+		
 			time.sleep(0.01)
           
 

@@ -8,14 +8,17 @@ from PyQt5.QtCore import Qt, QPoint
 # User made files
 from GUI_Stylesheets import GUI_Stylesheets
 
+#Official application version
+APP_VERSION = "1.0"
+
 GUI_Style = GUI_Stylesheets()
 SIDWIDTH = 200
+WINDOW_TITLE= "MX030 v" + APP_VERSION
 
 # Icon Image locations
 Main_path = os.getcwd() + "/"
 xray1_Path = Main_path + "/icons/ray.png"
 closex64_Path = Main_path + "/icons/exit.png"
-Main_path = os.getcwd() + "/"
 Icon_Path = Main_path + "/icons/logo.png"
 Mediatech_Path = Main_path + "/icons/Medicatech.png"
 Down_Idle = Main_path + "/icons/down_grey.png"
@@ -72,6 +75,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setWindowIcon(QIcon(xray1_Path))
+        MainWindow.setWindowTitle(WINDOW_TITLE)
 
         self.centralWidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -422,7 +426,6 @@ class Ui_MainWindow(object):
         self.yGyro.setMinimumSize(60, 12)
         self.yGyro.setStyleSheet(GUI_Style.statusBar_widgets)
         self.yGyro.setText("y-gyro")
-        # self.yAxis.setAlignment(Qt.AlignCenter)
         
         # Create Graphics view object to rotate widgets
         self.yG_View = QtWidgets.QGraphicsView()
@@ -439,7 +442,6 @@ class Ui_MainWindow(object):
         self.zGyro.setMinimumSize(60, 15)
         self.zGyro.setStyleSheet(GUI_Style.statusBar_widgets)
         self.zGyro.setText("z-gyro")
-        # self.zAxis.setAlignment(Qt.AlignCenter)
 
         # Create Graphics view object to rotate widgets
         self.zG_View = QtWidgets.QGraphicsView()
@@ -462,7 +464,6 @@ class Ui_MainWindow(object):
         self.Gyroscope.setLayout(VGylayout)
         self.Gyroscope.setStyleSheet(GUI_Style.groupBox)
         self.Gyroscope.setMaximumSize(200, 150)
-        # ~ self.Gyroscope.setMinimumSize(100, 100)
 
         # ---------------------------------------------------------------------
         # ----------------- Accelerometer Layout ------------------------------
@@ -501,7 +502,6 @@ class Ui_MainWindow(object):
         self.yAxis.setMinimumSize(60, 12)
         self.yAxis.setStyleSheet(GUI_Style.statusBar_widgets)
         self.yAxis.setText("y-axis")
-        # self.yAxis.setAlignment(Qt.AlignCenter)
         
         # Create Graphics view object to rotate widgets
         self.yAx_View = QtWidgets.QGraphicsView()
@@ -518,7 +518,6 @@ class Ui_MainWindow(object):
         self.zAxis.setMinimumSize(60, 15)
         self.zAxis.setStyleSheet(GUI_Style.statusBar_widgets)
         self.zAxis.setText("z-axis")
-        # self.zAxis.setAlignment(Qt.AlignCenter)
 
         # Create Graphics view object to rotate widgets
         self.zAx_View = QtWidgets.QGraphicsView()
@@ -527,14 +526,12 @@ class Ui_MainWindow(object):
         self.zAx_View.setScene(self.zAx_Scene)
         self.zAx_Scene.addWidget(self.zAxis)
 
-
         # ----------------------------------
         # ---- Add Objects to layout -------
         # ----------------------------------
         self.AcelLayout = QtWidgets.QVBoxLayout()
         self.AcelLayout.setSpacing(0)
         self.AcelLayout.setContentsMargins(0, 0, 0, 0)
-
 
         # ---------------------------------------------------------------------
         # ----------------- Right Side Button Layout --------------------------
@@ -635,8 +632,6 @@ class Ui_MainWindow(object):
         self.BottomLayout.addLayout(self.LeftButtonLayout)
         self.BottomLayout.addLayout(self.leftLogoLayout)
         self.BottomLayout.addLayout(self.leftHeaderLayout)
-        # self.BottomLayout.addLayout(self.SID1Layout)
-        # self.BottomLayout.addLayout(self.SID2Layout)
         self.BottomLayout.addLayout(self.AcelLayout)
         self.BottomLayout.addLayout(self.rightHeaderLayout)
         self.BottomLayout.addLayout(self.rightLogoLayout)
@@ -664,7 +659,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MX30 GUI"))
         self.SID2_Data.setText(_translate("MainWindow", "1000"))
         self.SID1_Data.setText(_translate("MainWindow", "1000"))
 

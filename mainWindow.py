@@ -96,10 +96,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.accelerometer = AcellerometerThread()
         self.accelerometer.start() 
         self.accelerometer.axisSignals.connect(self.updateAccelerometer)
-        # ~ self.accelerometer.gyroSignals.connect(self.updateGyroscope)
 
         self.ADC = ADC_thread()
-        self.ADC.start() 
+       # self.ADC.start() - not using at the moment
         self.ADC.ADC_meas.connect(self.updateSID)
 
         self.angleImg = angleGraphic()
@@ -149,23 +148,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def updateTime(self,  timeInterval):
         self.clockTime.setText("Time:  " + timeInterval)
 
-    def updateSID(self, floorSensor, verticalSensor):
-        # ~ self.SID1_Data.setText(str(floorSensor) + " mm")
-        # ~ self.SID2_Data.setText(str(verticalSensor) + " mm")        
+    def updateSID(self, floorSensor, verticalSensor):       
         self.SID1_Data.setText(str(floorSensor) + " in")
         self.SID2_Data.setText(str(verticalSensor) + " in")        
 
     def updateAccelerometer(self, x, y, z):
         self.xAxis.setText(str(x) + " \N{DEGREE SIGN}")
-        # ~ print("x: " + str(x) + " y: " + str(y) + " z: " + str(z))
 
         # For Screen Rotation
         self.rotateGUI(-1*x)
-        # ~ self.rotateGUI(y)
 
         # Set Angle tick rotation value
         self.angleImg.setAngleTick((-1*x))
-        # ~ self.angleImg.setAngleTick(y)
 
     def updateGyroscope(self, x, y, z):
         self.xGyro.setText("X: " + str(x))
@@ -215,31 +209,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # Relayout center objects
             # First remove
-            # self.SID1Layout.removeWidget(self.SID1img)
-            # self.SID1Layout.removeWidget(self.SID1Data_View)
-            # self.SID2Layout.removeWidget(self.SID2img)
-            # self.SID2Layout.removeWidget(self.SID2Data_View)
             self.AcelLayout.removeWidget(self.angleImg)
             self.AcelLayout.removeWidget(self.xAx_View)
 
             # Then layout
-            # self.SID1img.setMaximumSize(QtCore.QSize(SIDE_SIZE, SIDE_SIZE))
-            # self.SID2img.setMaximumSize(QtCore.QSize(SIDE_SIZE, SIDE_SIZE))
-            # ~ self.angleImg.setMaximumSize(QtCore.QSize(SIDE_SIZE, SIDE_SIZE))
-            # ~ self.angleImg.setMaximumSize(QtCore.QSize(SIDE_SIZE, SIDE_SIZE))
-            # self.SID1Layout.addWidget(self.SID1img)
-            # self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignTop)            
-            # self.SID2Layout.addWidget(self.SID2img)
-            # self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignTop)
             self.AcelLayout.addWidget(self.angleImg)
             self.AcelLayout.addWidget(self.xAx_View)
             
-
             # Align center objects
-            # self.SID1Layout.setSpacing(50)
-            # self.SID1Layout.setContentsMargins(0, 75, 0, 0)
-            # self.SID2Layout.setSpacing(50)
-            # self.SID2Layout.setContentsMargins(0, 75, 0, 0)
             self.AcelLayout.setSpacing(0)
             self.AcelLayout.setContentsMargins(0, 0, 0, 0)
 
@@ -263,30 +240,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
   			# Relayout center objects
             # First remove
-            # self.SID1Layout.removeWidget(self.SID1img)
-            # self.SID1Layout.removeWidget(self.SID1Data_View)
-            # self.SID2Layout.removeWidget(self.SID2img)
-            # self.SID2Layout.removeWidget(self.SID2Data_View)
             self.AcelLayout.removeWidget(self.angleImg)
             self.AcelLayout.removeWidget(self.xAx_View)
 
             # Then layout
-            # self.SID1img.setMaximumSize(QtCore.QSize(SIDE_SIZE, SIDE_SIZE))
-            # self.SID2img.setMaximumSize(QtCore.QSize(SIDE_SIZE, SIDE_SIZE))
-            # ~ self.angleImg.setMaximumSize(QtCore.QSize(SIDE_SIZE, SIDE_SIZE))
-            # self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignBottom)       
-            # self.SID1Layout.addWidget(self.SID1img)
-            # self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignBottom)
-            # self.SID2Layout.addWidget(self.SID2img)
-            # self.AcelLayout.addWidget(self.xAx_View)
             self.AcelLayout.addWidget(self.angleImg)
             self.AcelLayout.addWidget(self.xAx_View)
 
             # Align center objects
-            # self.SID1Layout.setSpacing(50)
-            # self.SID1Layout.setContentsMargins(0, 0, 0, 75)
-            # self.SID2Layout.setSpacing(50)
-            # self.SID2Layout.setContentsMargins(0, 0, 0, 75)
             self.AcelLayout.setSpacing(0)
             self.AcelLayout.setContentsMargins(0, 0, 0, 0)
 
@@ -313,19 +274,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # Relayout center objects
             # First remove
-            # self.SID1Layout.removeWidget(self.SID1img)
-            # self.SID1Layout.removeWidget(self.SID1Data_View)
-            # self.SID2Layout.removeWidget(self.SID2img)
-            # self.SID2Layout.removeWidget(self.SID2Data_View)
             self.AcelLayout.removeWidget(self.angleImg)
             self.AcelLayout.removeWidget(self.xAx_View)
-
-            # self.SID1Layout.addWidget(self.SID1img)
-            # self.SID1Layout.addWidget(self.SID1Data_View, 1, Qt.AlignTop)
-            # self.SID2Layout.addWidget(self.SID2img)
             self.AcelLayout.addWidget(self.angleImg)
             self.AcelLayout.addWidget(self.xAx_View, 0, Qt.AlignCenter)
-            # self.SID2Layout.addWidget(self.SID2Data_View, 1, Qt.AlignTop)
 
             # Add widgets to layout
             self.HeaderLayout.addWidget(self.MediLogo, Qt.AlignLeft)
@@ -337,13 +289,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.MediLogo.setMaximumSize(QtCore.QSize(759, 159))
 
             # Restore center objects
-            # self.SID1img.setMaximumSize(QtCore.QSize(DEFAULT_SIZE, DEFAULT_SIZE))
-            # self.SID2img.setMaximumSize(QtCore.QSize(DEFAULT_SIZE, DEFAULT_SIZE))
             self.angleImg.setMaximumSize(QtCore.QSize(DEFAULT_SIZE, DEFAULT_SIZE))
-            # self.SID1Layout.setSpacing(0)
-            # self.SID1Layout.setContentsMargins(0, 0, 0, 0)
-            # self.SID2Layout.setSpacing(0)
-            # self.SID2Layout.setContentsMargins(0, 0, 0, 0)
             self.AcelLayout.setSpacing(5)
             self.AcelLayout.setContentsMargins(0, 0, 0, 0)
 
@@ -413,7 +359,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton1.setIcon(QIcon(LEFT1_ICON_PRES))
         self.rightButton1.setIcon(QIcon(RIGHT1_ICON_PRES))
         self.GPIOthread.SWpushButton("Mode 1")
-        # self.updateAccelerometer(90,1,1)
 
     def Button1_Released(self):
         self.leftButton1.setIcon(QIcon(LEFT1_ICON))
@@ -428,8 +373,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton2.setIcon(QIcon(LEFT2_ICON_PRES))
         self.rightButton2.setIcon(QIcon(RIGHT2_ICON_PRES))
         self.GPIOthread.SWpushButton("Mode 2")
-        # self.updateAccelerometer(0,1,1)
-
 
     def Button2_Released(self):
         self.leftButton2.setStyleSheet(GUI_Style.buttonIdle)
@@ -444,8 +387,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.leftButton3.setIcon(QIcon(LEFT3_ICON_PRES))
         self.rightButton3.setIcon(QIcon(RIGHT3_ICON_PRES))
         self.GPIOthread.SWpushButton("Mode 3")
-        # self.updateAccelerometer(-90,1,1)
-
 
     def Button3_Released(self):
         self.leftButton3.setStyleSheet(GUI_Style.buttonIdle)
